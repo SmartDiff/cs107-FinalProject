@@ -1,2 +1,3 @@
-# cs107-FinalProject
-Harvard CS107 Final Project for Automatic Differentiation
+# Harvard CS107 Final Project: SmartDiff
+**Group 25**  
+Members: Bianca Cordazzo, Tianlei He, Xincheng Tan, Yilan Wang  
