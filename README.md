@@ -3,4 +3,5 @@
 ![Coverage](https://img.shields.io/codecov/c/gh/SmartDiff/cs107-FinalProject?color=red&label=CodeCov&logo=CodeCov&style=plastic)
 
 **Group 25**
+
 Members: Bianca Cordazzo, Tianlei He, Xincheng Tan, Yilan Wang
