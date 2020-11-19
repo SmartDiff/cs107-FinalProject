@@ -115,10 +115,13 @@ class TestElemOp:
         f = el.exp(x,3) / el.log(x,2)  
         assert (f.val,f.der) == (81/2, (162*np.log(3) - 81/(4*np.log(2)))/(np.log(4)/np.log(2))**2)
 
-        
+    def test_pow(self):
+        x = AD(2)
+        f = (el.power(x,2))**x
+        assert (f.val,f.der) == (16, 16*np.log(4) + 32)
 
+        f = (el.exp(x,2))**x
+        assert (f.val,f.der) == (16, 16*np.log(16))
 
-
-
-
-        
+        f = x**(el.exp(x,2))
+        assert (f.val,f.der) == (16, 32 + 64*(np.log(2)**2))        
