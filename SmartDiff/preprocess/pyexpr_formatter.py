@@ -80,21 +80,6 @@ class PyExpression_Formatter(object):
     return 0 if suffix_demand == 0 else 1
 
 
-
-if __name__ == "__main__":
-  formatter = PyExpression_Formatter()
-  input1 = "(2 + 4) * 9"
-  input2 = "e**(x)"
-  input3 = "sin(x)+5.88"
-  print(formatter.format_to_pyexpr(input1))
-  print(formatter.format_to_pyexpr(input2))
-  print(formatter.format_to_pyexpr(input3))
-
-  s1 = "power(pi, 3) + e / 2 "
-
-  print(formatter.format_to_pyexpr(s1))
-
-
   # code = compile("math.log(3)", "<string>", "eval")
   # print(eval(code))
   # print(eval("math.log(4)"))
