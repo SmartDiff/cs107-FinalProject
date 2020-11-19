@@ -8,14 +8,14 @@ import numpy as np
 # where the val represents the value evaluated at 'x', der represents the derivative to 'x' which evaluated at 'x'.
 # derivatives for reference: http://math2.org/math/derivatives/tableof.htm
 
-def power(x,a):
-    # ((x)^a)' = a * (x)^{a-1} * x'
-    """Returns the value and derivative of a power operation: x^a
+def power(x,n):
+    # ((x)^n)' = n * (x)^{n-1} * x'
+    """Returns the value and derivative of a power operation: x^n
     
     INPUTS
     =======
     x: an AutoDiff object or a scalar, required, the input variable
-    a: float or int, required, the base
+    n: float or int, required, the base
     
     RETURNS
     ========
@@ -40,10 +40,10 @@ def power(x,a):
             raise AttributeError('Type error!')
     return AD(val_new, der_new)
 
-def log(x,a):
-    # (log_a(x))' = 1/x * log_e(a) * x'
+def log(x,n):
+    # (log_n(x))' = 1/x * log_e(n) * x'
     # we should also check the value >0 for log calculation
-    """Returns the value and derivative of a logarithm operation: log_a(x)
+    """Returns the value and derivative of a logarithm operation: log_n(x)
     
     INPUTS
     =======
