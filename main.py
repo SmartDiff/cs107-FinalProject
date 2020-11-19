@@ -60,6 +60,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         :return:
         a list of user input function (each element is a component of the function)
         '''
+
         if self.InputDim == 1:
             func = self._FuncEval("1st")
             return list([func])
@@ -71,8 +72,9 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         str, user input
         '''
         # Need to make the dialog window larger to show the title
-        func, okPressed = QtWidgets.QInputDialog.getText(self, "Step 2: Input the evaluating point", string+" component:",
-                                                          QtWidgets.QLineEdit.Normal, "")
+        func, okPressed = QtWidgets.QInputDialog.getText(self, "Step 3: Input the function",
+                                                         string+" component:",
+                                                         QtWidgets.QLineEdit.Normal, "")
         if okPressed and func != '':
             return func
 
