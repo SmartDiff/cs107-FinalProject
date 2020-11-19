@@ -4,8 +4,8 @@ import numpy as np
 # from preprocessing import ???
 
 global Ui_MainWindow, Ui_SecondDiag
-Ui_MainWindow, QtBaseClass = uic.loadUiType('GUI/step1.ui') # .ui drawn in Qt Designer
-Ui_FourthDiag, QtBaseClass4 = uic.loadUiType('GUI/step4.ui')
+Ui_MainWindow, QtBaseClass = uic.loadUiType('SmartDiff/GUI/step1.ui') # .ui drawn in Qt Designer
+Ui_FourthDiag, QtBaseClass4 = uic.loadUiType('SmartDiff/GUI/step4.ui')
 
 class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
@@ -126,7 +126,7 @@ class FourthDiag(QtWidgets.QDialog, Ui_FourthDiag):
         :return:
         '''
         if self.InputDim == 1 and self.FuncDim == 1:
-            Ui_FourthDiag, QtBaseClass4 = uic.loadUiType('GUI/step4.ui')
+            Ui_FourthDiag, QtBaseClass4 = uic.loadUiType('SmartDiff/GUI/step4.ui')
             Ui_FourthDiag.__init__(self)
         else:
             raise NotImplementedError
