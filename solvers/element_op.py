@@ -129,13 +129,16 @@ def sqrt(x):
     >>> sqrt(AD(1.0, 2.0))
     AD(1.0, 1.0)
     """
-    if x.val < 0:
-        raise ValueError('Error: Independent variable must be nonnegative!')
+    if isinstance(x, AD):
+        if x.val < 0:
+            raise ValueError('Error: Independent variable must be nonnegative!')
     try:
         val_new = np.sqrt(x.val)
         der_new = 1 / 2 * x.val ** (-1 / 2) * x.der
     except AttributeError:
         if isinstance(x, float) or isinstance(x, int):
+            if x < 0:
+                raise ValueError('Error: Independent variable must be nonnegative!')
             val_new = np.sqrt(x)
             # If x is a constant, the derivative of x is 0.
             der_new = 0
@@ -256,13 +259,16 @@ def arcsin(x):
     >>> arcsin(AD(0.0, 2.0))
     AD(0.0, 0.0)
     """
-    if x.val < -1 or x.val > 1:
-        raise ValueError('Error: Independent variable must be in [-1,1]!')
+    if isinstance(x, AD):
+        if x.val < -1 or x.val > 1:
+            raise ValueError('Error: Independent variable must be in [-1,1]!')
     try:
         val_new = np.arcsin(x.val)
         der_new = 1/np.sqrt(1-x.val**2) * x.val
     except AttributeError:
         if isinstance(x, float) or isinstance(x, int):
+            if x < -1 or x > 1:
+                raise ValueError('Error: Independent variable must be in [-1,1]!')
             val_new = np.arcsin(x)
             # If x is a constant, the derivative of x is 0.
             der_new = 0
@@ -289,13 +295,16 @@ def arccos(x):
     >>> arccos(AD(0.0, 2.0))
     AD(1.5707963267948966, -0.0)
     """
-    if x.val < -1 or x.val > 1:
-        raise ValueError('Error: Independent variable must be in [-1,1]!')
+    if isinstance(x, AD):
+        if x.val < -1 or x.val > 1:
+            raise ValueError('Error: Independent variable must be in [-1,1]!')
     try:
         val_new = np.arccos(x.val)
         der_new = -1/np.sqrt(1-x.val**2) * x.val
     except AttributeError:
         if isinstance(x, float) or isinstance(x, int):
+            if x < -1 or x > 1:
+                raise ValueError('Error: Independent variable must be in [-1,1]!')
             val_new = np.arccos(x)
             # If x is a constant, the derivative of x is 0.
             der_new = 0
@@ -389,7 +398,7 @@ def cosh(x):
         der_new = np.sinh(x.val) * x.der
     except AttributeError:
         if isinstance(x, float) or isinstance(x, int):
-            val_new = np.cosh(h)
+            val_new = np.cosh(x)
             # If x is a constant, the derivative of x is 0.
             der_new = 0
         else:
