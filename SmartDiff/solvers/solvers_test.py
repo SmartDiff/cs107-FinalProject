@@ -1,6 +1,7 @@
 # usage: pytest -q solvers_test.py 
-from integrator import AutoDiffToy as AD
-import element_op as el
+
+from SmartDiff.solvers.integrator import AutoDiffToy as AD
+import SmartDiff.solvers.element_op as el
 import numpy as np
 import pytest
 
@@ -22,7 +23,6 @@ class TestElemOp:
         with pytest.raises(AttributeError):
             x = "s"
             f = el.power(x,3)
-
 
     def test_log(self):
         x = AD(12)
@@ -48,7 +48,6 @@ class TestElemOp:
         with pytest.raises(AttributeError):
             x = "s"
             f = el.log(x,3)
-
 
     def test_exp(self):
         f = el.exp(1)
@@ -256,7 +255,6 @@ class TestElemOp:
         with pytest.raises(AttributeError):
             x = "0.5"
             f = el.tanh(x)
-
 
     def test_sum(self):
         x = AD(5)
