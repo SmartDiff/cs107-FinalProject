@@ -114,6 +114,3 @@ class AutoDiffToy():
         val_new = self.val
         der_new = self.der
         return AutoDiffToy(val_new, der_new)
-
-    def __str__(self):
-        return "val = " + str(self.val) + "; der = " + str(self.der)
