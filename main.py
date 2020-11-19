@@ -1,10 +1,10 @@
 import sys
 from PyQt5 import QtGui, QtCore, QtWidgets, uic
 import numpy as np
-from SmartDiff.pyexpr_formatter import PyExpression_Formatter as Format
+from SmartDiff.preprocess.pyexpr_formatter import PyExpression_Formatter
 from SmartDiff.solvers.element_op import *
 
-global Ui_MainWindow, Ui_SecondDiag
+# global Ui_MainWindow, Ui_SecondDiag
 Ui_MainWindow, QtBaseClass = uic.loadUiType('SmartDiff/GUI/step1.ui') # .ui drawn in Qt Designer
 Ui_FourthDiag, QtBaseClass4 = uic.loadUiType('SmartDiff/GUI/step4.ui')
 
@@ -125,6 +125,7 @@ class FourthDiag(QtWidgets.QDialog, Ui_FourthDiag):
         '''
         Import the .ui based on user input dimensions
         :return:
+        None
         '''
         if self.InputDim == 1 and self.FuncDim == 1:
             Ui_FourthDiag, QtBaseClass4 = uic.loadUiType('SmartDiff/GUI/step4.ui')
@@ -147,14 +148,25 @@ class FourthDiag(QtWidgets.QDialog, Ui_FourthDiag):
         self.DisVal = not self.DisVal
 
     def onClickOK(self):
-        pass
-#
-#     def PointEval(self):
-#         if self.InputDim == 1:
-#             txt = self.PointEval1(self.xVal)
-#
-#         else:  # to add after putting in more input dimensions
-#             raise NotImplementedError
+        '''
+        Format the user input in step 2 and 3 into strings that can be put into AD modules in solvers
+        :return:
+        '''
+        # testing out the parser and the AD modules
+        formatter = PyExpression_Formatter()
+        print(f"parser output {formatter.format_to_pyexpr(str(self.val[0]))}")
+        print(f"parser output {formatter.format_to_pyexpr(self.func[0])}")
+        x = AD(eval(formatter.format_to_pyexpr(str(self.val[0]))))
+        f = formatter.format_to_pyexpr(x)
+        if isinstance(f, AD):
+            print("the resulting function is an AD object")
+        else:
+            print("Nope")
+        if self.DisVal:
+            print(f.val, f.der)
+        else:
+            print(f.der)
+
 #
 #     def PointEval1(self, var):
 #         '''
@@ -187,17 +199,10 @@ class FourthDiag(QtWidgets.QDialog, Ui_FourthDiag):
 #         # if var.text() == "":
 #         #     return 0
 #         # return var.text()
-#
-#     def onClickPrev(self):
-#         self.proceed = False
-#
-#     def onClickOK(self):
-#         pass
-
 
 
 if __name__ == "__main__":
-    # there are some issues here with the ui classes, is there a way to make it not global but accessible in classes?
+    # is there a way to make the .ui loaded not global but accessible in classes?
     app = QtWidgets.QApplication(sys.argv)
     window = MainWindow()
     window.show()
