@@ -1,9 +1,10 @@
-# usage: pytest -q solvers_test.py 
+# usage: pytest -q solvers_test.py
 
-from SmartDiff import solvers as el
-from SmartDiff.solvers import AutoDiffToy as AD
-#from solvers import element_op as el
+from SmartDiff.solvers.integrator import AutoDiffToy as AD
+import SmartDiff.solvers.element_op as el
+
 import numpy as np
+
 
 class TestElemOp:
 
