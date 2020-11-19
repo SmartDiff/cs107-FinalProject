@@ -1,7 +1,8 @@
 import sys
 from PyQt5 import QtGui, QtCore, QtWidgets, uic
 import numpy as np
-# from preprocessing import ???
+from SmartDiff.pyexpr_formatter import PyExpression_Formatter as Format
+from SmartDiff.solvers.element_op import *
 
 global Ui_MainWindow, Ui_SecondDiag
 Ui_MainWindow, QtBaseClass = uic.loadUiType('SmartDiff/GUI/step1.ui') # .ui drawn in Qt Designer
