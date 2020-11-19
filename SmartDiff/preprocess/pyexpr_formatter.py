@@ -32,7 +32,9 @@ class PyExpression_Formatter(object):
     pyexpr = []
     while i < len(input_str) - 1:
       c = input_str[i]
-      if c == "e":
+      if c.isspace():
+        i += 1
+      elif c == "e":
         next_c = input_str[i+1]
         if next_c in {"x", "r"}:
           pyexpr.append(c)
@@ -47,10 +49,11 @@ class PyExpression_Formatter(object):
       else:
         pyexpr.append(c)
         i += 1
-    if input_str[-1] == "e":
-      pyexpr.append("math.e")
-    else:
-      pyexpr.append(input_str[-1])
+    if i < len(input_str):
+      if input_str[-1] == "e":
+        pyexpr.append("math.e")
+      elif not input_str[-1].isspace():
+        pyexpr.append(input_str[-1])
     return "".join(pyexpr)
 
   def is_valid_input(self, input_str):
@@ -74,17 +77,6 @@ class PyExpression_Formatter(object):
       if suffix_demand == -1:
         return 1
     return 0 if suffix_demand == 0 else 1
-
-
-
-if __name__ == "__main__":
-  formatter = PyExpression_Formatter()
-  input1 = "(2 + 4) * 9"
-  input2 = "e**(x)"
-  input3 = "sin(x)+5.88"
-  print(formatter.format_to_pyexpr(input1))
-  print(formatter.format_to_pyexpr(input2))
-  print(formatter.format_to_pyexpr(input3))
 
 
   # code = compile("math.log(3)", "<string>", "eval")
