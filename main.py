@@ -1,12 +1,9 @@
 import sys
-# from PyQt5.QtWidgets import QApplication, QLabel, QMainWindow, QPushButton, QToolBar, QAction, QStatusBar, QCheckBox
-# from PyQt5.QtCore import Qt
 from PyQt5 import QtGui, QtCore, QtWidgets, uic
 import numpy as np
-from decimal import Decimal
 
 global Ui_MainWindow, Ui_SecondDiag
-Ui_MainWindow, QtBaseClass = uic.loadUiType('GUI/step1.ui')
+Ui_MainWindow, QtBaseClass = uic.loadUiType('GUI/step1.ui') # .ui drawn in Qt Designer
 # Ui_SecondDiag, QtBaseClass2 = uic.loadUiType('GUI/step2_1.ui')
 
 class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
@@ -20,22 +17,35 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.val = np.zeros(1)
         self.func = None
 
-        # OK button
+        # once OK button is pressed, go to step 2 and 3
         self.OKButton.clicked.connect(self.onClickOK)
 
     def SetDimInput(self):
+        '''
+        :return:
+        user input of function dimension and input dimension
+        '''
         self.FuncDim = int(self.FuncDimBox.currentText())
         self.InputDim = int(self.InputDimBox.currentText())
 
-    def PointEval(self, qle):
+    def PointEval(self):
+        '''
+        get user input values for each variable
+        :return:
+        np array of the user input (size = self.InputDim from step 1)
+        '''
         if self.InputDim == 1:
-            num = self._PointEval(qle, "x")
+            num = self._PointEval("x")
             return np.array([num])
         elif self.InputDim > 1:
             raise NotImplementedError
 
-
-    def _PointEval(self, qle, string):
+    def _PointEval(self, string):
+        '''
+        :param string: x, y, z to put in the QInputDialog box title
+        :return:
+        double, user input, default 0, min -100, max 100, up to 4 decimals
+        '''
         # Need to make the dialog window larger to show the title
         num, okPressed = QtWidgets.QInputDialog.getDouble(self, "Step 2: Input the evaluating point", string+" value:",
                                                            0, -100, 100, 4)
@@ -43,13 +53,19 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             return num
 
     def onClickOK(self):
+        '''
+        Trigger step 2: User put in values of the variables to evaluate
+        Trigger step 3: User put in the function to evaluate and differentiate (working on this now)
+        :return:
+        None
+        '''
         self.SetDimInput()
+        self.val = self.PointEval()
+        # code can recycled for step 3
         # self.UISetupStep2()
         # dlg2 = SecondDiag(self.InputDim)
         # self.SecondDiag()
         # dlg2.exec_()
-        var = QtWidgets.QLineEdit()
-        self.val = self.PointEval(var)
         # self.func = self.FuncEval()
 
     def onClickPrev(self):
