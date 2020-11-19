@@ -1,6 +1,7 @@
 import sys
 from PyQt5 import QtGui, QtCore, QtWidgets, uic
 import numpy as np
+import SmartDiff.solvers.integrator
 
 global Ui_MainWindow, Ui_SecondDiag
 Ui_MainWindow, QtBaseClass = uic.loadUiType('GUI/step1.ui') # .ui drawn in Qt Designer
@@ -174,3 +175,4 @@ if __name__ == "__main__":
     window = MainWindow()
     window.show()
     app.exec_()
+
