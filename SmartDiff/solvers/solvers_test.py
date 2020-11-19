@@ -1,7 +1,8 @@
 # usage: pytest -q solvers_test.py 
 
-from integrator import AutoDiffToy as AD
-import element_op as el
+from SmartDiff import solvers as el
+from SmartDiff.solvers import AutoDiffToy as AD
+#from solvers import element_op as el
 import numpy as np
 
 class TestElemOp:
