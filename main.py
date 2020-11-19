@@ -11,7 +11,9 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     def __init__(self):
         QtWidgets.QMainWindow.__init__(self)
         Ui_MainWindow.__init__(self)
+        self.setWindowTitle("SmartDiff")
         self.setupUi(self)
+
         self.FuncDim = 1  # default
         self.InputDim = 1  # default
         self.val = np.zeros(1)
@@ -48,7 +50,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         '''
         # Need to make the dialog window larger to show the title
         num, okPressed = QtWidgets.QInputDialog.getDouble(self, "Step 2: Input the evaluating point", string+" value:",
-                                                           0, -100, 100, 4)
+                                                          0, -100, 100, 4)
         if okPressed and num != '':
             return num
 
