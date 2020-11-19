@@ -1,6 +1,6 @@
 import math
 
-from SmartDiff.solvers.element_op import *
+from solvers.element_op import *
 
 # The evaluator takes as input a string representation of a math expression
 # and parses the string by iteratively building the AD object applied with
