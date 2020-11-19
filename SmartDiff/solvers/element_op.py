@@ -1,4 +1,4 @@
-from integrator import AutoDiffToy as AD
+from SmartDiff.solvers.integrator import AutoDiffToy as AD
 import numpy as np
 
 # Here contains the derivative calculation of elementary operations
