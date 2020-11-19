@@ -1,10 +1,11 @@
 import sys
 from PyQt5 import QtGui, QtCore, QtWidgets, uic
 import numpy as np
+# from preprocessing import ???
 
 global Ui_MainWindow, Ui_SecondDiag
 Ui_MainWindow, QtBaseClass = uic.loadUiType('GUI/step1.ui') # .ui drawn in Qt Designer
-# Ui_SecondDiag, QtBaseClass2 = uic.loadUiType('GUI/step2_1.ui')
+Ui_FourthDiag, QtBaseClass4 = uic.loadUiType('GUI/step4.ui')
 
 class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
@@ -13,14 +14,16 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         Ui_MainWindow.__init__(self)
         self.setWindowTitle("SmartDiff")
         self.setupUi(self)
+        self.Instructions.setWordWrap(True)
 
         self.FuncDim = 1  # default
         self.InputDim = 1  # default
         self.val = np.zeros(1)
         self.func = None
 
-        # once OK button is pressed, go to step 2 and 3
+        # once OK button is pressed, go to step 2 and 3 and 4
         self.OKButton.clicked.connect(self.onClickOK)
+
 
     def SetDimInput(self):
         '''
@@ -37,7 +40,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         np array of the user input (size = self.InputDim from step 1)
         '''
         if self.InputDim == 1:
-            num = self._PointEval("x")
+            num = self._PointEval("x_1")
             return np.array([num])
         elif self.InputDim > 1:
             raise NotImplementedError
@@ -80,8 +83,9 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
     def onClickOK(self):
         '''
-        Trigger step 2: User put in values of the variables to evaluate
-        Trigger step 3: User put in the function to evaluate and differentiate (working on this now)
+        Trigger step 2: User puts in values of the variables to evaluate
+        Trigger step 3: User puts in the function to evaluate and differentiate (working on this now)
+        Trigger step 4: User confirms the input is correct and chooses whether to show the function value
         :return:
         None
         '''
@@ -90,36 +94,59 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.val = self.PointEval()
         # step 3
         self.func = self.FuncEval()
-        print(f"Evaluating {self.func} at {self.val}")
-        # self.UISetupStep2()
-        # dlg2 = SecondDiag(self.InputDim)
-        # self.SecondDiag()
-        # dlg2.exec_()
-        # self.func = self.FuncEval()
+        print(f"Evaluating {self.func} at {self.val}")  # for testing only, to be commented out in the future
+        # step 4
+        dlg4 = FourthDiag(self.InputDim, self.FuncDim, self.val, self.func)
+        dlg4.exec_()
 
 
+class FourthDiag(QtWidgets.QDialog, Ui_FourthDiag):
 
-# class ThirdDiag(QtWidgets.QInputDialog, Ui_SecondDiag):
-#
-#     def __init__(self, InputDim):
-#         QtWidgets.QInputDialog.__init__(self)
-#         # load a dialogue based on user input from step one
-#         self.InputDim = InputDim
-#         Ui_SecondDiag.__init__(self)
-#         self.setupUi(self)
-#
-#         # initialize output values
-#         self.val_vec = np.zeros(self.InputDim)
-#         self.proceed = True
-#
-#         # input points to evaluate
-#         self.PointEval()
-#
-#         # Prev button
-#         self.prevButton.clicked.connect(self.onClickPrev)  # need to implement this
-#
-#         # OK button
-#         self.OKButton.clicked.connect(self.onClickOK)
+    def __init__(self, InputDim, FuncDim, val, func):
+        QtWidgets.QDialog.__init__(self)
+        # load a dialogue based on user input from step one
+        self.InputDim = InputDim
+        self.FuncDim = FuncDim
+        self.val = val
+        self.func = func
+        self.importUI()
+        self.setupUi(self)
+
+        self.DisVal = False
+        # populate the boxes based on user input in step 2 and 3
+        self.SetupValFunc()
+        # checkBox to select whether the user wants to show the function values
+        self.checkBox.clicked.connect(self.setDisVal)
+        # click OK button to start the computation
+        self.OKButton.clicked.connect(self.onClickOK)
+
+    def importUI(self):
+        '''
+        Import the .ui based on user input dimensions
+        :return:
+        '''
+        if self.InputDim == 1 and self.FuncDim == 1:
+            Ui_FourthDiag, QtBaseClass4 = uic.loadUiType('GUI/step4.ui')
+            Ui_FourthDiag.__init__(self)
+        else:
+            raise NotImplementedError
+
+    def SetupValFunc(self):
+        if self.InputDim == 1 and self.FuncDim == 1:
+            self.xVal_1.setText(str(self.val[0]))
+            self.xVal_2.setText("N/A")
+            self.xVal_3.setText("N/A")
+            self.FuncInput_1.setText(self.func[0])
+            self.FuncInput_2.setText("N/A")
+            self.FuncInput_3.setText("N/A")
+        else:
+            raise NotImplementedError
+
+    def setDisVal(self):
+        self.DisVal = not self.DisVal
+
+    def onClickOK(self):
+        pass
 #
 #     def PointEval(self):
 #         if self.InputDim == 1:
