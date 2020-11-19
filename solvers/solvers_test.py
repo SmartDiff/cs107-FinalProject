@@ -6,20 +6,36 @@ import numpy as np
 
 class TestElemOp:
 
-    def test_pow(self):
+    def test_power(self):
         x = AD(5)
         f = el.power(x,2)
         assert (f.val,f.der) == (25,10)
+
+        x = 10
+        f = el.power(x,3)
+        assert (f.val,f.der) == (1000,0)
 
     def test_log(self):
         x = AD(12)
         f = el.log(x,10)
         assert (f.val,f.der) == (np.log(12) / np.log(10), 1/(12 * np.log(10)))
 
+        x = 8
+        f = el.log(x,2)
+        assert (f.val,f.der) == (3, 0)
+
     def test_exp(self):
+        f = el.exp(1)
+        assert (f.val,f.der) == (np.exp(1), 0)
+
+        x = AD(1)
+        f = el.exp(x)
+        assert (f.val,f.der) == (np.exp(1), np.exp(1))
+
         x = AD(2)
-        f = el.exp(x,3)
-        assert (f.val,f.der) == (3**(2), 3**(2) * np.log(3))
+        f = el.power(x,3)
+        g = el.exp(f)
+        assert (round(g.val, 6), round(g.der,6)) == (round(np.exp(1)**8,6), round(12*np.exp(1)**8,6))
 
     def test_sqrt(self):
         x = AD(4)
@@ -101,18 +117,18 @@ class TestElemOp:
 
     def test_mul(self):
         x = AD(4)
-        f = el.log(x,2) * el.exp(x,3)
+        f = el.log(x,2) * 3**x
         assert (f.val,f.der) == (162, 81/(4*np.log(2)) + 162*np.log(3))
 
-        f = el.exp(x,3) * el.log(x,2)  
+        f = 3**x * el.log(x,2)  
         assert (f.val,f.der) == (162, 81/(4*np.log(2)) + 162*np.log(3))
 
     def test_truediv(self):
         x = AD(4)
-        f = el.log(x,2) / el.exp(x,3)
+        f = el.log(x,2) / 3**x
         assert (f.val,f.der) == (2/81, (81/(4*np.log(2)) - 162*np.log(3))/3**8)
 
-        f = el.exp(x,3) / el.log(x,2)  
+        f = 3**x / el.log(x,2)  
         assert (f.val,f.der) == (81/2, (162*np.log(3) - 81/(4*np.log(2)))/(np.log(4)/np.log(2))**2)
 
     def test_pow(self):
@@ -120,8 +136,8 @@ class TestElemOp:
         f = (el.power(x,2))**x
         assert (f.val,f.der) == (16, 16*np.log(4) + 32)
 
-        f = (el.exp(x,2))**x
+        f = (2**x)**x
         assert (f.val,f.der) == (16, 16*np.log(16))
 
-        f = x**(el.exp(x,2))
+        f = x**(2**x)
         assert (f.val,f.der) == (16, 32 + 64*(np.log(2)**2))        

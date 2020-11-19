@@ -60,29 +60,31 @@ def log(x,n):
     power(2.0, 0.1353352832366127)
     >>> log(AD(np.e**2, 2.0), np.e)
     AD(2.0, 0.2706705664732254)
-    """
-    if x.val <= 0:
-        raise ValueError('Error: Independent variable must be positive!')
+    """ 
+    if isinstance(x, AD):
+        if x.val <= 0:
+            raise ValueError('Error: Independent variable must be positive!')
     try:
         val_new = np.log(x.val) / np.log(n)
         der_new = 1/(x.val * np.log(n) * x.der)
     except AttributeError:
         if isinstance(x, float) or isinstance(x, int):
-            val_new = np.log(x.val) / np.log(n)
+            if x <= 0:
+                raise ValueError('Error: Independent variable must be positive!')
+            val_new = np.log(x) / np.log(n)
             # If x is a constant, the derivative of x is 0.
             der_new = 0
         else:
             raise AttributeError('Type error!')
     return AD(val_new, der_new)
 
-def exp(x,a):
-    # (a^{x})' = a^{x} * ln(a) * x'
-    """Returns the value and derivative of a exponential operation: a^x
+def exp(x):
+    # (e^{x})' = e^{x} * x'
+    """Returns the value and derivative of a exponential operation: e^x
     
     INPUTS
     =======
     x: an AutoDiff object or a scalar, required, the input variable
-    a: float or int, required, the base
     
     RETURNS
     ========
@@ -90,17 +92,17 @@ def exp(x,a):
     
     EXAMPLES
     =========
-    >>> exp(1.0, np.e)
+    >>> exp(1.0)
     AD(2.718281828459045, 2.718281828459045)
-    >>> exp(AD(1.0, 2.0), np.e)
+    >>> exp(AD(1.0, 2.0))
     AD(2.718281828459045, 5.43656365691809)
     """
     try:
-        val_new = a**x.val
-        der_new = a**x.val * np.log(a) * x.der
+        val_new = np.exp(x.val)
+        der_new = np.exp(x.val) * x.der
     except AttributeError:
         if isinstance(x, float) or isinstance(x, int):
-            val_new = a**x
+            val_new = np.exp(x)
             # If x is a constant, the derivative of x is 0.
             der_new = 0
         else:
