@@ -54,6 +54,28 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         if okPressed and num != '':
             return num
 
+    def FuncEval(self):
+        '''
+        get user input function to differentiate
+        :return:
+        a list of user input function (each element is a component of the function)
+        '''
+        if self.InputDim == 1:
+            func = self._FuncEval("1st")
+            return list([func])
+
+    def _FuncEval(self, string):
+        '''
+        :param string: x, y, z to put in the QInputDialog box title
+        :return:
+        str, user input
+        '''
+        # Need to make the dialog window larger to show the title
+        func, okPressed = QtWidgets.QInputDialog.getText(self, "Step 2: Input the evaluating point", string+" component:",
+                                                          QtWidgets.QLineEdit.Normal, "")
+        if okPressed and func != '':
+            return func
+
     def onClickOK(self):
         '''
         Trigger step 2: User put in values of the variables to evaluate
@@ -62,16 +84,16 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         None
         '''
         self.SetDimInput()
+        # step 2
         self.val = self.PointEval()
-        # code can recycled for step 3
+        # step 3
+        self.func = self.FuncEval()
         # self.UISetupStep2()
         # dlg2 = SecondDiag(self.InputDim)
         # self.SecondDiag()
         # dlg2.exec_()
         # self.func = self.FuncEval()
 
-    def onClickPrev(self):
-        self.proceed = False
 
 
 # class ThirdDiag(QtWidgets.QInputDialog, Ui_SecondDiag):
