@@ -284,6 +284,9 @@ class TestElemOp:
       f = - 50 + el.power(x,2) 
       assert (f.val,f.der) == (-25,10)
 
+      f = 50 - el.power(x,2) 
+      assert (f.val,f.der) == (25,-10)
+
       f = -5*x + el.power(x,2)
       assert (f.val,f.der) == (0,5)
 
@@ -349,8 +352,7 @@ class TestElemOp:
 
     def test_pos(self):
       x = AD(100)
-      f = x
-      assert (f.val,f.der) == (100, 1)
+      assert (x.val,x.der) == (100, 1)
 
       f = el.log(x,10) + x 
       assert (f.val,f.der) == (102, 1/(100*np.log(10))+1)
