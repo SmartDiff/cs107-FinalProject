@@ -7,7 +7,7 @@ from decimal import Decimal
 
 global Ui_MainWindow, Ui_SecondDiag
 Ui_MainWindow, QtBaseClass = uic.loadUiType('GUI/step1.ui')
-Ui_SecondDiag, QtBaseClass2 = uic.loadUiType('GUI/step2_1.ui')
+# Ui_SecondDiag, QtBaseClass2 = uic.loadUiType('GUI/step2_1.ui')
 
 class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
@@ -18,7 +18,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.FuncDim = 1  # default
         self.InputDim = 1  # default
         self.val = np.zeros(1)
-        self.proceed = True
+        self.func = None
 
         # OK button
         self.OKButton.clicked.connect(self.onClickOK)
@@ -36,7 +36,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
 
     def _PointEval(self, qle, string):
-        num, okPressed = QtWidgets.QInputDialog.getDouble(self, "Input the evaluating point", string+" value:",
+        # Need to make the dialog window larger to show the title
+        num, okPressed = QtWidgets.QInputDialog.getDouble(self, "Step 2: Input the evaluating point", string+" value:",
                                                            0, -100, 100, 4)
         if okPressed and num != '':
             return num
@@ -49,13 +50,13 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         # dlg2.exec_()
         var = QtWidgets.QLineEdit()
         self.val = self.PointEval(var)
-        self.func = self.FuncEval()
+        # self.func = self.FuncEval()
 
     def onClickPrev(self):
         self.proceed = False
 
 
-# class SecondDiag(QtWidgets.QInputDialog, Ui_SecondDiag):
+# class ThirdDiag(QtWidgets.QInputDialog, Ui_SecondDiag):
 #
 #     def __init__(self, InputDim):
 #         QtWidgets.QInputDialog.__init__(self)
