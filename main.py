@@ -90,6 +90,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.val = self.PointEval()
         # step 3
         self.func = self.FuncEval()
+        print(f"Evaluating {self.func} at {self.val}")
         # self.UISetupStep2()
         # dlg2 = SecondDiag(self.InputDim)
         # self.SecondDiag()
