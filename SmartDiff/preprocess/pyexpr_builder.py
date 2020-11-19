@@ -14,7 +14,7 @@ print(eval(code))
 print(eval("math.log(4)"))
 
 
-s = "el.power(x, 2) * 5"
+s = "pow(x, 2) * 5"
 x = AD(3)
 print(eval(s))
 
