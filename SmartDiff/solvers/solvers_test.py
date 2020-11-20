@@ -1,6 +1,6 @@
 # usage: pytest -q solvers_test.py 
 
-from SmartDiff.solvers.integrator import AutoDiffToy as AD
+from SmartDiff.solvers.integrator import AutoDiff as AD
 import SmartDiff.solvers.element_op as el
 import numpy as np
 import pytest
