@@ -24,7 +24,7 @@ def power(x, n):
     EXAMPLES
     =========
     >>> power(1.0, 2.0)
-    AD(1.0, 2.0)
+    AD(1.0, 0)
     >>> power(AD(1.0, 2.0), 2.0)
     AD(1.0, 4.0)
     """
@@ -42,7 +42,7 @@ def power(x, n):
 
 
 def log(x, n):
-    # (log_n(x))' = 1/x * log_e(n) * x'
+    # (log_n(x))' = 1/(x * log_e(n) * x')
     # we should also check the value >0 for log calculation
     """Returns the value and derivative of a logarithm operation: log_n(x)
 
@@ -57,10 +57,10 @@ def log(x, n):
 
     EXAMPLES
     =========
-    >>> log(np.e**2, np.e)
-    power(2.0, 0.1353352832366127)
+    >>> log(np.e, np.e)
+    AD(1.0, 0)
     >>> log(AD(np.e**2, 2.0), np.e)
-    AD(2.0, 0.2706705664732254)
+    AD(2.0, 0.06766764161830635)
     """
     if isinstance(x, AD):
         if x.val <= 0:
@@ -95,7 +95,7 @@ def exp(x):
     EXAMPLES
     =========
     >>> exp(1.0)
-    AD(2.718281828459045, 2.718281828459045)
+    AD(2.718281828459045, 0)
     >>> exp(AD(1.0, 2.0))
     AD(2.718281828459045, 5.43656365691809)
     """
@@ -128,7 +128,7 @@ def sqrt(x):
     EXAMPLES
     =========
     >>> sqrt(1.0)
-    AD(1.0, 0.5)
+    AD(1.0, 0)
     >>> sqrt(AD(1.0, 2.0))
     AD(1.0, 1.0)
     """
@@ -165,7 +165,7 @@ def sin(x):
     EXAMPLES
     =========
     >>> sin(0.0)
-    AD(0.0, 1.0)
+    AD(0.0, 0)
     >>> sin(AD(0.0, 2.0))
     AD(0.0, 2.0)
     """
@@ -197,7 +197,7 @@ def cos(x):
     EXAMPLES
     =========
     >>> cos(0.0)
-    AD(1.0, -0.0)
+    AD(1.0, 0)
     >>> cos(AD(0.0, 2.0))
     AD(1.0, -0.0)
     """
@@ -229,7 +229,7 @@ def tan(x):
     EXAMPLES
     =========
     >>> tan(0.0)
-    AD(0.0, 1.0)
+    AD(0.0, 0)
     >>> tan(AD(0.0, 2.0))
     AD(0.0, 2.0)
     """
@@ -261,7 +261,7 @@ def arcsin(x):
     EXAMPLES
     =========
     >>> arcsin(0.0)
-    AD(0.0, 0.0)
+    AD(0.0, 0)
     >>> arcsin(AD(0.0, 2.0))
     AD(0.0, 0.0)
     """
@@ -298,7 +298,7 @@ def arccos(x):
     EXAMPLES
     =========
     >>> arccos(0.0)
-    AD(1.5707963267948966, -0.0)
+    AD(1.5707963267948966, 0)
     >>> arccos(AD(0.0, 2.0))
     AD(1.5707963267948966, -0.0)
     """
@@ -335,7 +335,7 @@ def arctan(x):
     EXAMPLES
     =========
     >>> arctan(0.0)
-    AD(0.0, 1.0)
+    AD(0.0, 0)
     >>> arctan(AD(0.0, 2.0))
     AD(0.0, 2.0)
     """
@@ -367,7 +367,7 @@ def sinh(x):
     EXAMPLES
     =========
     >>> sinh(0.0)
-    AD(0.0, 1.0)
+    AD(0.0, 0)
     >>> sinh(AD(0.0, 2.0))
     AD(0.0, 2.0)
     """
@@ -399,7 +399,7 @@ def cosh(x):
     EXAMPLES
     =========
     >>> cosh(0.0)
-    AD(1.0, 0.0)
+    AD(1.0, 0)
     >>> cosh(AD(0.0, 2.0))
     AD(1.0, 0.0)
     """
@@ -431,7 +431,7 @@ def tanh(x):
     EXAMPLES
     =========
     >>> tanh(0.0)
-    AD(0.0, 1.0)
+    AD(0.0, 0)
     >>> tanh(AD(0.0, 2.0))
     AD(0.0, 2.0)
     """
