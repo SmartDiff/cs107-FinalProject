@@ -1,12 +1,14 @@
 import sys
 from PyQt5 import QtGui, QtCore, QtWidgets, uic
 import numpy as np
+import math
 from SmartDiff.preprocess.pyexpr_formatter import PyExpression_Formatter
 from SmartDiff.solvers.element_op import *
 
 # global Ui_MainWindow, Ui_SecondDiag
-Ui_MainWindow, QtBaseClass = uic.loadUiType('SmartDiff/GUI/step1.ui') # .ui drawn in Qt Designer
-Ui_FourthDiag, QtBaseClass4 = uic.loadUiType('SmartDiff/GUI/step4.ui')
+Ui_MainWindow, QtBaseClass = uic.loadUiType('SmartDiff/GUI/step1.ui')  # .ui drawn in Qt Designer
+Ui_FourthDiag, QtBaseClass4 = uic.loadUiType('SmartDiff/GUI/step4.ui')  # .ui drawn in Qt Designer
+Ui_FifthDiag, QtBaseClass5 = uic.loadUiType('SmartDiff/GUI/step5.ui')  # .ui drawn in Qt Designer
 
 class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
@@ -95,7 +97,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.val = self.PointEval()
         # step 3
         self.func = self.FuncEval()
-        print(f"Evaluating {self.func} at {self.val}")  # for testing only, to be commented out in the future
+        # print(f"Evaluating {self.func} at {self.val}")  # for testing only, to be commented out in the future
         # step 4
         dlg4 = FourthDiag(self.InputDim, self.FuncDim, self.val, self.func)
         dlg4.exec_()
@@ -110,9 +112,10 @@ class FourthDiag(QtWidgets.QDialog, Ui_FourthDiag):
         self.FuncDim = FuncDim
         self.val = val
         self.func = func
-        self.importUI()
-        self.setupUi(self)
 
+        self.setupUi(self)
+        Ui_FourthDiag, QtBaseClass4 = uic.loadUiType('SmartDiff/GUI/step4.ui')
+        Ui_FourthDiag.__init__(self)
         self.DisVal = False
         # populate the boxes based on user input in step 2 and 3
         self.SetupValFunc()
@@ -121,53 +124,149 @@ class FourthDiag(QtWidgets.QDialog, Ui_FourthDiag):
         # click OK button to start the computation
         self.OKButton.clicked.connect(self.onClickOK)
 
-    def importUI(self):
-        '''
-        Import the .ui based on user input dimensions
-        :return:
-        None
-        '''
-        if self.InputDim == 1 and self.FuncDim == 1:
-            Ui_FourthDiag, QtBaseClass4 = uic.loadUiType('SmartDiff/GUI/step4.ui')
-            Ui_FourthDiag.__init__(self)
-        else:
-            raise NotImplementedError
-
     def SetupValFunc(self):
+        '''
+        Display the function expressions, variable value input based on user input
+        :return:
+        '''
+        xVal_list = [self.xVal_1, self.xVal_2, self.xVal_3]
+        FuncInput_list = [self.FuncInput_1, self.FuncInput_2, self.FuncInput_3]
+
+        for xval in xVal_list:
+            xval.setText("N/A")
+        for func in FuncInput_list:
+            func.setText("N/A")
         if self.InputDim == 1 and self.FuncDim == 1:
             self.xVal_1.setText(str(self.val[0]))
-            self.xVal_2.setText("N/A")
-            self.xVal_3.setText("N/A")
             self.FuncInput_1.setText(self.func[0])
-            self.FuncInput_2.setText("N/A")
-            self.FuncInput_3.setText("N/A")
         else:
             raise NotImplementedError
 
     def setDisVal(self):
+        '''
+        Set whether the GUI displays the function value in addition to the derivative
+        :return:
+        None
+        '''
         self.DisVal = not self.DisVal
 
     def onClickOK(self):
         '''
-        Format the user input in step 2 and 3 into strings that can be put into AD modules in solvers
+        sets up step 5
         :return:
+        The function value and derivative at the specific point from user input
         '''
-        # testing out the parser and the AD modules
-        formatter = PyExpression_Formatter()
-        print(f"parser output {formatter.format_to_pyexpr(str(self.val[0]))}")
-        print(f"parser output {formatter.format_to_pyexpr(self.func[0])}")
-        x = AD(eval(formatter.format_to_pyexpr(str(self.val[0]))))
-        f = formatter.format_to_pyexpr(x)
-        if isinstance(f, AD):
-            print("the resulting function is an AD object")
-        else:
-            print("Nope")
-        if self.DisVal:
-            print(f.val, f.der)
-        else:
-            print(f.der)
+        # compute function value and derivative and get error messsage
+        val, der, msg = self.compValDer()
+        # step 5
+        dlg5 = FifthDiag(self.InputDim, self.FuncDim, val, der, msg, self.DisVal)
+        dlg5.exec_()
 
-#
+    def compValDer(self):
+        '''
+        Format the user input in step 2 and 3 into strings and call AD modules in solvers
+        :return:
+        np.array, np.array, str: function value, function derivative, error message
+        '''
+        err_msg = ""
+        # instantiate a formatter object
+        formatter = PyExpression_Formatter()
+        var_map = {"x1": AD(self.val[0]), "x": AD(self.val[0]),
+                   "x_1": AD(self.val[0])}  # the last two consider user input error
+        func_map = {"pi": math.pi,
+                    "e": math.e,
+                    "power": power,
+                    "log": log,
+                    "exp": exp,
+                    "sqrt": sqrt,
+                    "sin": sin,
+                    "cos": cos,
+                    "tan": tan,
+                    "arcsin": arcsin,
+                    "arccos": arccos,
+                    "arctan": arctan,
+                    "sinh": sinh,
+                    "cosh": cosh,
+                    "tanh": tanh}
+        var_map.update(func_map)
+        # Get user input and check if it's valid
+        is_valid = formatter.is_valid_input(self.func[0])
+        if is_valid == 0:
+            AD_out = eval(self.func[0], var_map)
+            val = AD_out.val
+            der = AD_out.der
+            print(f"value = {val}")
+            print(f"derivative = {der}")
+            print("error message:" + err_msg)
+            return np.array([val]), np.array([der]), err_msg  # need to change for higher dim
+        else:
+            if is_valid == 1:
+                return np.zeros(1), np.zeros(1), "Input function has unmatched parenthesis!"
+            else:
+                return np.zeros(1), np.zeros(1), "Input function contains invalid character!"
+
+
+class FifthDiag(QtWidgets.QDialog, Ui_FifthDiag):
+
+    def __init__(self, InputDim, FuncDim, Val, Der, Msg, DisVal):
+        QtWidgets.QDialog.__init__(self)
+        # load a dialogue based on user input from step one
+        self.InputDim = InputDim
+        self.FuncDim = FuncDim
+        self.val = Val
+        self.der = Der
+        self.msg = Msg
+        print(self.msg)
+        self.DisVal = DisVal
+        Ui_FifthDiag, QtBaseClass5 = uic.loadUiType('SmartDiff/GUI/step5.ui')
+        Ui_FifthDiag.__init__(self)
+        self.setupUi(self)
+
+        # populate the boxes based on user input in step 2 and 3
+        self.ResultDisplay()
+        # stop the program when user clicks quit
+        self.quitButton.clicked.connect(self.onClickQuit)
+
+    def ResultDisplay(self):
+        '''
+        Display the results of the SmartDiff, based on user input
+        :return:
+        None
+        '''
+        self.ErrMsg.setWordWrap(True)
+        fval_list = [self.f1Val, self.f2Val, self.f3Val]
+        der_list = [self.f11Der, self.f12Der, self.f13Der,
+                    self.f21Der, self.f22Der, self.f23Der,
+                    self.f31Der, self.f32Der, self.f33Der]
+        for fval in fval_list:
+            fval.setText("N/A")
+        for der in der_list:
+            der.setText("N/A")
+
+        if self.InputDim == 1 and self.FuncDim == 1:
+            # display error message, if any
+            if self.msg == "":
+                self.ErrMsg.setText("Success! See results below")
+                if self.DisVal:
+                    self.f1Val.setText(str(self.val[0]))
+                    self.f11Der.setText(str(self.der[0]))
+                else:
+                    self.f11Der.setText(str(self.der[0]))
+            else:
+                self.ErrMsg.setText("Failure: " + self.msg +
+                                    "Close windows of step 4 and 5 and start again from step 1.")
+        else:
+            raise NotImplementedError
+
+    def onClickQuit(self):
+        '''
+        stop the program when user clicks quit
+        :return:
+        None
+        '''
+        sys.exit()
+
+
 #     def PointEval1(self, var):
 #         '''
 #         User input the number to evaluate
