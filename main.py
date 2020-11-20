@@ -43,7 +43,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         np array of the user input (size = self.InputDim from step 1)
         '''
         if self.InputDim == 1:
-            num = self._PointEval("x_1")
+            num = self._PointEval("x1")
             return np.array([num])
         elif self.InputDim > 1:
             raise NotImplementedError
@@ -55,7 +55,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         double, user input, default 0, min -100, max 100, up to 4 decimals
         '''
         # Need to make the dialog window larger to show the title
-        num, okPressed = QtWidgets.QInputDialog.getDouble(self, "Step 2: Input the evaluating point", string+" value:",
+        num, okPressed = QtWidgets.QInputDialog.getDouble(self, "Step 2: Input the evaluating point", string+" = ",
                                                           0, -100, 100, 4)
         if okPressed and num != '':
             return num
@@ -68,7 +68,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         '''
 
         if self.InputDim == 1:
-            func = self._FuncEval("1st")
+            func = self._FuncEval("f1")
             return list([func])
 
     def _FuncEval(self, string):
@@ -78,8 +78,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         str, user input
         '''
         # Need to make the dialog window larger to show the title
-        func, okPressed = QtWidgets.QInputDialog.getText(self, "Step 3: Input the function",
-                                                         string+" component:",
+        func, okPressed = QtWidgets.QInputDialog.getText(self, "Step 3: Input the function", string+" = ",
                                                          QtWidgets.QLineEdit.Normal, "")
         if okPressed and func != '':
             return func
@@ -134,8 +133,12 @@ class FourthDiag(QtWidgets.QDialog, Ui_FourthDiag):
 
         for xval in xVal_list:
             xval.setText("N/A")
+            xval.setEnabled(False)
+            xval.setStyleSheet("background: white; color: black")
         for func in FuncInput_list:
             func.setText("N/A")
+            func.setEnabled(False)
+            func.setStyleSheet("background: white; color: black")
         if self.InputDim == 1 and self.FuncDim == 1:
             self.xVal_1.setText(str(self.val[0]))
             self.FuncInput_1.setText(self.func[0])
@@ -173,21 +176,9 @@ class FourthDiag(QtWidgets.QDialog, Ui_FourthDiag):
         formatter = PyExpression_Formatter()
         var_map = {"x1": AD(self.val[0]), "x": AD(self.val[0]),
                    "x_1": AD(self.val[0])}  # the last two consider user input error
-        func_map = {"pi": math.pi,
-                    "e": math.e,
-                    "power": power,
-                    "log": log,
-                    "exp": exp,
-                    "sqrt": sqrt,
-                    "sin": sin,
-                    "cos": cos,
-                    "tan": tan,
-                    "arcsin": arcsin,
-                    "arccos": arccos,
-                    "arctan": arctan,
-                    "sinh": sinh,
-                    "cosh": cosh,
-                    "tanh": tanh}
+        func_map = {"pi": math.pi, "e": math.e, "power": power, "log": log, "exp": exp, "sqrt": sqrt, "sin": sin,
+                    "cos": cos, "tan": tan, "arcsin": arcsin, "arccos": arccos, "arctan": arctan, "sinh": sinh,
+                    "cosh": cosh, "tanh": tanh}
         var_map.update(func_map)
         # Get user input and check if it's valid
         is_valid = formatter.is_valid_input(self.func[0])
@@ -195,9 +186,6 @@ class FourthDiag(QtWidgets.QDialog, Ui_FourthDiag):
             AD_out = eval(self.func[0], var_map)
             val = AD_out.val
             der = AD_out.der
-            print(f"value = {val}")
-            print(f"derivative = {der}")
-            print("error message:" + err_msg)
             return np.array([val]), np.array([der]), err_msg  # need to change for higher dim
         else:
             if is_valid == 1:
@@ -216,7 +204,6 @@ class FifthDiag(QtWidgets.QDialog, Ui_FifthDiag):
         self.val = Val
         self.der = Der
         self.msg = Msg
-        print(self.msg)
         self.DisVal = DisVal
         Ui_FifthDiag, QtBaseClass5 = uic.loadUiType('SmartDiff/GUI/step5.ui')
         Ui_FifthDiag.__init__(self)
@@ -240,18 +227,22 @@ class FifthDiag(QtWidgets.QDialog, Ui_FifthDiag):
                     self.f31Der, self.f32Der, self.f33Der]
         for fval in fval_list:
             fval.setText("N/A")
+            fval.setEnabled(False)
+            fval.setStyleSheet("background: white; color: black")
         for der in der_list:
             der.setText("N/A")
+            der.setEnabled(False)
+            der.setStyleSheet("background: white; color: black")
 
         if self.InputDim == 1 and self.FuncDim == 1:
             # display error message, if any
             if self.msg == "":
                 self.ErrMsg.setText("Success! See results below")
                 if self.DisVal:
-                    self.f1Val.setText(str(self.val[0]))
-                    self.f11Der.setText(str(self.der[0]))
+                    self.f1Val.setText(str(np.round(self.val[0], 2)))
+                    self.f11Der.setText(str(np.round(self.der[0], 2)))
                 else:
-                    self.f11Der.setText(str(self.der[0]))
+                    self.f11Der.setText(str(np.round(self.der[0], 2)))
             else:
                 self.ErrMsg.setText("Failure: " + self.msg +
                                     "Close windows of step 4 and 5 and start again from step 1.")
