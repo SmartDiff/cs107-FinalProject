@@ -10,7 +10,7 @@
     <x>0</x>
     <y>0</y>
     <width>697</width>
-    <height>729</height>
+    <height>673</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -141,7 +141,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline; color:#ff0000;&quot;&gt;Instructions to input the function:&lt;/span&gt;&lt;span style=&quot; font-weight:600; color:#ff0000;&quot;/&gt;&lt;/p&gt;&lt;p&gt;1. Input the variables as x1, x2, x3. In addition to 0-9 and the decimal point, do &lt;span style=&quot; font-weight:600;&quot;&gt;not&lt;/span&gt; put in numerical values pi and e. &lt;/p&gt;&lt;p&gt;2. In addition to +,-,*,/, here are the functions to choose from: &lt;/p&gt;&lt;p&gt;- Power function: f(x)**g(x) should be written as power(f(x),g(x))&lt;/p&gt;&lt;p&gt;- Logarithmic function log_n (x) should be written as log(x, n)&lt;/p&gt;&lt;p&gt;- Exponential function e**f(x) should be written as exp(f(x))&lt;/p&gt;&lt;p&gt;- Other functions: sqrt, sin, cos, tan, arcsin, arccos, arctan, sinh, cosh, &lt;/p&gt;&lt;p&gt;tanh are written as such&lt;/p&gt;&lt;p&gt;- You may put in numerical values pi and e&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-weight:600; text-decoration: underline; color:#ff0000;&quot;&gt;Instructions to input the function:&lt;/span&gt;&lt;/p&gt;&lt;p&gt;1. Input the variables as x1, x2, x3. In addition to 0-9 and the decimal point, do &lt;span style=&quot; font-weight:600;&quot;&gt;not&lt;/span&gt; put in numerical values pi and e. &lt;/p&gt;&lt;p&gt;2. In addition to +,-,*,/, here are the functions to choose from: &lt;/p&gt;&lt;p&gt;- Power function: f(x)**g(x) should be written as f(x)**g(x)&lt;/p&gt;&lt;p&gt;- Logarithmic function log_n (x) should be written as log(x, n)&lt;/p&gt;&lt;p&gt;- Exponential function e**f(x) can be written as exp(f(x)) or e**f(x)&lt;/p&gt;&lt;p&gt;- Other functions: sqrt, sin, cos, tan, arcsin, arccos, arctan, sinh, cosh, &lt;/p&gt;&lt;p&gt;tanh are written as such&lt;/p&gt;&lt;p&gt;- You may put in numerical values pi and e&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
   </widget>
