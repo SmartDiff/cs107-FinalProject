@@ -183,10 +183,17 @@ class FourthDiag(QtWidgets.QDialog, Ui_FourthDiag):
         # Get user input and check if it's valid
         is_valid = formatter.is_valid_input(self.func[0])
         if is_valid == 0:
-            AD_out = eval(self.func[0], var_map)
-            val = AD_out.val
-            der = AD_out.der
-            return np.array([val]), np.array([der]), err_msg  # need to change for higher dim
+            try:
+                AD_out = eval(self.func[0], var_map)
+                val = AD_out.val
+                der = AD_out.der
+                return np.array([val]), np.array([der]), err_msg  # need to change for higher dim
+            except ValueError as e:
+                return np.zeros(1), np.zeros(1), str(e)+" "
+            except AttributeError as e:
+                return np.zeros(1), np.zeros(1), str(e)+" "
+            except ZeroDivisionError as e:
+                return np.zeros(1), np.zeros(1), str(e)+" "
         else:
             if is_valid == 1:
                 return np.zeros(1), np.zeros(1), "Input function has unmatched parenthesis!"
