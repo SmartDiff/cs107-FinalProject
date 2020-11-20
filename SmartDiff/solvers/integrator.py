@@ -64,9 +64,12 @@ class AutoDiffToy():
     def __truediv__(self, other):
         # (f/g)' = (f'*g - g'*f)/g^2
         try:
-            # elementwise division to return Jacobian matrix
-            val_new = (np.array(self.val) / np.array(other.val)).tolist()
-            der_new = ((np.array(self.der) * np.array(other.val) -  np.array(other.der) * np.array(self.val)) / np.array(other.val)**2).tolist()
+            if other.val != 0:
+                # elementwise division to return Jacobian matrix
+                val_new = (np.array(self.val) / np.array(other.val)).tolist()
+                der_new = ((np.array(self.der) * np.array(other.val) -  np.array(other.der) * np.array(self.val)) / np.array(other.val)**2).tolist()
+            else:
+                raise ZeroDivisionError('Division by zero')
         except AttributeError:
             if isinstance(other, float) or isinstance(other, int):
                 if other != 0:
