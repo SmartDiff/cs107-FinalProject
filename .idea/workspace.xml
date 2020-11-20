@@ -1,0 +1,577 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="5acc317f-6389-45e4-bda1-781ede264fc4" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/SmartDiff/solvers/integrator.py" beforeDir="false" afterPath="$PROJECT_DIR$/SmartDiff/solvers/integrator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartDiff/solvers/solvers_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/SmartDiff/solvers/solvers_test.py" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FUSProjectUsageTrigger">
+    <session id="1469726287">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.open.time.0" value="1" />
+          <entry key="project.opened" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="ipynb" value="1" />
+          <entry key="md" value="1" />
+          <entry key="py" value="13" />
+          <entry key="txt" value="2" />
+          <entry key="yml" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="IPNB" value="1" />
+          <entry key="Markdown" value="1" />
+          <entry key="PLAIN_TEXT" value="2" />
+          <entry key="Python" value="13" />
+          <entry key="YAML" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="Python Console" value="41" />
+          <entry key="dummy" value="33" />
+          <entry key="py" value="4392" />
+          <entry key="txt" value="14" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="PLAIN_TEXT" value="47" />
+          <entry key="Python" value="4433" />
+        </counts>
+      </usages-collector>
+    </session>
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/SmartDiff/solvers/element_op.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="135">
+              <caret line="438" column="8" selection-start-line="438" selection-start-column="8" selection-end-line="438" selection-end-column="8" />
+              <folding>
+                <element signature="e#0#40#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/solvers/solvers_test.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="165">
+              <caret line="11" column="25" selection-end-line="259" />
+              <folding>
+                <element signature="e#37#77#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="90">
+                <caret line="6" selection-start-line="6" selection-end-line="6" />
+              </first_editor>
+              <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/requirements.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="45">
+              <caret line="3" selection-start-line="3" selection-end-line="3" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/SmartDiff/solvers/integrator.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="135">
+              <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/SmartDiff/preprocess/pyexpr_formatter_test.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="11">
+              <caret line="97" column="33" selection-start-line="97" selection-start-column="33" selection-end-line="97" selection-end-column="33" />
+              <folding>
+                <marker date="1605772889708" expanded="true" signature="451:452" ph="..." />
+                <marker date="1605772889708" expanded="true" signature="451:455" ph="..." />
+                <marker date="1605772889708" expanded="true" signature="1474:1974" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/SmartDiff/preprocess/pyexpr_formatter.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="166">
+              <caret line="56" column="36" selection-start-line="56" selection-start-column="36" selection-end-line="56" selection-end-column="36" />
+              <folding>
+                <element signature="e#0#11#0" expanded="true" />
+                <marker date="1605772741506" expanded="true" signature="304:2367" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/SmartDiff/solvers/solvers_test.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="90">
+              <caret line="10" column="23" lean-forward="true" selection-start-line="10" selection-start-column="23" selection-end-line="10" selection-end-column="23" />
+              <folding>
+                <element signature="e#37#77#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/main.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="270">
+              <caret line="18" column="36" selection-start-line="18" selection-start-column="36" selection-end-line="18" selection-end-column="36" />
+              <folding>
+                <element signature="e#0#10#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>pytest</find>
+    </findStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/solvers/__init__.py" />
+        <option value="$PROJECT_DIR$/solvers/solvers_test.py" />
+        <option value="$PROJECT_DIR$/solvers/parser.py" />
+        <option value="$PROJECT_DIR$/SmartDiff/solvers/parser.py" />
+        <option value="$PROJECT_DIR$/SmartDiff/solvers/evaluator.py" />
+        <option value="$PROJECT_DIR$/SmartDiff/preprocess/pyexpr_builder.py" />
+        <option value="$PROJECT_DIR$/main.py" />
+        <option value="$PROJECT_DIR$/SmartDiff/preprocess/pyexpr_formatter.py" />
+        <option value="$PROJECT_DIR$/SmartDiff/preprocess/pyexpr_formatter_test.py" />
+        <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/requirements.txt" />
+        <option value="$PROJECT_DIR$/SmartDiff/solvers/element_op.py" />
+        <option value="$PROJECT_DIR$/SmartDiff/solvers/solvers_test.py" />
+        <option value="$PROJECT_DIR$/SmartDiff/solvers/integrator.py" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="404" />
+    <option name="y" value="23" />
+    <option name="width" value="1276" />
+    <option name="height" value="948" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="cs107-FinalProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="cs107-FinalProject" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="cs107-FinalProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="cs107-FinalProject" type="462c0819:PsiDirectoryNode" />
+              <item name="SmartDiff" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="cs107-FinalProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="cs107-FinalProject" type="462c0819:PsiDirectoryNode" />
+              <item name="SmartDiff" type="462c0819:PsiDirectoryNode" />
+              <item name="preprocess" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="cs107-FinalProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="cs107-FinalProject" type="462c0819:PsiDirectoryNode" />
+              <item name="SmartDiff" type="462c0819:PsiDirectoryNode" />
+              <item name="solvers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="cs107-FinalProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="cs107-FinalProject" type="462c0819:PsiDirectoryNode" />
+              <item name="solvers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="cs107-FinalProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/SmartDiff/preprocess" />
+      <recent name="$PROJECT_DIR$/SmartDiff" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Python tests.pytest for solvers_test.TestElemOp">
+    <configuration name="pytest for pyexpr_formatter_test.TestPyExpFormatter" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
+      <module name="cs107-FinalProject" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/SmartDiff/preprocess" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_keywords" value="&quot;&quot;" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;pyexpr_formatter_test.TestPyExpFormatter&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="pytest for pyexpr_formatter_test.TestPyExpFormatter.test_format_to_pyexpr_no_e_no_pi" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
+      <module name="cs107-FinalProject" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/SmartDiff/preprocess" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_keywords" value="&quot;&quot;" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;pyexpr_formatter_test.TestPyExpFormatter.test_format_to_pyexpr_no_e_no_pi&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="pytest for pyexpr_formatter_test.TestPyExpFormatter.test_format_to_pyexpr_with_e" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
+      <module name="cs107-FinalProject" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/SmartDiff/preprocess" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_keywords" value="&quot;&quot;" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;pyexpr_formatter_test.TestPyExpFormatter.test_format_to_pyexpr_with_e&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="pytest for pyexpr_formatter_test.TestPyExpFormatter.test_is_valid_input_out2" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
+      <module name="cs107-FinalProject" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/SmartDiff/preprocess" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_keywords" value="&quot;&quot;" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;pyexpr_formatter_test.TestPyExpFormatter.test_is_valid_input_out2&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="pytest for solvers_test.TestElemOp" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
+      <module name="cs107-FinalProject" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/SmartDiff/solvers" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_keywords" value="&quot;&quot;" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;solvers_test.TestElemOp&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Python tests.pytest for pyexpr_formatter_test.TestPyExpFormatter.test_format_to_pyexpr_no_e_no_pi" />
+      <item itemvalue="Python tests.pytest for pyexpr_formatter_test.TestPyExpFormatter.test_format_to_pyexpr_with_e" />
+      <item itemvalue="Python tests.pytest for pyexpr_formatter_test.TestPyExpFormatter.test_is_valid_input_out2" />
+      <item itemvalue="Python tests.pytest for pyexpr_formatter_test.TestPyExpFormatter" />
+      <item itemvalue="Python tests.pytest for solvers_test.TestElemOp" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python tests.pytest for solvers_test.TestElemOp" />
+        <item itemvalue="Python tests.pytest for pyexpr_formatter_test.TestPyExpFormatter" />
+        <item itemvalue="Python tests.pytest for pyexpr_formatter_test.TestPyExpFormatter.test_is_valid_input_out2" />
+        <item itemvalue="Python tests.pytest for pyexpr_formatter_test.TestPyExpFormatter.test_format_to_pyexpr_no_e_no_pi" />
+        <item itemvalue="Python tests.pytest for pyexpr_formatter_test.TestPyExpFormatter.test_format_to_pyexpr_with_e" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="5acc317f-6389-45e4-bda1-781ede264fc4" name="Default Changelist" comment="" />
+      <created>1605739120259</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1605739120259</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="TestHistory">
+    <history-entry file="pytest_for_pyexpr_formatter_test_TestPyExpFormatter_test_format_to_pyexpr_with_pi - 2020.11.19 at 02h 54m 38s.xml">
+      <configuration name="pytest for pyexpr_formatter_test.TestPyExpFormatter.test_format_to_pyexpr_with_pi" configurationId="tests" />
+    </history-entry>
+    <history-entry file="pytest_for_pyexpr_formatter_test_TestPyExpFormatter_test_format_to_pyexpr_with_pi - 2020.11.19 at 02h 55m 05s.xml">
+      <configuration name="pytest for pyexpr_formatter_test.TestPyExpFormatter.test_format_to_pyexpr_with_pi" configurationId="tests" />
+    </history-entry>
+    <history-entry file="pytest_for_pyexpr_formatter_test_TestPyExpFormatter_test_format_to_pyexpr_with_pi - 2020.11.19 at 02h 56m 17s.xml">
+      <configuration name="pytest for pyexpr_formatter_test.TestPyExpFormatter.test_format_to_pyexpr_with_pi" configurationId="tests" />
+    </history-entry>
+    <history-entry file="pytest_for_pyexpr_formatter_test_TestPyExpFormatter_test_format_to_pyexpr_with_pi - 2020.11.19 at 02h 58m 07s.xml">
+      <configuration name="pytest for pyexpr_formatter_test.TestPyExpFormatter.test_format_to_pyexpr_with_pi" configurationId="tests" />
+    </history-entry>
+    <history-entry file="pytest_for_pyexpr_formatter_test_TestPyExpFormatter_test_format_to_pyexpr_with_pi - 2020.11.19 at 02h 59m 02s.xml">
+      <configuration name="pytest for pyexpr_formatter_test.TestPyExpFormatter.test_format_to_pyexpr_with_pi" configurationId="tests" />
+    </history-entry>
+    <history-entry file="pytest_for_pyexpr_formatter_test_TestPyExpFormatter_test_format_to_pyexpr_with_e - 2020.11.19 at 02h 59m 59s.xml">
+      <configuration name="pytest for pyexpr_formatter_test.TestPyExpFormatter.test_format_to_pyexpr_with_e" configurationId="tests" />
+    </history-entry>
+    <history-entry file="pytest_for_pyexpr_formatter_test_TestPyExpFormatter_test_format_to_pyexpr_no_e_no_pi - 2020.11.19 at 03h 01m 30s.xml">
+      <configuration name="pytest for pyexpr_formatter_test.TestPyExpFormatter.test_format_to_pyexpr_no_e_no_pi" configurationId="tests" />
+    </history-entry>
+    <history-entry file="pytest_for_pyexpr_formatter_test_TestPyExpFormatter_test_is_valid_input_out2 - 2020.11.19 at 03h 01m 42s.xml">
+      <configuration name="pytest for pyexpr_formatter_test.TestPyExpFormatter.test_is_valid_input_out2" configurationId="tests" />
+    </history-entry>
+    <history-entry file="pytest_for_pyexpr_formatter_test_TestPyExpFormatter - 2020.11.19 at 03h 01m 46s.xml">
+      <configuration name="pytest for pyexpr_formatter_test.TestPyExpFormatter" configurationId="tests" />
+    </history-entry>
+    <history-entry file="pytest_for_solvers_test_TestElemOp - 2020.11.19 at 03h 16m 09s.xml">
+      <configuration name="pytest for solvers_test.TestElemOp" configurationId="tests" />
+    </history-entry>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="404" y="23" width="1276" height="948" extended-state="0" />
+    <layout>
+      <window_info id="Favorites" side_tool="true" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18964143" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Version Control" />
+      <window_info anchor="bottom" id="Inspection Results" weight="0.32943925" />
+      <window_info anchor="bottom" id="Python Console" weight="0.32943925" />
+      <window_info anchor="bottom" id="Terminal" weight="0.32943925" />
+      <window_info anchor="bottom" id="Event Log" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.47196263" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+    </layout>
+    <layout-to-restore>
+      <window_info id="Favorites" order="0" side_tool="true" />
+      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.19043824" />
+      <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection Results" order="0" weight="0.32943925" />
+      <window_info anchor="bottom" id="Terminal" order="1" weight="0.32943925" />
+      <window_info anchor="bottom" id="Event Log" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Version Control" order="3" />
+      <window_info active="true" anchor="bottom" id="Python Console" order="4" visible="true" weight="0.32943925" />
+      <window_info anchor="bottom" id="Message" order="5" />
+      <window_info anchor="bottom" id="Find" order="6" />
+      <window_info anchor="bottom" id="Run" order="7" weight="0.23364486" />
+      <window_info anchor="bottom" id="Debug" order="8" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="9" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="10" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="11" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+    </layout-to-restore>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$USER_HOME$/anaconda3/envs/python3/lib/python3.6/site-packages/PyQt5/__init__.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SmartDiff/solvers/__init__.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/milestone2.ipynb">
+      <provider selected="true" editor-type-id="ipnb-editor">
+        <state>
+          <selected id="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Library/Caches/PyCharmCE2018.2/python_stubs/-153307219/PyQt5/QtWidgets/QMainWindow.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2316">
+          <caret line="13" column="6" selection-start-line="13" selection-start-column="6" selection-end-line="13" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Library/Caches/PyCharmCE2018.2/python_stubs/-153307219/builtins.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="182">
+          <caret line="72" column="4" selection-start-line="72" selection-start-column="4" selection-end-line="72" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.travis.yml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="18" column="36" selection-start-line="18" selection-start-column="36" selection-end-line="18" selection-end-column="36" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SmartDiff/preprocess/pyexpr_formatter.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="166">
+          <caret line="56" column="36" selection-start-line="56" selection-start-column="36" selection-end-line="56" selection-end-column="36" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+            <marker date="1605772741506" expanded="true" signature="304:2367" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SmartDiff/preprocess/pyexpr_formatter_test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="11">
+          <caret line="97" column="33" selection-start-line="97" selection-start-column="33" selection-end-line="97" selection-end-column="33" />
+          <folding>
+            <marker date="1605772889708" expanded="true" signature="451:452" ph="..." />
+            <marker date="1605772889708" expanded="true" signature="451:455" ph="..." />
+            <marker date="1605772889708" expanded="true" signature="1474:1974" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="90">
+            <caret line="6" selection-start-line="6" selection-end-line="6" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/requirements.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" selection-start-line="3" selection-end-line="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SmartDiff/solvers/element_op.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="438" column="8" selection-start-line="438" selection-start-column="8" selection-end-line="438" selection-end-column="8" />
+          <folding>
+            <element signature="e#0#40#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/solvers/solvers_test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" column="25" selection-end-line="259" />
+          <folding>
+            <element signature="e#37#77#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SmartDiff/solvers/solvers_test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="10" column="23" lean-forward="true" selection-start-line="10" selection-start-column="23" selection-end-line="10" selection-end-column="23" />
+          <folding>
+            <element signature="e#37#77#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SmartDiff/solvers/integrator.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>
