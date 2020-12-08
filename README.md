@@ -2,9 +2,11 @@
 
 ## Master branch
 [![Build Status](https://travis-ci.com/SmartDiff/cs107-FinalProject.svg?branch=master)](https://travis-ci.com/SmartDiff/cs107-FinalProject)
-[![Build Status milestone2](https://travis-ci.com/SmartDiff/cs107-FinalProject.svg?branch=milestone2)](https://travis-ci.com/SmartDiff/cs107-FinalProject)
 [![codecov](https://codecov.io/gh/SmartDiff/cs107-FinalProject/branch/master/graph/badge.svg?token=9IKFVF8E1T)](https://codecov.io/gh/SmartDiff/cs107-FinalProject)
-[![codecov milestone2](https://codecov.io/gh/SmartDiff/cs107-FinalProject/branch/milestone2/graph/badge.svg?token=9IKFVF8E1T)](https://codecov.io/gh/SmartDiff/cs107-FinalProject)
+
+## M3 branch
+[![Build Status M3](https://travis-ci.com/SmartDiff/cs107-FinalProject.svg?branch=M3)](https://travis-ci.com/SmartDiff/cs107-FinalProject)
+[![codecov M3](https://codecov.io/gh/SmartDiff/cs107-FinalProject/branch/M3/graph/badge.svg?token=9IKFVF8E1T)](https://codecov.io/gh/SmartDiff/cs107-FinalProject)
 
 ## M2 branch without GUI
 [![Build Status m2_formatter](https://travis-ci.com/SmartDiff/cs107-FinalProject.svg?branch=m2_formatter)](https://travis-ci.com/SmartDiff/cs107-FinalProject)
