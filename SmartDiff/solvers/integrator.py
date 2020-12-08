@@ -1,8 +1,5 @@
 import numpy as np
 
-## The reason I change the type to array and then back list is to make sure it can do elementwise computation to save Jacobian matrix for multiple functions.
-## In stead of doing for loop, I guess it will save more time.
-
 class AutoDiff():
     def __init__(self, value, der=1):
         self.val = value
@@ -12,11 +9,11 @@ class AutoDiff():
         # (f+g)' = f' + g'
         try:
             # elementwise summation to return Jacobian matrix
-            val_new = (np.array(self.val) + np.array(other.val)).tolist()
-            der_new = (np.array(self.der) + np.array(other.der)).tolist()
+            val_new = self.val + other.val
+            der_new = self.der + other.der
         except AttributeError:
             if isinstance(other, float) or isinstance(other, int):
-                val_new = (np.array(self.val) + np.array(other)).tolist()
+                val_new = self.val + other
                 der_new = self.der
             else:
                 raise AttributeError('Type error!')
@@ -29,18 +26,18 @@ class AutoDiff():
         # (f-g)' = f' - g'
         try:
             # elementwise subtraction to return Jacobian matrix
-            val_new = (np.array(self.val) - np.array(other.val)).tolist()
-            der_new = (np.array(self.der) - np.array(other.der)).tolist()
+            val_new = self.val - other.val
+            der_new = self.der - other.der
         except AttributeError:
             if isinstance(other, float) or isinstance(other, int):
-                val_new = (np.array(self.val) - np.array(other)).tolist()
+                val_new = self.val - other
                 der_new = self.der
             else:
                 raise AttributeError('Type error!')
         return AutoDiff(val_new, der_new)
 
     def __rsub__(self, other):
-        val_new = (np.array(other) - np.array(self.val)).tolist()
+        val_new = other - self.val
         der_new = - self.der
         return AutoDiff(val_new, der_new)
 
@@ -48,12 +45,12 @@ class AutoDiff():
         # (f*g)' = f'*g + g' * f
         try:
             # elementwise multiplication to return Jacobian matrix
-            val_new = (np.array(self.val) * np.array(other.val)).tolist()
-            der_new = (np.array(self.der) * np.array(other.val) + np.array(other.der) * np.array(self.val)).tolist()
+            val_new = self.val * other.val
+            der_new = self.der * other.val + other.der * self.val
         except AttributeError:
             if isinstance(other, float) or isinstance(other, int):
-                val_new = (np.array(self.val) * np.array(other)).tolist()
-                der_new = (np.array(self.der) * np.array(other)).tolist()
+                val_new = self.val * other
+                der_new = self.der * other
             else:
                 raise AttributeError('Type error!')
         return AutoDiff(val_new, der_new)
@@ -66,15 +63,15 @@ class AutoDiff():
         try:
             if other.val != 0:
                 # elementwise division to return Jacobian matrix
-                val_new = (np.array(self.val) / np.array(other.val)).tolist()
-                der_new = ((np.array(self.der) * np.array(other.val) -  np.array(other.der) * np.array(self.val)) / np.array(other.val)**2).tolist()
+                val_new = self.val / other.val
+                der_new = (self.der * other.val -  other.der * self.val) / (other.val)**2
             else:
                 raise ZeroDivisionError('Division by zero')
         except AttributeError:
             if isinstance(other, float) or isinstance(other, int):
                 if other != 0:
-                    val_new = (np.array(self.val) / np.array(other)).tolist()
-                    der_new = (np.array(self.der) / np.array(other)).tolist()
+                    val_new = self.val / other
+                    der_new = self.der / other
                 else:
                     raise ZeroDivisionError('Division by zero')
             else:
@@ -92,19 +89,19 @@ class AutoDiff():
             raise ValueError('Error: Value of base function must be positive!')
         try:
             # elementwise power to return Jacobian matrix
-            val_new = (np.array(self.val) ** np.array(other.val)).tolist()
-            der_new = (np.array(self.val) ** np.array(other.val) * (np.array(self.der)/np.array(self.val) * np.array(other.val) + np.array(other.der) * np.array(np.log(self.val)))).tolist()
+            val_new = self.val ** other.val
+            der_new = self.val ** other.val * (self.der/self.val * other.val + other.der * np.log(self.val))
         except AttributeError:
             if isinstance(other, float) or isinstance(other, int):
-                val_new = (np.array(self.val) ** np.array(other)).tolist()
-                der_new = (np.array(self.val) ** np.array(other) * (np.array(self.der)/np.array(self.val) * np.array(other))).tolist()
+                val_new = self.val ** other
+                der_new = self.val ** other * self.der/self.val * other
             else:
                 raise AttributeError('Type error!')
         return AutoDiff(val_new, der_new)
 
     def __rpow__(self, other):
-        val_new = (np.array(other) ** np.array(self.val)).tolist()
-        der_new = (np.array(other) ** np.array(self.val) * (np.array(self.der) * np.array(np.log(other)))).tolist()
+        val_new = other ** self.val
+        der_new = other ** self.val * self.der * np.log(other)
         return AutoDiff(val_new, der_new)
 
     # unary operations
@@ -117,3 +114,87 @@ class AutoDiff():
         val_new = self.val
         der_new = self.der
         return AutoDiff(val_new, der_new)
+        
+
+    # comparison operator
+    def __lt__(self, other):
+        """
+        less than comparison operator
+
+        Returns
+        -------
+        """
+        try:
+            return self.val < other.val
+        except AttributeError:
+            return self.val < other
+
+    def __gt__(self, other):
+        """
+        greater than comparison operator
+        Parameters
+        ----------
+        other
+
+        Returns
+        -------
+
+        """
+        try:
+            return self.val > other.val
+        except AttributeError:
+            return self.val > val
+
+
+    def __le__(self, other):
+        """
+        less than or equal to comparison operator
+        Returns
+        -------
+
+        """
+        try:
+            return self.val <= other.val
+        except AttributeError:
+            return self.val <= other
+
+    def __ge__(self, other):
+        """
+        greater than or equal to comparison operator
+        Returns
+        -------
+
+        """
+        try:
+            return self.val >= other.val
+        except AttributeError:
+            return self.val >= other
+
+    def __eq__(self, other):
+        """
+        equal to comparison operator
+        Parameters
+        ----------
+        other
+
+        Returns
+        -------
+
+        """
+        try:
+            return self.val == other.val
+        except AttributeError:
+            return self.val == other
+
+
+    def __ne__(self, other):
+        """
+        not equal to comparison operator
+        Returns
+        -------
+
+        """
+        try:
+            return not self.val == other.val
+        except AttributeError:
+            return not self.val == other
