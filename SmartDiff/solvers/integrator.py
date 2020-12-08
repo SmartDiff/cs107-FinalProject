@@ -87,7 +87,7 @@ class AutoDiff():
                 der_new = self.der * other.val
             else:   # self is a constant
                 der_new = other.der * self.val
-                N_new = other.der
+                N_new = other.N
 
         except AttributeError:
             if isinstance(other, float) or isinstance(other, int):
@@ -101,7 +101,7 @@ class AutoDiff():
     def __rmul__(self, other):
         return self.__mul__(other)
 
-    # TODO: Remember to the order (max(self.N, other.N)) to the returning AutoDiff object!
+    # TODO: Remember to asign the order N to max(self.N, other.N) in the returning AutoDiff object!
 
     def __truediv__(self, other):
         # (f/g)' = (f'*g - g'*f)/g^2
