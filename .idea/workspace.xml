@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5acc317f-6389-45e4-bda1-781ede264fc4" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/SmartDiff/solvers/high-order_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartDiff/solvers/element_op.py" beforeDir="false" afterPath="$PROJECT_DIR$/SmartDiff/solvers/element_op.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SmartDiff/solvers/integrator.py" beforeDir="false" afterPath="$PROJECT_DIR$/SmartDiff/solvers/integrator.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartDiff/solvers/solvers_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/SmartDiff/solvers/solvers_test.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -15,15 +17,17 @@
     <session id="1469726287">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.open.time.0" value="1" />
-          <entry key="project.opened" value="1" />
+          <entry key="project.closed" value="2" />
+          <entry key="project.open.time.0" value="2" />
+          <entry key="project.open.time.1" value="1" />
+          <entry key="project.opened" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="ipynb" value="1" />
           <entry key="md" value="1" />
-          <entry key="py" value="13" />
+          <entry key="py" value="17" />
           <entry key="txt" value="2" />
           <entry key="yml" value="1" />
         </counts>
@@ -33,104 +37,48 @@
           <entry key="IPNB" value="1" />
           <entry key="Markdown" value="1" />
           <entry key="PLAIN_TEXT" value="2" />
-          <entry key="Python" value="13" />
+          <entry key="Python" value="17" />
           <entry key="YAML" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="Python Console" value="41" />
+          <entry key="Python Console" value="388" />
           <entry key="dummy" value="33" />
-          <entry key="py" value="4392" />
+          <entry key="py" value="7847" />
           <entry key="txt" value="14" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="PLAIN_TEXT" value="47" />
-          <entry key="Python" value="4433" />
+          <entry key="Python" value="8235" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/SmartDiff/solvers/element_op.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="438" column="8" selection-start-line="438" selection-start-column="8" selection-end-line="438" selection-end-column="8" />
+            <state relative-caret-position="40">
+              <caret line="94" lean-forward="true" selection-start-line="94" selection-end-line="94" />
               <folding>
-                <element signature="e#0#40#0" expanded="true" />
+                <element signature="e#0#55#0" expanded="true" />
+                <marker date="1607392833226" expanded="true" signature="5117:5844" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/solvers/solvers_test.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="11" column="25" selection-end-line="259" />
-              <folding>
-                <element signature="e#37#77#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/README.md">
-          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-            <state split_layout="SPLIT">
-              <first_editor relative-caret-position="90">
-                <caret line="6" selection-start-line="6" selection-end-line="6" />
-              </first_editor>
-              <second_editor />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/requirements.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="45">
-              <caret line="3" selection-start-line="3" selection-end-line="3" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/SmartDiff/solvers/integrator.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/SmartDiff/preprocess/pyexpr_formatter_test.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="11">
-              <caret line="97" column="33" selection-start-line="97" selection-start-column="33" selection-end-line="97" selection-end-column="33" />
+            <state relative-caret-position="1444">
+              <caret line="76" column="14" selection-start-line="76" selection-start-column="14" selection-end-line="76" selection-end-column="14" />
               <folding>
-                <marker date="1605772889708" expanded="true" signature="451:452" ph="..." />
-                <marker date="1605772889708" expanded="true" signature="451:455" ph="..." />
-                <marker date="1605772889708" expanded="true" signature="1474:1974" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/SmartDiff/preprocess/pyexpr_formatter.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="166">
-              <caret line="56" column="36" selection-start-line="56" selection-start-column="36" selection-end-line="56" selection-end-column="36" />
-              <folding>
-                <element signature="e#0#11#0" expanded="true" />
-                <marker date="1605772741506" expanded="true" signature="304:2367" ph="..." />
+                <element signature="e#0#18#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -139,10 +87,23 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/SmartDiff/solvers/solvers_test.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="10" column="23" lean-forward="true" selection-start-line="10" selection-start-column="23" selection-end-line="10" selection-end-column="23" />
+            <state relative-caret-position="277">
+              <caret line="105" lean-forward="true" selection-start-line="98" selection-start-column="6" selection-end-line="105" />
               <folding>
-                <element signature="e#37#77#0" expanded="true" />
+                <element signature="e#37#92#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/SmartDiff/solvers/high-order_test.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="117">
+              <caret line="31" column="23" lean-forward="true" selection-start-line="31" selection-start-column="23" selection-end-line="31" selection-end-column="23" />
+              <folding>
+                <element signature="e#0#55#0" expanded="true" />
+                <marker date="1607393181786" expanded="true" signature="156:158" ph="..." />
               </folding>
             </state>
           </provider>
@@ -151,8 +112,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="18" column="36" selection-start-line="18" selection-start-column="36" selection-end-line="18" selection-end-column="36" />
+            <state relative-caret-position="65">
+              <caret line="186" column="25" selection-start-line="186" selection-start-column="25" selection-end-line="186" selection-end-column="25" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
               </folding>
@@ -191,14 +152,15 @@
         <option value="$PROJECT_DIR$/SmartDiff/preprocess/pyexpr_formatter_test.py" />
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/requirements.txt" />
-        <option value="$PROJECT_DIR$/SmartDiff/solvers/element_op.py" />
         <option value="$PROJECT_DIR$/SmartDiff/solvers/solvers_test.py" />
         <option value="$PROJECT_DIR$/SmartDiff/solvers/integrator.py" />
+        <option value="$PROJECT_DIR$/SmartDiff/solvers/element_op.py" />
+        <option value="$PROJECT_DIR$/SmartDiff/solvers/high-order_test.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="404" />
+    <option name="x" value="485" />
     <option name="y" value="23" />
     <option name="width" value="1276" />
     <option name="height" value="948" />
@@ -235,11 +197,6 @@
             </path>
             <path>
               <item name="cs107-FinalProject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="cs107-FinalProject" type="462c0819:PsiDirectoryNode" />
-              <item name="solvers" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="cs107-FinalProject" type="b2602c69:ProjectViewProjectNode" />
               <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
             </path>
           </expand>
@@ -271,7 +228,28 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python tests.pytest for solvers_test.TestElemOp">
+  <component name="RunManager" selected="Python.high-order_test">
+    <configuration name="high-order_test" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="cs107-FinalProject" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/SmartDiff/solvers" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/SmartDiff/solvers/high-order_test.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="pytest for pyexpr_formatter_test.TestPyExpFormatter" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
       <module name="cs107-FinalProject" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -299,21 +277,6 @@
       <option name="_new_keywords" value="&quot;&quot;" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
       <option name="_new_target" value="&quot;pyexpr_formatter_test.TestPyExpFormatter.test_format_to_pyexpr_no_e_no_pi&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
-      <method v="2" />
-    </configuration>
-    <configuration name="pytest for pyexpr_formatter_test.TestPyExpFormatter.test_format_to_pyexpr_with_e" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
-      <module name="cs107-FinalProject" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/SmartDiff/preprocess" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="_new_keywords" value="&quot;&quot;" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;pyexpr_formatter_test.TestPyExpFormatter.test_format_to_pyexpr_with_e&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
@@ -349,18 +312,18 @@
     </configuration>
     <list>
       <item itemvalue="Python tests.pytest for pyexpr_formatter_test.TestPyExpFormatter.test_format_to_pyexpr_no_e_no_pi" />
-      <item itemvalue="Python tests.pytest for pyexpr_formatter_test.TestPyExpFormatter.test_format_to_pyexpr_with_e" />
       <item itemvalue="Python tests.pytest for pyexpr_formatter_test.TestPyExpFormatter.test_is_valid_input_out2" />
       <item itemvalue="Python tests.pytest for pyexpr_formatter_test.TestPyExpFormatter" />
       <item itemvalue="Python tests.pytest for solvers_test.TestElemOp" />
+      <item itemvalue="Python.high-order_test" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.high-order_test" />
         <item itemvalue="Python tests.pytest for solvers_test.TestElemOp" />
         <item itemvalue="Python tests.pytest for pyexpr_formatter_test.TestPyExpFormatter" />
         <item itemvalue="Python tests.pytest for pyexpr_formatter_test.TestPyExpFormatter.test_is_valid_input_out2" />
         <item itemvalue="Python tests.pytest for pyexpr_formatter_test.TestPyExpFormatter.test_format_to_pyexpr_no_e_no_pi" />
-        <item itemvalue="Python tests.pytest for pyexpr_formatter_test.TestPyExpFormatter.test_format_to_pyexpr_with_e" />
       </list>
     </recent_temporary>
   </component>
@@ -410,23 +373,24 @@
     </history-entry>
   </component>
   <component name="ToolWindowManager">
-    <frame x="404" y="23" width="1276" height="948" extended-state="0" />
+    <frame x="485" y="23" width="1276" height="948" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info id="Favorites" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18964143" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16334662" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Version Control" />
-      <window_info anchor="bottom" id="Inspection Results" weight="0.32943925" />
-      <window_info anchor="bottom" id="Python Console" weight="0.32943925" />
-      <window_info anchor="bottom" id="Terminal" weight="0.32943925" />
-      <window_info anchor="bottom" id="Event Log" side_tool="true" />
+      <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.47196263" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.47196263" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Version Control" order="7" />
+      <window_info anchor="bottom" id="Inspection Results" order="8" weight="0.32943925" />
+      <window_info anchor="bottom" id="Terminal" order="9" weight="0.32943925" />
+      <window_info anchor="bottom" id="Python Console" order="10" weight="0.32943925" />
+      <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -476,48 +440,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/Library/Caches/PyCharmCE2018.2/python_stubs/-153307219/builtins.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="182">
-          <caret line="72" column="4" selection-start-line="72" selection-start-column="4" selection-end-line="72" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.travis.yml">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" column="36" selection-start-line="18" selection-start-column="36" selection-end-line="18" selection-end-column="36" />
-          <folding>
-            <element signature="e#0#10#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SmartDiff/preprocess/pyexpr_formatter.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="166">
-          <caret line="56" column="36" selection-start-line="56" selection-start-column="36" selection-end-line="56" selection-end-column="36" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-            <marker date="1605772741506" expanded="true" signature="304:2367" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SmartDiff/preprocess/pyexpr_formatter_test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="11">
-          <caret line="97" column="33" selection-start-line="97" selection-start-column="33" selection-end-line="97" selection-end-column="33" />
-          <folding>
-            <marker date="1605772889708" expanded="true" signature="451:452" ph="..." />
-            <marker date="1605772889708" expanded="true" signature="451:455" ph="..." />
-            <marker date="1605772889708" expanded="true" signature="1474:1974" ph="..." />
-          </folding>
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
@@ -536,40 +460,99 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/SmartDiff/solvers/element_op.py">
+    <entry file="file://$PROJECT_DIR$/solvers/solvers_test.py" />
+    <entry file="file://$PROJECT_DIR$/SmartDiff/preprocess/pyexpr_formatter.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="438" column="8" selection-start-line="438" selection-start-column="8" selection-end-line="438" selection-end-column="8" />
+        <state relative-caret-position="776">
+          <caret line="76" column="29" selection-start-line="76" selection-start-column="29" selection-end-line="76" selection-end-column="29" />
           <folding>
-            <element signature="e#0#40#0" expanded="true" />
+            <element signature="e#0#11#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/solvers/solvers_test.py">
+    <entry file="file://$PROJECT_DIR$/SmartDiff/preprocess/pyexpr_formatter_test.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="25" selection-end-line="259" />
+        <state relative-caret-position="1620">
+          <caret line="108" column="4" selection-start-line="108" selection-start-column="4" selection-end-line="108" selection-end-column="4" />
           <folding>
-            <element signature="e#37#77#0" expanded="true" />
+            <marker date="1607383969416" expanded="true" signature="451:452" ph="..." />
+            <marker date="1607383969416" expanded="true" signature="451:455" ph="..." />
+            <marker date="1607383969416" expanded="true" signature="1474:1974" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/anaconda3/envs/python3/lib/python3.6/site-packages/sympy/functions/combinatorial/factorials.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="148">
+          <caret line="750" column="40" selection-start-line="750" selection-start-column="40" selection-end-line="750" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SmartDiff/solvers/integrator.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1444">
+          <caret line="76" column="14" selection-start-line="76" selection-start-column="14" selection-end-line="76" selection-end-column="14" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/SmartDiff/solvers/solvers_test.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="10" column="23" lean-forward="true" selection-start-line="10" selection-start-column="23" selection-end-line="10" selection-end-column="23" />
+        <state relative-caret-position="277">
+          <caret line="105" lean-forward="true" selection-start-line="98" selection-start-column="6" selection-end-line="105" />
           <folding>
-            <element signature="e#37#77#0" expanded="true" />
+            <element signature="e#37#92#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/SmartDiff/solvers/integrator.py">
+    <entry file="file://$USER_HOME$/anaconda3/envs/python3/lib/python3.6/site-packages/sympy/functions/combinatorial/numbers.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
+        <state relative-caret-position="196">
+          <caret line="428" column="37" lean-forward="true" selection-start-line="428" selection-start-column="37" selection-end-line="428" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Library/Caches/PyCharmCE2018.2/python_stubs/-153307219/builtins.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="417">
+          <caret line="132" column="4" selection-start-line="132" selection-start-column="4" selection-end-line="132" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="65">
+          <caret line="186" column="25" selection-start-line="186" selection-start-column="25" selection-end-line="186" selection-end-column="25" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SmartDiff/solvers/element_op.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="40">
+          <caret line="94" lean-forward="true" selection-start-line="94" selection-end-line="94" />
+          <folding>
+            <element signature="e#0#55#0" expanded="true" />
+            <marker date="1607392833226" expanded="true" signature="5117:5844" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SmartDiff/solvers/high-order_test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="117">
+          <caret line="31" column="23" lean-forward="true" selection-start-line="31" selection-start-column="23" selection-end-line="31" selection-end-column="23" />
+          <folding>
+            <element signature="e#0#55#0" expanded="true" />
+            <marker date="1607393181786" expanded="true" signature="156:158" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>

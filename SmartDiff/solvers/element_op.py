@@ -1,5 +1,6 @@
 from SmartDiff.solvers.integrator import AutoDiff as AD
 import numpy as np
+from sympy import bell, symbols
 
 # Here contains the derivative calculation of elementary operations
 # If the input 'x' is a scalar number, it will return the value of such operation evaluated at 'x',
@@ -150,6 +151,38 @@ def sqrt(x):
     return AD(val_new, der_new)
 
 
+def get_n_der_vecs(dk_f, gx, N):
+    """
+    This function applies Faa di Bruno's formula to compute the derivatives of order from 1 to N
+    given the calling elementary operator has dk_f as its kth order derivative function.
+
+    :param dk_f(val, k): A lambda function of the kth order derivative of f at the point val
+    :param gx: Potentially an AutoDiff object
+    :param N: highest derivative order of gx
+
+    :return: a list of high-order derivatives up until gx.N
+    """
+    # Create symbols and symbol-value mapping for eval() in the loop
+    dxs = symbols('q:%d' % N)
+    dx_mapping = {str(dxs[i]): gx.der[i] for i in range(N)}
+    # Use Faa di Bruno's formula
+    der_new = []
+    for n in range(1, N + 1):
+        nth_der = 0
+        for k in range(1, n + 1):
+            # The first n-k+1 derivatives
+            t = n - k + 1
+            vars = dxs[:t]
+            # bell polynomial as python function str
+            bell_nk_str = str(bell(n, k, vars))
+            # evaluate the bell polynomial using the symbol-value mapping
+            val_bell_nk = eval(bell_nk_str, dx_mapping)
+            nth_der += dk_f(gx.val, k) * val_bell_nk
+        der_new.append(nth_der)
+    return der_new
+
+
+
 def sin(x):
     # (sin(x))' = cos(x) * x'
     """Returns the value and derivative of a sine operation: sin(x)
@@ -169,17 +202,26 @@ def sin(x):
     >>> sin(AD(0.0, 2.0))
     AD(0.0, 2.0)
     """
+    half_pi = np.pi / 2
+    N = 1
+    dk_f = lambda gx, k: np.sin(gx + half_pi * k)  # nth order derivative for sin(x)
     try:
         val_new = np.sin(x.val)
-        der_new = np.cos(x.val) * x.der
+        N = x.N
+        if N == 1:
+            der_new = np.array([np.cos(x.val) * x.der])
+        else:
+            # N > 1
+            N = x.N
+            der_new = get_n_der_vecs(dk_f, x, N)
     except AttributeError:
         if isinstance(x, float) or isinstance(x, int):
             val_new = np.sin(x)
             # If x is a constant, the derivative of x is 0.
-            der_new = 0
+            der_new = np.zeros(1)
         else:
             raise AttributeError('Type error!')
-    return AD(val_new, der_new)
+    return AD(val_new, der_new, N)
 
 
 def cos(x):
