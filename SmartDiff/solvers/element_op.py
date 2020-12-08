@@ -212,7 +212,6 @@ def sin(x):
             der_new = np.array([np.cos(x.val) * x.der])
         else:
             # N > 1
-            N = x.N
             der_new = get_n_der_vecs(dk_f, x, N)
     except AttributeError:
         if isinstance(x, float) or isinstance(x, int):
