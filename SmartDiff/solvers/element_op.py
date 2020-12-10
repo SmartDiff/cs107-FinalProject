@@ -3,6 +3,12 @@ from scipy.misc import factorial2
 from sympy import bell, binomial, symbols
 import math
 
+# TODO: Elementary Ops
+#       - power(x, n) when n is fractional
+#       - tan
+#       - arcsin, arccos, arctan,
+#       - sinh, cosh, tanh
+
 
 class AutoDiff():
     def __init__(self, value, der=None, N=1):
@@ -465,46 +471,6 @@ def sqrt(x):
     return AutoDiff(val_new, der_new, N)
 
 
-# TODO
-def log(x, n):
-    # (log_n(x))' = 1/(x * log_e(n) * x')
-    # we should also check the value >0 for log calculation
-    """Returns the value and derivative of a logarithm operation: log_n(x)
-
-    INPUTS
-    =======
-    x: an AutoDiff object or a scalar, required, the input variable
-    a: float or int, required, the base
-
-    RETURNS
-    ========
-    an AD object containing the value and derivative of the expression
-
-    EXAMPLES
-    =========
-    >>> log(np.e, np.e)
-    AD(1.0, 0)
-    >>> log(AD(np.e**2, 2.0), np.e)
-    AD(2.0, 0.06766764161830635)
-    """
-    if isinstance(x, AutoDiff):
-        if x.val <= 0:
-            raise ValueError('Error: Independent variable must be positive!')
-    try:
-        val_new = np.log(x.val) / np.log(n)
-        der_new = 1 / (x.val * np.log(n) * x.der)  # TODO: x.der should be outside???
-    except AttributeError:
-        if isinstance(x, float) or isinstance(x, int):
-            if x <= 0:
-                raise ValueError('Error: Independent variable must be positive!')
-            val_new = np.log(x) / np.log(n)
-            # If x is a constant, the derivative of x is 0.
-            der_new = 0
-        else:
-            raise AttributeError('Type error!')
-    return AutoDiff(val_new, der_new)
-
-
 def exp(x):
     # (e^{x})' = e^{x} * x'
     """Returns the value and derivative of a exponential operation: e^x
@@ -541,6 +507,45 @@ def exp(x):
         else:
             raise AttributeError('Type error!')
     return AutoDiff(val_new, der_new, N)
+
+
+def log(x, a):
+    # (log_n(x))' = 1/(x * log_e(n) * x')
+    # we should also check the value >0 for log calculation
+    """Returns the value and derivative of a logarithm operation: log_n(x)
+
+    INPUTS
+    =======
+    x: an AutoDiff object or a scalar, required, the input variable
+    a: float or int, required, the base
+
+    RETURNS
+    ========
+    an AD object containing the value and derivative of the expression
+
+    EXAMPLES
+    =========
+    >>> log(np.e, np.e)
+    AD(1.0, 0)
+    >>> log(AD(np.e**2, 2.0), np.e)
+    AD(2.0, 0.06766764161830635)
+    """
+    # equivalent to log_gx(fx) = ln(fx) / ln(gx)
+    if isinstance(x, AutoDiff):
+        if x.val <= 0:
+            raise ValueError('Error: Independent variable must be positive!')
+    try:
+        # TODO: Do we assume n is a constant?? (The following implementation assumes so)
+        return ln(x) / ln(a)
+        # val_new = np.log(x.val) / np.log(n)
+        # der_new = 1 / (x.val * np.log(n) * x.der)  # BUG: x.der should be outside???
+    except AttributeError:
+        if isinstance(x, float) or isinstance(x, int):
+            if x <= 0:
+                raise ValueError('Error: Independent variable must be positive!')
+            return inv(ln(a)) * np.log(x)  # in case a is an AD object
+        else:
+            raise AttributeError('Type error!')
 
 
 def ln(x):

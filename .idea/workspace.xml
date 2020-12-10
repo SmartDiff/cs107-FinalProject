@@ -2,11 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5acc317f-6389-45e4-bda1-781ede264fc4" name="Default Changelist" comment="">
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SmartDiff/solvers/element_op.py" beforeDir="false" afterPath="$PROJECT_DIR$/SmartDiff/solvers/element_op.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SmartDiff/solvers/high-order_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/SmartDiff/solvers/high-order_test.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SmartDiff/solvers/integrator.py" beforeDir="false" afterPath="$PROJECT_DIR$/SmartDiff/solvers/integrator.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SmartDiff/solvers/solvers_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/SmartDiff/solvers/solvers_test.py" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/.idea/cs107-FinalProject.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/cs107-FinalProject.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+>>>>>>> 8f0cd508086d3c4e120575e06aad68cb3f9fc4c0
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -14,6 +20,7 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+<<<<<<< HEAD
   <component name="FUSProjectUsageTrigger">
     <session id="1469726287">
       <usages-collector id="statistics.lifecycle.project">
@@ -59,11 +66,14 @@
       </usages-collector>
     </session>
   </component>
+=======
+>>>>>>> 8f0cd508086d3c4e120575e06aad68cb3f9fc4c0
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/SmartDiff/solvers/element_op.py">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="281">
               <caret line="166" column="20" selection-start-line="166" selection-start-column="20" selection-end-line="166" selection-end-column="20" />
               <folding>
@@ -71,6 +81,10 @@
                 <marker date="1607591539949" expanded="true" signature="11323:11364" ph="..." />
                 <marker date="1607591539949" expanded="true" signature="18880:18882" ph="..." />
               </folding>
+=======
+            <state relative-caret-position="-780">
+              <caret line="217" column="54" lean-forward="true" selection-start-line="217" selection-start-column="54" selection-end-line="217" selection-end-column="54" />
+>>>>>>> 8f0cd508086d3c4e120575e06aad68cb3f9fc4c0
             </state>
           </provider>
         </entry>
@@ -78,11 +92,16 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/SmartDiff/solvers/integrator.py">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="370">
               <caret line="169" column="25" lean-forward="true" selection-start-line="167" selection-start-column="8" selection-end-line="169" selection-end-column="25" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
+=======
+            <state relative-caret-position="399">
+              <caret line="22" column="68" lean-forward="true" selection-start-line="22" selection-start-column="68" selection-end-line="22" selection-end-column="68" />
+>>>>>>> 8f0cd508086d3c4e120575e06aad68cb3f9fc4c0
             </state>
           </provider>
         </entry>
@@ -90,8 +109,13 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/SmartDiff/solvers/solvers_test.py">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="4980">
               <caret line="335" selection-start-line="317" selection-start-column="6" selection-end-line="335" />
+=======
+            <state relative-caret-position="87">
+              <caret line="95" column="19" lean-forward="true" selection-start-line="95" selection-start-column="19" selection-end-line="95" selection-end-column="19" />
+>>>>>>> 8f0cd508086d3c4e120575e06aad68cb3f9fc4c0
               <folding>
                 <element signature="e#37#92#0" expanded="true" />
               </folding>
@@ -102,10 +126,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/SmartDiff/solvers/high-order_test.py">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="437">
               <caret line="127" lean-forward="true" selection-start-line="127" selection-end-line="127" />
               <folding>
                 <element signature="e#1#42#0" expanded="true" />
+=======
+            <state relative-caret-position="296">
+              <caret line="31" column="23" selection-start-line="31" selection-start-column="23" selection-end-line="31" selection-end-column="23" />
+              <folding>
+                <element signature="e#0#55#0" expanded="true" />
+>>>>>>> 8f0cd508086d3c4e120575e06aad68cb3f9fc4c0
               </folding>
             </state>
           </provider>
@@ -114,7 +145,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="2715">
+=======
+            <state relative-caret-position="3439">
+>>>>>>> 8f0cd508086d3c4e120575e06aad68cb3f9fc4c0
               <caret line="186" column="25" selection-start-line="186" selection-start-column="25" selection-end-line="186" selection-end-column="25" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
@@ -135,10 +170,14 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>pytest</find>
+<<<<<<< HEAD
       <find>exp</find>
       <find>AD</find>
       <find>sd</find>
       <find>sd.</find>
+=======
+      <find>sin</find>
+>>>>>>> 8f0cd508086d3c4e120575e06aad68cb3f9fc4c0
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -165,11 +204,19 @@
       </list>
     </option>
   </component>
+<<<<<<< HEAD
   <component name="ProjectFrameBounds">
     <option name="x" value="366" />
     <option name="y" value="23" />
     <option name="width" value="1276" />
     <option name="height" value="948" />
+=======
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="485" />
+    <option name="y" value="22" />
+    <option name="width" value="1277" />
+    <option name="height" value="949" />
+>>>>>>> 8f0cd508086d3c4e120575e06aad68cb3f9fc4c0
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -200,10 +247,6 @@
               <item name="SmartDiff" type="462c0819:PsiDirectoryNode" />
               <item name="solvers" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="cs107-FinalProject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -212,6 +255,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
@@ -317,11 +361,19 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Python tests.pytest for pyexpr_formatter_test.TestPyExpFormatter.test_is_valid_input_out2" />
+<<<<<<< HEAD
+=======
+      <item itemvalue="Python.high-order_test" />
       <item itemvalue="Python tests.pytest for pyexpr_formatter_test.TestPyExpFormatter" />
+      <item itemvalue="Python tests.pytest for pyexpr_formatter_test.TestPyExpFormatter.test_format_to_pyexpr_no_e_no_pi" />
+>>>>>>> 8f0cd508086d3c4e120575e06aad68cb3f9fc4c0
+      <item itemvalue="Python tests.pytest for pyexpr_formatter_test.TestPyExpFormatter.test_is_valid_input_out2" />
       <item itemvalue="Python tests.pytest for solvers_test.TestElemOp" />
+<<<<<<< HEAD
       <item itemvalue="Python.high-order_test" />
       <item itemvalue="Python tests.pytest for solvers_test.TestElemOp.test_truediv" />
+=======
+>>>>>>> 8f0cd508086d3c4e120575e06aad68cb3f9fc4c0
     </list>
     <recent_temporary>
       <list>
@@ -379,10 +431,14 @@
     </history-entry>
   </component>
   <component name="ToolWindowManager">
+<<<<<<< HEAD
     <frame x="366" y="23" width="1276" height="948" extended-state="0" />
+=======
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+>>>>>>> 8f0cd508086d3c4e120575e06aad68cb3f9fc4c0
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16334662" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16314399" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -422,30 +478,13 @@
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
     </layout-to-restore>
   </component>
-  <component name="VcsContentAnnotationSettings">
-    <option name="myLimit" value="2678400000" />
-  </component>
   <component name="editorHistoryManager">
-    <entry file="file://$USER_HOME$/anaconda3/envs/python3/lib/python3.6/site-packages/PyQt5/__init__.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$USER_HOME$/anaconda3/envs/python3/lib/python3.6/site-packages/PyQt5/__init__.py" />
     <entry file="file://$PROJECT_DIR$/SmartDiff/solvers/__init__.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/docs/milestone2.ipynb">
-      <provider selected="true" editor-type-id="ipnb-editor">
-        <state>
-          <selected id="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Library/Caches/PyCharmCE2018.2/python_stubs/-153307219/PyQt5/QtWidgets/QMainWindow.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2316">
-          <caret line="13" column="6" selection-start-line="13" selection-start-column="6" selection-end-line="13" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/milestone2.ipynb" />
+    <entry file="file://$USER_HOME$/Library/Caches/PyCharmCE2018.2/python_stubs/-153307219/PyQt5/QtWidgets/QMainWindow.py" />
     <entry file="file://$PROJECT_DIR$/.travis.yml">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -481,6 +520,7 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$USER_HOME$/anaconda3/envs/python3/lib/python3.6/site-packages/sympy/functions/combinatorial/factorials.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="148">
@@ -516,12 +556,13 @@
           <folding>
             <element signature="e#37#92#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
+=======
+    <entry file="file://$USER_HOME$/anaconda3/envs/python3/lib/python3.6/site-packages/sympy/functions/combinatorial/factorials.py" />
+    <entry file="file://$USER_HOME$/anaconda3/envs/python3/lib/python3.6/site-packages/sympy/functions/combinatorial/numbers.py" />
+    <entry file="file://$USER_HOME$/Library/Caches/PyCharmCE2018.2/python_stubs/-153307219/builtins.py" />
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2715">
+        <state relative-caret-position="3439">
           <caret line="186" column="25" selection-start-line="186" selection-start-column="25" selection-end-line="186" selection-end-column="25" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
@@ -531,6 +572,40 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/SmartDiff/solvers/high-order_test.py">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="296">
+          <caret line="31" column="23" selection-start-line="31" selection-start-column="23" selection-end-line="31" selection-end-column="23" />
+          <folding>
+            <element signature="e#0#55#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SmartDiff/solvers/integrator.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="399">
+          <caret line="22" column="68" lean-forward="true" selection-start-line="22" selection-start-column="68" selection-end-line="22" selection-end-column="68" />
+>>>>>>> 8f0cd508086d3c4e120575e06aad68cb3f9fc4c0
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SmartDiff/solvers/solvers_test.py">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="2715">
+          <caret line="186" column="25" selection-start-line="186" selection-start-column="25" selection-end-line="186" selection-end-column="25" />
+=======
+        <state relative-caret-position="87">
+          <caret line="95" column="19" lean-forward="true" selection-start-line="95" selection-start-column="19" selection-end-line="95" selection-end-column="19" />
+>>>>>>> 8f0cd508086d3c4e120575e06aad68cb3f9fc4c0
+          <folding>
+            <element signature="e#37#92#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SmartDiff/solvers/high-order_test.py">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="437">
           <caret line="127" lean-forward="true" selection-start-line="127" selection-end-line="127" />
           <folding>
@@ -558,6 +633,10 @@
             <marker date="1607591539949" expanded="true" signature="11323:11364" ph="..." />
             <marker date="1607591539949" expanded="true" signature="18880:18882" ph="..." />
           </folding>
+=======
+        <state relative-caret-position="-780">
+          <caret line="217" column="54" lean-forward="true" selection-start-line="217" selection-start-column="54" selection-end-line="217" selection-end-column="54" />
+>>>>>>> 8f0cd508086d3c4e120575e06aad68cb3f9fc4c0
         </state>
       </provider>
     </entry>

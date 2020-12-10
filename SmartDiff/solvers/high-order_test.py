@@ -105,14 +105,13 @@ class NOrderTestElemOp:
 
   def test_truediv(self):
     # N = 1 tests all passed in solvers_test
-    x = AD(4)
-    f = el.log(x, 2) / 3 ** x
-    assert (f.val, f.der) == (2 / 81, (81 / (4 * np.log(2)) - 162 * np.log(3)) / 3 ** 8)
+    x = AD(3)
+    f = 5*x / 3
+    assert (f.val, f.der[-1]) == (5, 5/3)
 
     x = AD(4, N=2)
     f = x / x
     assert (f.val, f.der[-1]) == (1, 0)
-
 
   def test_rtruediv(self):
     x = AD(4, N=2)

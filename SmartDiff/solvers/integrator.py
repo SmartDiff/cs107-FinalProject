@@ -89,7 +89,7 @@ class AutoDiff():
                 der_new = self.der * other.val
             else:   # self is a constant
                 der_new = other.der * self.val
-                N_new = other.der
+                N_new = other.N
 
         except AttributeError:
             if isinstance(other, float) or isinstance(other, int):
