@@ -130,3 +130,7 @@ dmypy.json
 
 # Other binary file
 .DS_Store
+# nonessential .idea files
+.idea/workspace.xml
+.idea/usage.statistics.xml
+.idea/tasks.xml
