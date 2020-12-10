@@ -5,6 +5,7 @@ import SmartDiff.solvers.element_op as el
 import numpy as np
 import pytest
 
+
 class TestElemOp:
 
     def test_power(self):
