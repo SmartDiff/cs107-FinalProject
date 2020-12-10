@@ -48,6 +48,7 @@ class NOrderTestElemOp:
     x = AD(2)
     f = el.power(x, 3)
     g = el.exp(f)
+    print(g)
     assert (round(g.val, 6), round(g.der[0], 6)) == (round(np.exp(1) ** 8, 6), round(12 * np.exp(1) ** 8, 6))
 
     with pytest.raises(AttributeError):
@@ -123,6 +124,11 @@ class NOrderTestElemOp:
     assert (f.val, f.der[-1]) == (3 / 8, -9 / 4**4)
 
 
+  def test_sqrt(self):
+    x = AD(4, N=2)
+    f = el.sqrt(x)
+    assert (f.val, f.der[-1]) == (2, -0.25 / (4**1.5))
+
   def test_power(self):
 
     pass
@@ -137,7 +143,8 @@ class NOrderTestElemOp:
 if __name__ == "__main__":
   test = NOrderTestElemOp()
   #test.test_sin()
-  #test.test_exp()
-  #test.test_ln()
+  # test.test_exp()
+  # test.test_ln()
   test.test_truediv()
   test.test_rtruediv()
+  test.test_sqrt()
