@@ -13,4 +13,4 @@ script:
 after_success:
   - codecov
 env:
-  CODECOV_TOKEN=679b9741-44f0-408e-a48b-c17a1b698670
+  CODECOV_TOKEN="679b9741-44f0-408e-a48b-c17a1b698670"
