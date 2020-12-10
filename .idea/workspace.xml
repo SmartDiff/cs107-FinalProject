@@ -1,20 +1,90 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5acc317f-6389-45e4-bda1-781ede264fc4" name="Default Changelist" comment="" />
+    <list default="true" id="5acc317f-6389-45e4-bda1-781ede264fc4" name="Default Changelist" comment="">
+<<<<<<< HEAD
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartDiff/solvers/element_op.py" beforeDir="false" afterPath="$PROJECT_DIR$/SmartDiff/solvers/element_op.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartDiff/solvers/high-order_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/SmartDiff/solvers/high-order_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartDiff/solvers/integrator.py" beforeDir="false" afterPath="$PROJECT_DIR$/SmartDiff/solvers/integrator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartDiff/solvers/solvers_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/SmartDiff/solvers/solvers_test.py" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/.idea/cs107-FinalProject.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/cs107-FinalProject.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+>>>>>>> 8f0cd508086d3c4e120575e06aad68cb3f9fc4c0
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+<<<<<<< HEAD
+  <component name="FUSProjectUsageTrigger">
+    <session id="1469726287">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.closed" value="2" />
+          <entry key="project.open.time.0" value="2" />
+          <entry key="project.open.time.1" value="1" />
+          <entry key="project.open.time.9" value="1" />
+          <entry key="project.opened" value="4" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="ipynb" value="1" />
+          <entry key="md" value="1" />
+          <entry key="py" value="19" />
+          <entry key="txt" value="2" />
+          <entry key="yml" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="IPNB" value="1" />
+          <entry key="Markdown" value="1" />
+          <entry key="PLAIN_TEXT" value="2" />
+          <entry key="Python" value="19" />
+          <entry key="YAML" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="Python Console" value="537" />
+          <entry key="dummy" value="33" />
+          <entry key="py" value="11763" />
+          <entry key="txt" value="14" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="PLAIN_TEXT" value="47" />
+          <entry key="Python" value="12300" />
+        </counts>
+      </usages-collector>
+    </session>
+  </component>
+=======
+>>>>>>> 8f0cd508086d3c4e120575e06aad68cb3f9fc4c0
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/SmartDiff/solvers/element_op.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="284">
-              <caret line="213" column="19" selection-start-line="213" selection-start-column="19" selection-end-line="213" selection-end-column="19" />
+<<<<<<< HEAD
+            <state relative-caret-position="281">
+              <caret line="166" column="20" selection-start-line="166" selection-start-column="20" selection-end-line="166" selection-end-column="20" />
+              <folding>
+                <element signature="e#1#19#0" expanded="true" />
+                <marker date="1607591539949" expanded="true" signature="11323:11364" ph="..." />
+                <marker date="1607591539949" expanded="true" signature="18880:18882" ph="..." />
+              </folding>
+=======
+            <state relative-caret-position="-780">
+              <caret line="217" column="54" lean-forward="true" selection-start-line="217" selection-start-column="54" selection-end-line="217" selection-end-column="54" />
+>>>>>>> 8f0cd508086d3c4e120575e06aad68cb3f9fc4c0
             </state>
           </provider>
         </entry>
@@ -22,8 +92,16 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/SmartDiff/solvers/integrator.py">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+            <state relative-caret-position="370">
+              <caret line="169" column="25" lean-forward="true" selection-start-line="167" selection-start-column="8" selection-end-line="169" selection-end-column="25" />
+              <folding>
+                <element signature="e#0#18#0" expanded="true" />
+              </folding>
+=======
             <state relative-caret-position="399">
               <caret line="22" column="68" lean-forward="true" selection-start-line="22" selection-start-column="68" selection-end-line="22" selection-end-column="68" />
+>>>>>>> 8f0cd508086d3c4e120575e06aad68cb3f9fc4c0
             </state>
           </provider>
         </entry>
@@ -31,8 +109,13 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/SmartDiff/solvers/solvers_test.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1805">
+<<<<<<< HEAD
+            <state relative-caret-position="4980">
+              <caret line="335" selection-start-line="317" selection-start-column="6" selection-end-line="335" />
+=======
+            <state relative-caret-position="87">
               <caret line="95" column="19" lean-forward="true" selection-start-line="95" selection-start-column="19" selection-end-line="95" selection-end-column="19" />
+>>>>>>> 8f0cd508086d3c4e120575e06aad68cb3f9fc4c0
               <folding>
                 <element signature="e#37#92#0" expanded="true" />
               </folding>
@@ -40,13 +123,20 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/SmartDiff/solvers/high-order_test.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="57">
-              <caret line="3" column="13" lean-forward="true" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
+<<<<<<< HEAD
+            <state relative-caret-position="437">
+              <caret line="127" lean-forward="true" selection-start-line="127" selection-end-line="127" />
+              <folding>
+                <element signature="e#1#42#0" expanded="true" />
+=======
+            <state relative-caret-position="296">
+              <caret line="31" column="23" selection-start-line="31" selection-start-column="23" selection-end-line="31" selection-end-column="23" />
               <folding>
                 <element signature="e#0#55#0" expanded="true" />
+>>>>>>> 8f0cd508086d3c4e120575e06aad68cb3f9fc4c0
               </folding>
             </state>
           </provider>
@@ -55,7 +145,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1547">
+<<<<<<< HEAD
+            <state relative-caret-position="2715">
+=======
+            <state relative-caret-position="3439">
+>>>>>>> 8f0cd508086d3c4e120575e06aad68cb3f9fc4c0
               <caret line="186" column="25" selection-start-line="186" selection-start-column="25" selection-end-line="186" selection-end-column="25" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
@@ -76,7 +170,14 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>pytest</find>
+<<<<<<< HEAD
+      <find>exp</find>
+      <find>AD</find>
+      <find>sd</find>
+      <find>sd.</find>
+=======
       <find>sin</find>
+>>>>>>> 8f0cd508086d3c4e120575e06aad68cb3f9fc4c0
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -103,18 +204,25 @@
       </list>
     </option>
   </component>
+<<<<<<< HEAD
+  <component name="ProjectFrameBounds">
+    <option name="x" value="366" />
+    <option name="y" value="23" />
+    <option name="width" value="1276" />
+    <option name="height" value="948" />
+=======
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="485" />
     <option name="y" value="22" />
     <option name="width" value="1277" />
     <option name="height" value="949" />
+>>>>>>> 8f0cd508086d3c4e120575e06aad68cb3f9fc4c0
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -143,6 +251,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -206,21 +315,6 @@
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="pytest for pyexpr_formatter_test.TestPyExpFormatter.test_format_to_pyexpr_no_e_no_pi" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
-      <module name="cs107-FinalProject" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/SmartDiff/preprocess" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="_new_keywords" value="&quot;&quot;" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;pyexpr_formatter_test.TestPyExpFormatter.test_format_to_pyexpr_no_e_no_pi&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
-      <method v="2" />
-    </configuration>
     <configuration name="pytest for pyexpr_formatter_test.TestPyExpFormatter.test_is_valid_input_out2" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
       <module name="cs107-FinalProject" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -251,20 +345,43 @@
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
+    <configuration name="pytest for solvers_test.TestElemOp.test_truediv" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
+      <module name="cs107-FinalProject" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/SmartDiff/solvers" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_keywords" value="&quot;&quot;" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;solvers_test.TestElemOp.test_truediv&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
     <list>
+<<<<<<< HEAD
+=======
       <item itemvalue="Python.high-order_test" />
       <item itemvalue="Python tests.pytest for pyexpr_formatter_test.TestPyExpFormatter" />
       <item itemvalue="Python tests.pytest for pyexpr_formatter_test.TestPyExpFormatter.test_format_to_pyexpr_no_e_no_pi" />
+>>>>>>> 8f0cd508086d3c4e120575e06aad68cb3f9fc4c0
       <item itemvalue="Python tests.pytest for pyexpr_formatter_test.TestPyExpFormatter.test_is_valid_input_out2" />
       <item itemvalue="Python tests.pytest for solvers_test.TestElemOp" />
+<<<<<<< HEAD
+      <item itemvalue="Python.high-order_test" />
+      <item itemvalue="Python tests.pytest for solvers_test.TestElemOp.test_truediv" />
+=======
+>>>>>>> 8f0cd508086d3c4e120575e06aad68cb3f9fc4c0
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.high-order_test" />
         <item itemvalue="Python tests.pytest for solvers_test.TestElemOp" />
+        <item itemvalue="Python tests.pytest for solvers_test.TestElemOp.test_truediv" />
         <item itemvalue="Python tests.pytest for pyexpr_formatter_test.TestPyExpFormatter" />
         <item itemvalue="Python tests.pytest for pyexpr_formatter_test.TestPyExpFormatter.test_is_valid_input_out2" />
-        <item itemvalue="Python tests.pytest for pyexpr_formatter_test.TestPyExpFormatter.test_format_to_pyexpr_no_e_no_pi" />
       </list>
     </recent_temporary>
   </component>
@@ -282,12 +399,6 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="pytest_for_pyexpr_formatter_test_TestPyExpFormatter_test_format_to_pyexpr_with_pi - 2020.11.19 at 02h 54m 38s.xml">
-      <configuration name="pytest for pyexpr_formatter_test.TestPyExpFormatter.test_format_to_pyexpr_with_pi" configurationId="tests" />
-    </history-entry>
-    <history-entry file="pytest_for_pyexpr_formatter_test_TestPyExpFormatter_test_format_to_pyexpr_with_pi - 2020.11.19 at 02h 55m 05s.xml">
-      <configuration name="pytest for pyexpr_formatter_test.TestPyExpFormatter.test_format_to_pyexpr_with_pi" configurationId="tests" />
-    </history-entry>
     <history-entry file="pytest_for_pyexpr_formatter_test_TestPyExpFormatter_test_format_to_pyexpr_with_pi - 2020.11.19 at 02h 56m 17s.xml">
       <configuration name="pytest for pyexpr_formatter_test.TestPyExpFormatter.test_format_to_pyexpr_with_pi" configurationId="tests" />
     </history-entry>
@@ -312,16 +423,27 @@
     <history-entry file="pytest_for_solvers_test_TestElemOp - 2020.11.19 at 03h 16m 09s.xml">
       <configuration name="pytest for solvers_test.TestElemOp" configurationId="tests" />
     </history-entry>
+    <history-entry file="pytest_for_solvers_test_TestElemOp_test_truediv - 2020.12.10 at 03h 34m 32s.xml">
+      <configuration name="pytest for solvers_test.TestElemOp.test_truediv" configurationId="tests" />
+    </history-entry>
+    <history-entry file="pytest_for_solvers_test_TestElemOp - 2020.12.10 at 03h 35m 27s.xml">
+      <configuration name="pytest for solvers_test.TestElemOp" configurationId="tests" />
+    </history-entry>
   </component>
   <component name="ToolWindowManager">
+<<<<<<< HEAD
+    <frame x="366" y="23" width="1276" height="948" extended-state="0" />
+=======
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+>>>>>>> 8f0cd508086d3c4e120575e06aad68cb3f9fc4c0
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16314399" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.47196263" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32943925" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.24182244" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -388,9 +510,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="776">
           <caret line="76" column="29" selection-start-line="76" selection-start-column="29" selection-end-line="76" selection-end-column="29" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -398,34 +517,52 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1620">
           <caret line="108" column="4" selection-start-line="108" selection-start-column="4" selection-end-line="108" selection-end-column="4" />
-          <folding>
-            <marker date="1607383969416" expanded="true" signature="451:452" ph="..." />
-            <marker date="1607383969416" expanded="true" signature="451:455" ph="..." />
-            <marker date="1607383969416" expanded="true" signature="1474:1974" ph="..." />
-          </folding>
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
+    <entry file="file://$USER_HOME$/anaconda3/envs/python3/lib/python3.6/site-packages/sympy/functions/combinatorial/factorials.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="148">
+          <caret line="750" column="40" selection-start-line="750" selection-start-column="40" selection-end-line="750" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/anaconda3/envs/python3/lib/python3.6/site-packages/sympy/functions/combinatorial/numbers.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="196">
+          <caret line="428" column="37" lean-forward="true" selection-start-line="428" selection-start-column="37" selection-end-line="428" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Library/Caches/PyCharmCE2018.2/python_stubs/-153307219/builtins.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="417">
+          <caret line="501" column="4" selection-start-line="501" selection-start-column="4" selection-end-line="501" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Library/Caches/PyCharmCE2018.2/python_stubs/-153307219/math.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="182">
+          <caret line="139" column="4" selection-start-line="139" selection-start-column="4" selection-end-line="139" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SmartDiff/solvers/solvers_test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4980">
+          <caret line="335" selection-start-line="317" selection-start-column="6" selection-end-line="335" />
+          <folding>
+            <element signature="e#37#92#0" expanded="true" />
+          </folding>
+=======
     <entry file="file://$USER_HOME$/anaconda3/envs/python3/lib/python3.6/site-packages/sympy/functions/combinatorial/factorials.py" />
     <entry file="file://$USER_HOME$/anaconda3/envs/python3/lib/python3.6/site-packages/sympy/functions/combinatorial/numbers.py" />
     <entry file="file://$USER_HOME$/Library/Caches/PyCharmCE2018.2/python_stubs/-153307219/builtins.py" />
-    <entry file="file://$PROJECT_DIR$/SmartDiff/solvers/element_op.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="284">
-          <caret line="213" column="19" selection-start-line="213" selection-start-column="19" selection-end-line="213" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SmartDiff/solvers/integrator.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="22" column="68" lean-forward="true" selection-start-line="22" selection-start-column="68" selection-end-line="22" selection-end-column="68" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1547">
+        <state relative-caret-position="3439">
           <caret line="186" column="25" selection-start-line="186" selection-start-column="25" selection-end-line="186" selection-end-column="25" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
@@ -433,10 +570,33 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/SmartDiff/solvers/high-order_test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="296">
+          <caret line="31" column="23" selection-start-line="31" selection-start-column="23" selection-end-line="31" selection-end-column="23" />
+          <folding>
+            <element signature="e#0#55#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SmartDiff/solvers/integrator.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="399">
+          <caret line="22" column="68" lean-forward="true" selection-start-line="22" selection-start-column="68" selection-end-line="22" selection-end-column="68" />
+>>>>>>> 8f0cd508086d3c4e120575e06aad68cb3f9fc4c0
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/SmartDiff/solvers/solvers_test.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1805">
+<<<<<<< HEAD
+        <state relative-caret-position="2715">
+          <caret line="186" column="25" selection-start-line="186" selection-start-column="25" selection-end-line="186" selection-end-column="25" />
+=======
+        <state relative-caret-position="87">
           <caret line="95" column="19" lean-forward="true" selection-start-line="95" selection-start-column="19" selection-end-line="95" selection-end-column="19" />
+>>>>>>> 8f0cd508086d3c4e120575e06aad68cb3f9fc4c0
           <folding>
             <element signature="e#37#92#0" expanded="true" />
           </folding>
@@ -445,11 +605,38 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/SmartDiff/solvers/high-order_test.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="57">
-          <caret line="3" column="13" lean-forward="true" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
+<<<<<<< HEAD
+        <state relative-caret-position="437">
+          <caret line="127" lean-forward="true" selection-start-line="127" selection-end-line="127" />
           <folding>
-            <element signature="e#0#55#0" expanded="true" />
+            <element signature="e#1#42#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SmartDiff/solvers/integrator.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="370">
+          <caret line="169" column="25" lean-forward="true" selection-start-line="167" selection-start-column="8" selection-end-line="169" selection-end-column="25" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SmartDiff/solvers/element_op.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="281">
+          <caret line="166" column="20" selection-start-line="166" selection-start-column="20" selection-end-line="166" selection-end-column="20" />
+          <folding>
+            <element signature="e#1#19#0" expanded="true" />
+            <marker date="1607591539949" expanded="true" signature="11323:11364" ph="..." />
+            <marker date="1607591539949" expanded="true" signature="18880:18882" ph="..." />
+          </folding>
+=======
+        <state relative-caret-position="-780">
+          <caret line="217" column="54" lean-forward="true" selection-start-line="217" selection-start-column="54" selection-end-line="217" selection-end-column="54" />
+>>>>>>> 8f0cd508086d3c4e120575e06aad68cb3f9fc4c0
         </state>
       </provider>
     </entry>

@@ -1,5 +1,7 @@
 import numpy as np
 from sympy import binomial
+import SmartDiff.solvers.element_op as el
+
 
 ## The reason I change the type to array and then back list is to make sure it can do elementwise computation to save Jacobian matrix for multiple functions.
 ## In stead of doing for loop, I guess it will save more time.
@@ -87,7 +89,7 @@ class AutoDiff():
                 der_new = self.der * other.val
             else:   # self is a constant
                 der_new = other.der * self.val
-                N_new = other.der
+                N_new = other.N
 
         except AttributeError:
             if isinstance(other, float) or isinstance(other, int):
@@ -101,32 +103,36 @@ class AutoDiff():
     def __rmul__(self, other):
         return self.__mul__(other)
 
-    # TODO: Remember to the order (max(self.N, other.N)) to the returning AutoDiff object!
-
     def __truediv__(self, other):
         # (f/g)' = (f'*g - g'*f)/g^2
         try:
             if other.val != 0:
                 # elementwise division to return Jacobian matrix
-                val_new = (np.array(self.val) / np.array(other.val)).tolist()
-                der_new = ((np.array(self.der) * np.array(other.val) -  np.array(other.der) * np.array(self.val)) / np.array(other.val)**2).tolist()
+                denom = el.inv(other)
+                return self.__mul__(denom)
             else:
                 raise ZeroDivisionError('Division by zero')
         except AttributeError:
             if isinstance(other, float) or isinstance(other, int):
                 if other != 0:
-                    val_new = (np.array(self.val) / np.array(other)).tolist()
-                    der_new = (np.array(self.der) / np.array(other)).tolist()
+                    # just divide if other is constant
+                    val_new = self.val / other
+                    der_new = self.der / other
+                    return AutoDiff(val_new, der_new, self.N)
                 else:
                     raise ZeroDivisionError('Division by zero')
             else:
                 raise AttributeError('Type error!')
-        return AutoDiff(val_new, der_new)
 
     def __rtruediv__(self, other):
-        val_new = other/self.val
-        der_new = - other * self.der/self.val**2
-        return AutoDiff(val_new, der_new)
+        if self.val != 0:
+            inv_self = el.inv(self)
+            return inv_self * other
+        else:
+            raise ZeroDivisionError('Division by zero')
+        # val_new = other / self.val
+        # der_new = - other * self.der/self.val**2
+        # return AutoDiff(val_new, der_new)
 
     def __pow__(self, other):
         # (f^g)' = f^g * (f'/f * g + g' * ln(f))
@@ -134,25 +140,39 @@ class AutoDiff():
             raise ValueError('Error: Value of base function must be positive!')
         try:
             # elementwise power to return Jacobian matrix
-            val_new = (np.array(self.val) ** np.array(other.val)).tolist()
-            der_new = (np.array(self.val) ** np.array(other.val) * (np.array(self.der)/np.array(self.val) * np.array(other.val) + np.array(other.der) * np.array(np.log(self.val)))).tolist()
+            val_new = self.val ** other.val
+            N_new = self.N  # The larger order of the two components
+            if self.N == other.N:
+                if N_new == 1:
+                    der_new = val_new * (other.val * self.der / self.val + other.der / np.log(self.val))
+                else:
+                    # fx^gx = e^(gx * ln(fx))
+                    pw = el.ln(self) * other
+                    f_power_g = el.exp(pw)
+                    return f_power_g
+            elif self.N > other.N:
+                # other is constant: x^a
+                return el.power(self, other.val)
+            else:
+                # self is constant: b^gx = e^(gx * ln(b))
+                pw = other * np.log(self.val)
+                return el.exp(pw)
         except AttributeError:
             if isinstance(other, float) or isinstance(other, int):
-                val_new = (np.array(self.val) ** np.array(other)).tolist()
-                der_new = (np.array(self.val) ** np.array(other) * (np.array(self.der)/np.array(self.val) * np.array(other))).tolist()
+                return el.power(self, other)
             else:
                 raise AttributeError('Type error!')
-        return AutoDiff(val_new, der_new)
+        return AutoDiff(val_new, der_new, N_new)
 
     def __rpow__(self, other):
-        val_new = (np.array(other) ** np.array(self.val)).tolist()
-        der_new = (np.array(other) ** np.array(self.val) * (np.array(self.der) * np.array(np.log(other)))).tolist()
-        return AutoDiff(val_new, der_new)
+        # other is constant: c^fx
+        pw = self.val * np.log(other)
+        return el.exp(pw)
 
     # unary operations
     def __neg__(self):
-        val_new = - self.val
-        der_new = - self.der
+        val_new = -self.val
+        der_new = -self.der
         return AutoDiff(val_new, der_new, self.N)
 
     def __pos__(self):
@@ -242,3 +262,9 @@ class AutoDiff():
             return not self.val == other.val
         except AttributeError:
             return not self.val == other
+
+    def __str__(self):
+        val = "val = " + str(self.val)
+        der = "; der = " + str(self.der)
+        return val + der
+
