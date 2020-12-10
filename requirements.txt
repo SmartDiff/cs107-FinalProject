@@ -1,4 +1,4 @@
 PyQt5==5.15.1
 numpy>=1.19.4
 sympy>=1.7
-scipy==0.15.1
+scipy>=0.15.1
