@@ -4,6 +4,37 @@ import numpy as np
 import pytest
 
 class TestElemOpNOrder:
+  
+  def test_add(self):
+    # N > 1
+    x = AD(5, N=3)
+    f = el.sin(x)
+    g = 10
+    h = f + g
+    assert (h.val, np.round(h.der[-1]), 6) == (np.sin(5) + 10, np.round(-np.cos(5)), 6)
+
+    f = 10
+    g = el.sin(x)
+    h = f + g
+    assert (h.val, np.round(h.der[-1]), 6) == (np.sin(5) + 10, np.round(-np.cos(5)), 6)
+
+    f = el.sin(x)
+    g = x**2
+    h = f + g
+    assert (h.val, np.round(h.der[-1]), 6) == (np.sin(5) + 25, np.round(-np.cos(5)), 6)
+
+  def test_sub(self):
+    # N > 1
+    x = AD(5, N=3)
+    f = el.sin(x)
+    g = 10
+    h = f - g
+    assert (h.val, np.round(h.der[-1]), 6) == (np.sin(5) - 10, np.round(-np.cos(5)), 6)
+
+    f = el.sin(x)
+    g = x**2
+    h = f - g
+    assert (h.val, np.round(h.der[-1]), 6) == (np.sin(5) - 25, np.round(-np.cos(5)), 6)
 
   def test_sin(self):
     # N = 1
@@ -58,6 +89,54 @@ class TestElemOpNOrder:
     f = el.cos(x) * 4
     assert (f.val, np.round(f.der[-1], 6)) == (4*np.cos(2), np.round(-4*np.cos(2), 6))
 
+  def test_tan(self):
+    # N > 1
+    x = AD(10, N=2)
+    f = el.tan(x)
+    assert (f.val, np.round(f.der[-1], 6)) == (np.tan(10), np.round(2*np.tan(10)*(1/(np.cos(10)**2)), 6))
+
+    x = AD(10, N=3)
+    f = el.tan(x)
+    assert (f.val, np.round(f.der[-1], 6)) == (np.tan(10), np.round(-2*(-2 + np.cos(20))*(1/(np.cos(10)**4)), 6))
+
+
+  def test_arcsin(self):
+    # N > 1
+    x = AD(0.5, N=2)
+    f = el.arcsin(x)
+    assert (f.val, np.round(f.der[-1], 6)) == (np.arcsin(0.5), 0.7698)
+
+  def test_arccos(self):
+    # N > 1
+    x = AD(0.5, N=2)
+    f = el.arccos(x)
+    assert (f.val, np.round(f.der[-1], 6)) == (np.arccos(0.5), -0.7698)
+
+  def test_arctan(self):
+    # N > 1
+    x = AD(0.5, N=2)
+    f = el.arctan(x)
+    assert (f.val, np.round(f.der[-1], 6)) == (np.arctan(0.5), -0.64)
+
+  def test_sinh(self):
+    # N > 1
+    x = AD(10, N=4)
+    f = el.sinh(x)
+    assert (f.val, f.der[-1]) == (np.sinh(10), np.sinh(10))
+
+    x = AD(10, N=7)
+    f = el.sinh(x)
+    assert (f.val, f.der[-1]) == (np.sinh(10), np.cosh(10))
+
+  def test_cosh(self):
+    # N > 1
+    x = AD(10, N=4)
+    f = el.cosh(x)
+    assert (f.val, f.der[-1]) == (np.cosh(10), np.cosh(10))
+
+    x = AD(10, N=7)
+    f = el.cosh(x)
+    assert (f.val, f.der[-1]) == (np.cosh(10), np.sinh(10))
 
   def test_exp(self):
     # N = 1
@@ -150,7 +229,6 @@ class TestElemOpNOrder:
     f = 3 / (2 * x)  # shows rtruediv should work
     assert (f.val, f.der[-1]) == (3 / 8, -9 / 4**4)
 
-
   def test_sqrt(self):
     x = AD(4, N=2)
     f = el.sqrt(x)
@@ -164,7 +242,22 @@ class TestElemOpNOrder:
   def test_AD_pow(self):
     pass
 
+  def test_power_k(self):
+    with pytest.raises(AttributeError):
+      x = AD(10)
+      n = "1"
+      f = el.power_k_order(x, n, 3)
 
+    with pytest.raises(AttributeError):
+      x = AD(10)
+      n = AD(3)
+      f = el.power_k_order(x, n, 3)
+
+    with pytest.raises(ValueError):
+      x = AD(-3)
+      n = 1/2
+      f = el.power_k_order(x, n, 3)
+  
 #if __name__ == "__main__":
   # test = NOrderTestElemOp()
   # test.test_sin()

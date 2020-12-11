@@ -50,8 +50,8 @@ class TestElemOp:
       x = "s"
       f = el.log(x,3)
 
-    x = -3
     with pytest.raises(ValueError):
+      x = -3.9
       f = el.log(x,3)
 
   def test_ln(self):
