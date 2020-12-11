@@ -516,6 +516,9 @@ def expn(x,n):
         >>> exp(AD(1.0, 2.0), np.e)
         AD(2.718281828459045, 5.43656365691809)
         """
+    if isinstance(n, float) or isinstance(n, int):
+        if n < 0:
+            raise ValueError('Error: Base must be positive!')
     N = 1
     dk_f = lambda gx, k: n**gx *(np.log(n)**2)  # nth order derivative for n^x
     try:
