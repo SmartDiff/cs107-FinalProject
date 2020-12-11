@@ -1086,9 +1086,11 @@ def logistic(x,x0=0, L=1, k=1):
     N = 1
     try:
         val_new = L / (1 + np.exp(-k * (x.val - x0)))
+        der_val = k*(np.exp(-k * (x.val - x0)))
         N = x.N
         if N == 1:
-            der_new = np.array([val_new * (1-val_new) * x.der])
+            #der_new = np.array([val_new * (1-val_new) * x.der])
+            der_new = np.array([val_new * (val_new/L) * der_val * x.der])
         else:
             # N > 1
             f = lambda x: L * 1/(1+x)
