@@ -373,7 +373,7 @@ def power(x, n):
 
 
 def log(x, a):
-    # (log_n(x))' = 1/(x * log_e(n) * x')
+    # (log_a(x))' = 1/(x * log_e(a) * x')
     # we should also check the value >0 for log calculation
     """Returns the value and derivative of a logarithm operation: log_n(x)
     INPUTS
@@ -396,8 +396,8 @@ def log(x, a):
             raise ValueError('Error: Independent variable must be positive!')
     try:
         return ln(x) / ln(a)
-        # val_new = np.log(x.val) / np.log(n)
-        # der_new = 1 / (x.val * np.log(n) * x.der)  # BUG: x.der should be outside???
+        #val_new = np.log(x.val) / np.log(n)
+        #der_new = 1 / (x.val * np.log(n)) * x.der  # BUG: x.der should be outside???
     except AttributeError:
         if isinstance(x, float) or isinstance(x, int):
             if x <= 0:
@@ -405,6 +405,7 @@ def log(x, a):
             return inv(ln(a)) * np.log(x)  # in case a is an AD object
         else:
             raise AttributeError('Type error!')
+    #return AutoDiff(val_new, der_new, N)
 
 # def log_k_order(gx, n, k):
 #     if k == 1:

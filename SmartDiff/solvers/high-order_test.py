@@ -1,11 +1,9 @@
-
 import SmartDiff.solvers.element_op as el
 from SmartDiff.solvers.element_op import AutoDiff as AD
 import numpy as np
 import pytest
 
-
-class NOrderTestElemOp:
+class TestElemOpNOrder:
 
   def test_sin(self):
     # N = 1
@@ -22,18 +20,43 @@ class NOrderTestElemOp:
     assert (f.val, f.der) == (np.sin(13), 0)
 
     # N > 1
-    x = AD(0, N=4)
+    x = AD(2, N=4)
     f = el.sin(x)
-    print(f)
+    #print(f)
+    assert (f.val, np.round(f.der[-1], 6)) == (np.sin(2), np.round(np.sin(2), 6))
+
+    x = AD(2, N=3)
+    f = el.sin(x)
+    #print(f)
+    assert (f.val, np.round(f.der[-1], 6)) == (np.sin(2), np.round(-np.cos(2), 6))
 
     f = el.sin(x) + 3
-    print(f)
+    assert (f.val, np.round(f.der[-1], 6)) == (np.sin(2) + 3, np.round(-np.cos(2), 6))
 
     f = el.sin(x) - 2
-    print(f)
+    assert (f.val, np.round(f.der[-1], 6)) == (np.sin(2) - 2, np.round(-np.cos(2), 6))
 
     f = el.sin(x) * 4
-    print(f)
+    assert (f.val, np.round(f.der[-1], 6)) == (4*np.sin(2), np.round(-4*np.cos(2), 6))
+
+  def test_cos(self):
+    # N > 1
+    x = AD(10, N=5)
+    f = el.cos(x)
+    assert (f.val, np.round(f.der[-1], 6)) == (np.cos(10), np.round(-np.sin(10), 6))
+
+    x = AD(2, N=2)
+    f = el.cos(x)
+    assert (f.val, np.round(f.der[-1], 6)) == (np.cos(2), np.round(-np.cos(2), 6))
+
+    f = el.cos(x) + 3
+    assert (f.val, np.round(f.der[-1], 6)) == (np.cos(2) + 3, np.round(-np.cos(2), 6))
+
+    f = el.cos(x) - 2
+    assert (f.val, np.round(f.der[-1], 6)) == (np.cos(2) - 2, np.round(-np.cos(2), 6))
+
+    f = el.cos(x) * 4
+    assert (f.val, np.round(f.der[-1], 6)) == (4*np.cos(2), np.round(-4*np.cos(2), 6))
 
 
   def test_exp(self):
@@ -60,6 +83,10 @@ class NOrderTestElemOp:
       x = AD(3, N=N)
       f = el.exp(x)
       print("N=%d" % N, f)
+
+    x = AD(2, N=5)
+    f = el.exp(x)
+    assert (f.val, f.der[-1]) == (np.exp(2), np.exp(2))
 
   def test_ln(self):
     # N = 1
@@ -130,21 +157,19 @@ class NOrderTestElemOp:
     assert (f.val, f.der[-1]) == (2, -0.25 / (4**1.5))
 
   def test_power(self):
-
-    pass
+    x = AD(4, N=3)
+    f = el.power(x, 4)
+    assert (f.val, f.der[-1]) == (256, 96)
 
   def test_AD_pow(self):
     pass
 
 
-
-
-
-if __name__ == "__main__":
-  test = NOrderTestElemOp()
-  #test.test_sin()
+#if __name__ == "__main__":
+  # test = NOrderTestElemOp()
+  # test.test_sin()
   # test.test_exp()
   # test.test_ln()
-  test.test_truediv()
-  test.test_rtruediv()
-  test.test_sqrt()
+  # test.test_truediv()
+  # test.test_rtruediv()
+  # test.test_sqrt()
