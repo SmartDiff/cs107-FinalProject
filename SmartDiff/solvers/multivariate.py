@@ -36,8 +36,9 @@ def jacob_hessian(func, vals, N=1):
             N = 1
     elif N > 2:
         raise ValueError("Only support 1st and 2nd order derivatives for multivariable cases")
-    xs = symbols('x:%d' % n)
-    AD_vars = [AD(vals[i], N=N, var=xs[i]) for i in range(n)]
+    # xs = symbols('x:%d' % n)
+    # AD_vars = [AD(vals[i], N=N, var=xs[i]) for i in range(n)]
+    AD_vars = [AD(vals[i], N=N) for i in range(n)]
     # AD_const = [AD(vals[i], N=1, var='const') for i in range(n)]
     AD_func_list = []
     for i in range(n):
@@ -56,6 +57,7 @@ def jacob_hessian(func, vals, N=1):
     for i in range(m):
         for j in range(n):
             print(AD_func_list[j][i])
+
     # fill in Jacobian
     jacobian = np.zeros((m, n))
     for i in range(m):
@@ -75,13 +77,13 @@ def jacob_hessian(func, vals, N=1):
 # print('jacobian1',jacobian1)
 output_value1, jacobian1, hess1 = jacob_hessian(lambda x,y : [x**2*exp(x)+y, y], [2,3], 1)
 print('value1', output_value1)
-print('jacobian1',jacobian1)
-print('hessian1',hess1)
-#
-# output_value1, jacobian1, hess1 = jacob_hessian(lambda x,y : [x**2*exp(x),x*y], [2,3], 2)
-# print('value2', output_value1)
-# print('jacobian2',jacobian1)
-# print('hessian2',hess1)
+print('jacobian1', jacobian1)
+print('hessian1', hess1)
+print("--------------------------------------------")
+output_value1, jacobian1, hess1 = jacob_hessian(lambda x,y : [x**2*exp(x),x*y], [2,3], 2)
+print('value2', output_value1)
+print('jacobian2', jacobian1)
+print('hessian2', hess1)
 
 # print('----------')
 # output_value2, jacobian2 = get_jaco(func = (lambda x,y,z : [el.cos(el.exp(x))*z+y*z]), vals = [1,2,3])

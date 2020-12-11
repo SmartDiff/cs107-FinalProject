@@ -2,8 +2,6 @@ import numpy as np
 from sympy import bell, binomial, symbols
 from math import factorial
 
-# TO DO: MAKE MULTIVARIABLE JACOBIAN AND HESSIAN
-
 # Here contains the derivative calculation of elementary operations
 # If the input 'x' is a scalar number, it will return the value of such operation evaluated at 'x',
 # which is directly applied the operation.
@@ -13,10 +11,9 @@ from math import factorial
 
 
 class AutoDiff():
-    def __init__(self, value, der=None, N=1, var='x'):
+    def __init__(self, value, der=None, N=1):
         self.val = value
         self.N = N
-        self.var = var
         if der is None:
             self.der = np.zeros(N)
             self.der[0] = 1.0
@@ -31,10 +28,7 @@ class AutoDiff():
             val_new = self.val + other.val
             N_new = self.N  # The larger order of the two components
             if self.N == other.N:
-                if self.var == other.var:
-                    der_new = self.der + other.der
-                else:
-                    der_new = self.der
+                der_new = self.der + other.der
             elif self.N > other.N:  # other is constant
                 der_new = self.der
             else:  # self is constant
@@ -47,7 +41,7 @@ class AutoDiff():
                 N_new = self.N
             else:
                 raise AttributeError('Type error!')
-        return AutoDiff(val_new, der_new, N_new, self.var)
+        return AutoDiff(val_new, der_new, N_new)
 
     def __radd__(self, other):
         return self.__add__(other)
@@ -60,10 +54,7 @@ class AutoDiff():
             val_new = self.val - other.val
             N_new = self.N  # The larger order of the two components
             if self.N == other.N:
-                if self.var == other.var:
-                    der_new = self.der - other.der
-                else:
-                    der_new = self.der
+                der_new = self.der - other.der
             elif self.N > other.N:  # other is constant
                 der_new = self.der
             else:  # self is constant
@@ -76,13 +67,13 @@ class AutoDiff():
                 N_new = self.N
             else:
                 raise AttributeError('Type error!')
-        return AutoDiff(val_new, der_new, N_new, self.var)
+        return AutoDiff(val_new, der_new, N_new)
 
     def __rsub__(self, other):
         # In this case, other must be a constant
         val_new = other - self.val
         der_new = -self.der
-        return AutoDiff(val_new, der_new, self.N, self.var)
+        return AutoDiff(val_new, der_new, self.N)
 
     def __mul__(self, other):
         # (f*g)' = f'*g + g' * f
@@ -91,16 +82,13 @@ class AutoDiff():
             val_new = self.val * other.val
             N_new = self.N
             if self.N == other.N:
-                if self.var == other.var:
-                    der_new = []
-                    for n in range(1, self.N+1):
-                        # binomial(n, 0) = binomial(n, n) = 1 always holds
-                        nth_der = self.der[-1] * other.val + self.val * other.der[-1]  # 1st and last term
-                        for k in range(1, n):
-                            nth_der += binomial(n, k) * self.der[n-k-1] * other.der[k-1]
-                        der_new.append(nth_der)
-                else:
-                    der_new = self.der
+                der_new = []
+                for n in range(1, self.N+1):
+                    # binomial(n, 0) = binomial(n, n) = 1 always holds
+                    nth_der = self.der[-1] * other.val + self.val * other.der[-1]  # 1st and last term
+                    for k in range(1, n):
+                        nth_der += binomial(n, k) * self.der[n-k-1] * other.der[k-1]
+                    der_new.append(nth_der)
             elif self.N > other.N:  # other is a constant
                 der_new = self.der * other.val
             else:   # self is a constant
@@ -114,7 +102,7 @@ class AutoDiff():
                 N_new = self.N
             else:
                 raise AttributeError('Type error!')
-        return AutoDiff(val_new, der_new, N_new, self.var)
+        return AutoDiff(val_new, der_new, N_new)
 
     def __rmul__(self, other):
         return self.__mul__(other)
@@ -134,7 +122,7 @@ class AutoDiff():
                     # just divide if other is constant
                     val_new = self.val / other
                     der_new = self.der / other
-                    return AutoDiff(val_new, der_new, self.N, self.var)
+                    return AutoDiff(val_new, der_new, self.N)
                 else:
                     raise ZeroDivisionError('Division by zero')
             else:
@@ -159,16 +147,13 @@ class AutoDiff():
             val_new = self.val ** other.val
             N_new = self.N  # The larger order of the two components
             if self.N == other.N:
-                if self.var == other.var:
-                    if N_new == 1:
-                        der_new = val_new * (other.val * self.der / self.val + other.der / np.log(self.val))
-                    else:
-                        # fx^gx = e^(gx * ln(fx))
-                        pw = ln(self) * other
-                        f_power_g = exp(pw)
-                        return f_power_g
+                if N_new == 1:
+                    der_new = val_new * (other.val * self.der / self.val + other.der * np.log(self.val))
                 else:
-                    der_new = self.der
+                    # fx^gx = e^(gx * ln(fx))
+                    pw = ln(self) * other
+                    f_power_g = exp(pw)
+                    return f_power_g
             elif self.N > other.N:
                 # other is constant: x^a
                 return power(self, other.val)
@@ -181,29 +166,30 @@ class AutoDiff():
                 return power(self, other)
             else:
                 raise AttributeError('Type error!')
-        return AutoDiff(val_new, der_new, N_new, self.var)
+        return AutoDiff(val_new, der_new, N_new)
 
     def __rpow__(self, other):
-        # other is constant: c^fx
-        pw = self.val * np.log(other)
+        # other is constant: c^fx = e^(fx * ln(c))
+        # print("power base = ", other)
+        # print("self.val = ", self.val)
+        pw = self * np.log(other)
         return exp(pw)
 
     # unary operations
     def __neg__(self):
         val_new = -self.val
         der_new = -self.der
-        return AutoDiff(val_new, der_new, self.N, self.var)
+        return AutoDiff(val_new, der_new, self.N)
 
     def __pos__(self):
         val_new = self.val
         der_new = self.der
-        return AutoDiff(val_new, der_new, self.N, self.var)
+        return AutoDiff(val_new, der_new, self.N)
 
     # comparison operator
     def __lt__(self, other):
         """
         less than comparison operator
-
         Returns
         -------
         """
@@ -218,10 +204,8 @@ class AutoDiff():
         Parameters
         ----------
         other
-
         Returns
         -------
-
         """
         try:
             return self.val > other.val
@@ -234,7 +218,6 @@ class AutoDiff():
         less than or equal to comparison operator
         Returns
         -------
-
         """
         try:
             return self.val <= other.val
@@ -246,7 +229,6 @@ class AutoDiff():
         greater than or equal to comparison operator
         Returns
         -------
-
         """
         try:
             return self.val >= other.val
@@ -259,10 +241,8 @@ class AutoDiff():
         Parameters
         ----------
         other
-
         Returns
         -------
-
         """
         try:
             return self.val == other.val
@@ -275,7 +255,6 @@ class AutoDiff():
         not equal to comparison operator
         Returns
         -------
-
         """
         try:
             return not self.val == other.val
@@ -285,8 +264,7 @@ class AutoDiff():
     def __str__(self):
         val = "val = " + str(self.val)
         der = "; der = " + str(self.der)
-        var = "; var = " + str(self.var)
-        return val + der + var
+        return val + der
 
 
 
@@ -294,11 +272,9 @@ def get_n_der_vecs(dk_f, gx, N):
     """
     This function applies Faa di Bruno's formula to compute the derivatives of order from 1 to N
     given the calling elementary operator has dk_f as its kth order derivative function.
-
     :param dk_f(val, k): A lambda function of the kth order derivative of f at the point val
     :param gx: Potentially an AutoDiff object
     :param N: highest derivative order of gx
-
     :return: a list of high-order derivatives up until gx.N
     """
     # Create symbols and symbol-value mapping for eval() in the loop
@@ -348,21 +324,18 @@ def power_k_order(gx, n, k):
 def power(x, n):
     # ((x)^n)' = n * (x)^{n-1} * x'
     """Returns the value and derivative of a power operation: x^n
-
     INPUTS
     =======
     x: an AutoDiff object or a scalar, required, the input variable
     n: float or int, required, the base
-
     RETURNS
     ========
     an AD object containing the value and derivative of the expression
-
     EXAMPLES
     =========
     >>> power(1.0, 2.0)
     AD(1.0, 0)
-    >>> power(AutoDiff(1.0, 2.0), 2.0)
+    >>> power(AD(1.0, 2.0), 2.0)
     AD(1.0, 4.0)
     """
     N = 1
@@ -370,7 +343,6 @@ def power(x, n):
     try:
         val_new = np.power(x.val, n)
         N = x.N
-        var_new = x.var
         if N == 1:
             der_new = n * x.val ** (n - 1) * x.der
         else:
@@ -381,32 +353,22 @@ def power(x, n):
             val_new = np.power(x, n)
             # If x is a constant, the derivative of x is 0.
             der_new = np.zeros(1)
-            var_new = 'const'
         else:
             raise AttributeError('Type error!')
-    return AutoDiff(val_new, der_new, N, var_new)
+    return AutoDiff(val_new, der_new, N)
 
 
-def log_k_order(gx, n, k):
-    if k == 1:
-        return 1/(gx * np.log(n))
-    if k != 1:
-        return power_k_order(gx, -1, k-1)/(np.log(n))
-
-def log(x, n):
+def log(x, a):
     # (log_n(x))' = 1/(x * log_e(n) * x')
     # we should also check the value >0 for log calculation
     """Returns the value and derivative of a logarithm operation: log_n(x)
-
     INPUTS
     =======
     x: an AutoDiff object or a scalar, required, the input variable
     a: float or int, required, the base
-
     RETURNS
     ========
     an AD object containing the value and derivative of the expression
-
     EXAMPLES
     =========
     >>> log(np.e, np.e)
@@ -414,27 +376,72 @@ def log(x, n):
     >>> log(AD(np.e**2, 2.0), np.e)
     AD(2.0, 0.06766764161830635)
     """
-    N = 1
-    dk_f = lambda gx, k: log_k_order(gx, n, k)  # nth order derivative for log(x, n)
+    # equivalent to log_gx(fx) = ln(fx) / ln(gx)
+    if isinstance(x, AutoDiff):
+        if x.val <= 0:
+            raise ValueError('Error: Independent variable must be positive!')
     try:
-        val_new = np.log(x.val) / np.log(n)
-        N = x.N
-        var_new = x.var
-        if N == 1:
-            der_new = 1 / (x.val * np.log(n) * x.der)
-        else:
-            # N > 1
-            der_new = get_n_der_vecs(dk_f, x, N)
+        return ln(x) / ln(a)
+        # val_new = np.log(x.val) / np.log(n)
+        # der_new = 1 / (x.val * np.log(n) * x.der)  # BUG: x.der should be outside???
     except AttributeError:
         if isinstance(x, float) or isinstance(x, int):
-            val_new = np.log(x) / np.log(n)
-            # If x is a constant, the derivative of x is 0.
-            der_new = np.zeros(1)
-            var_new = 'const'
+            if x <= 0:
+                raise ValueError('Error: Independent variable must be positive!')
+            return inv(ln(a)) * np.log(x)  # in case a is an AD object
         else:
             raise AttributeError('Type error!')
-    return AutoDiff(val_new, der_new, N, var_new)
 
+# def log_k_order(gx, n, k):
+#     if k == 1:
+#         return 1/(gx * np.log(n))
+#     if k != 1:
+#         return power_k_order(gx, -1, k-1)/(np.log(n))
+#
+# def log(x, n):
+#     # (log_n(x))' = 1/(x * log_e(n) * x')
+#     # we should also check the value >0 for log calculation
+#     """Returns the value and derivative of a logarithm operation: log_n(x)
+#
+#     INPUTS
+#     =======
+#     x: an AutoDiff object or a scalar, required, the input variable
+#     n: float or int, required, the base
+#
+#     RETURNS
+#     ========
+#     an AD object containing the value and derivative of the expression
+#
+#     EXAMPLES
+#     =========
+#     >>> log(np.e, np.e)
+#     AD(1.0, 0)
+#     >>> log(AD(np.e**2, 2.0), np.e)
+#     AD(2.0, 0.06766764161830635)
+#     """
+#     if isinstance(x, AutoDiff):
+#         if x.val <= 0:
+#             raise ValueError('Error: Independent variable must be positive!')
+#     N = 1
+#     dk_f = lambda gx, k: log_k_order(gx, n, k)  # nth order derivative for log(x, n)
+#     try:
+#         val_new = np.log(x.val) / np.log(n)
+#         N = x.N
+#         if N == 1:
+#             der_new = 1 / (x.val * np.log(n) * x.der)
+#         else:
+#             # N > 1
+#             der_new = get_n_der_vecs(dk_f, x, N)
+#     except AttributeError:
+#         if isinstance(x, float) or isinstance(x, int):
+#             if x <= 0:
+#                 raise ValueError('Error: Independent variable must be positive!')
+#             val_new = np.log(x) / np.log(n)
+#             # If x is a constant, the derivative of x is 0.
+#             der_new = np.zeros(1)
+#         else:
+#             raise AttributeError('Type error!')
+#     return AutoDiff(val_new, der_new, N)
 
 
 def ln(x):
@@ -461,7 +468,6 @@ def ln(x):
     try:
         val_new = np.log(x.val)
         N = x.N
-        var_new = x.var
         if N == 1:
             der_new = x.der * (1 / x.val)
         else:
@@ -473,25 +479,21 @@ def ln(x):
             val_new = np.log(x)
             # If x is a constant, the derivative of x is 0.
             der_new = np.zeros(1)
-            var_new = 'const'
         else:
             raise AttributeError('Type error!')
-    return AutoDiff(val_new, der_new, N, var_new)
+    return AutoDiff(val_new, der_new, N)
 
 
 def expn(x,n):
     #  (n^{x})' = n^{x} * ln(n) * x'
     """Returns the value and derivative of a exponential operation: n^x
-
         INPUTS
         =======
         x: an AutoDiff object or a scalar, required, the input variable
         n: float or int, required, the base
-
         RETURNS
         ========
         an AD object containing the value and derivative of the expression
-
         EXAMPLES
         =========
         >>> exp(1.0, np.e)
@@ -499,12 +501,14 @@ def expn(x,n):
         >>> exp(AD(1.0, 2.0), np.e)
         AD(2.718281828459045, 5.43656365691809)
         """
+    if isinstance(n, float) or isinstance(n, int):
+        if n < 0:
+            raise ValueError('Error: Base must be positive!')
     N = 1
     dk_f = lambda gx, k: n**gx *(np.log(n)**2)  # nth order derivative for n^x
     try:
         val_new = n**x.val
         N = x.N
-        var_new = x.var
         if N == 1:
             der_new = n**x.val * np.log(n) * x.der
         else:
@@ -515,24 +519,20 @@ def expn(x,n):
             val_new = n**x
             # If x is a constant, the derivative of x is 0.
             der_new = np.zeros(1)
-            var_new = 'const'
         else:
             raise AttributeError('Type error!')
-    return AutoDiff(val_new, der_new, N, var_new)
+    return AutoDiff(val_new, der_new, N)
 
 
 def exp(x):
     # (e^{x})' = e^{x} * x'
     """Returns the value and derivative of a exponential operation: e^x
-
     INPUTS
     =======
     x: an AutoDiff object or a scalar, required, the input variable
-
     RETURNS
     ========
     an AD object containing the value and derivative of the expression
-
     EXAMPLES
     =========
     >>> exp(1.0)
@@ -545,7 +545,6 @@ def exp(x):
     try:
         val_new = np.exp(x.val)
         N = x.N
-        var_new = x.var
         if N == 1:
             der_new = np.exp(x.val) * x.der
         else:
@@ -556,10 +555,9 @@ def exp(x):
             val_new = np.exp(x)
             # If x is a constant, the derivative of x is 0.
             der_new = np.zeros(1)
-            var_new = 'const'
         else:
             raise AttributeError('Type error!')
-    return AutoDiff(val_new, der_new, N, var_new)
+    return AutoDiff(val_new, der_new, N)
 
 
 # YW copied from Xincheng's code on github
@@ -574,7 +572,6 @@ def inv(x):
     try:
         val_new = 1.0 / x.val
         N = x.N
-        var_new = x.var
         if N == 1:
             der_new = -x.der / (x.val**2)
         else:
@@ -586,25 +583,21 @@ def inv(x):
             val_new = 1.0 / x
             # If x is a constant, the derivative of x is 0.
             der_new = np.zeros(1)
-            var_new = 'const'
         else:
             raise AttributeError('Type error!')
-    return AutoDiff(val_new, der_new, N, var_new)
+    return AutoDiff(val_new, der_new, N) # YW
 
 
 def sqrt(x):
     # (sqrt(x))' = ((x)^{1/2})' = 1/2 * (x)^{-1/2} * x'
     # we should also check the value is >0 for sqrt calculation
     """Returns the value and derivative of a square root operation: x^{1/2}
-
     INPUTS
     =======
     x: an AutoDiff object or a scalar, required, the input variable
-
     RETURNS
     ========
     an AD object containing the value and derivative of the expression
-
     EXAMPLES
     =========
     >>> sqrt(1.0)
@@ -612,12 +605,14 @@ def sqrt(x):
     >>> sqrt(AD(1.0, 2.0))
     AD(1.0, 1.0)
     """
+    if isinstance(x, AutoDiff):
+        if x.val < 0:
+            raise ValueError('Error: Independent variable must be nonnegative!')
     N = 1
     dk_f = lambda gx, k: power_k_order(gx, 1/2, k)  # nth order derivative for sqrt(x)
     try:
         val_new = np.sqrt(x.val)
         N = x.N
-        var_new = x.var
         if N == 1:
             # der_new = np.array([1 / 2 * x.val ** (-1/2) * x.der])
             der_new = 0.5 * x.der / np.sqrt(x.val)
@@ -626,27 +621,25 @@ def sqrt(x):
             der_new = get_n_der_vecs(dk_f, x, N)
     except AttributeError:
         if isinstance(x, float) or isinstance(x, int):
+            if x < 0:
+                raise ValueError('Error: Independent variable must be nonnegative!')
             val_new = np.sqrt(x)
             # If x is a constant, the derivative of x is 0.
             der_new = np.zeros(1)
-            var_new = 'const'
         else:
             raise AttributeError('Type error!')
-    return AutoDiff(val_new, der_new, N, var_new)
+    return AutoDiff(val_new, der_new, N)
 
 
 def sin(x):
     # (sin(x))' = cos(x) * x'
     """Returns the value and derivative of a sine operation: sin(x)
-
     INPUTS
     =======
     x: an AutoDiff object or a scalar, required, the input variable
-
     RETURNS
     ========
     an AD object containing the value and derivative of the expression
-
     EXAMPLES
     =========
     >>> sin(0.0)
@@ -660,7 +653,6 @@ def sin(x):
     try:
         val_new = np.sin(x.val)
         N = x.N
-        var_new = x.var
         if N == 1:
             der_new = np.cos(x.val) * x.der
         else:
@@ -671,24 +663,20 @@ def sin(x):
             val_new = np.sin(x)
             # If x is a constant, the derivative of x is 0.
             der_new = np.zeros(1)
-            var_new = 'const'
         else:
             raise AttributeError('Type error!')
-    return AutoDiff(val_new, der_new, N, var_new)
+    return AutoDiff(val_new, der_new, N)
 
 
 def cos(x):
     # (cos(x))' = - sin(x) * x'
     """Returns the value and derivative of a cosine operation: cos(x)
-
     INPUTS
     =======
     x: an AutoDiff object or a scalar, required, the input variable
-
     RETURNS
     ========
     an AD object containing the value and derivative of the expression
-
     EXAMPLES
     =========
     >>> cos(0.0)
@@ -702,7 +690,6 @@ def cos(x):
     try:
         val_new = np.cos(x.val)
         N = x.N
-        var_new = x.var
         if N == 1:
             der_new = -np.sin(x.val) * x.der
         else:
@@ -713,10 +700,9 @@ def cos(x):
             val_new = np.cos(x)
             # If x is a constant, the derivative of x is 0.
             der_new = np.zeros(1)
-            var_new = 'const'
         else:
             raise AttributeError('Type error!')
-    return AutoDiff(val_new, der_new, N, var_new)
+    return AutoDiff(val_new, der_new, N)
 
 
 def tan_k_order(gx, k):
@@ -732,15 +718,12 @@ def tan_k_order(gx, k):
 def tan(x):
     # (tan(x))' = 1/cos(x)^2 * x'
     """Returns the value and derivative of a tangent operation: tan(x)
-
     INPUTS
     =======
     x: an AutoDiff object or a scalar, required, the input variable
-
     RETURNS
     ========
     an AD object containing the value and derivative of the expression
-
     EXAMPLES
     =========
     >>> tan(0.0)
@@ -753,7 +736,6 @@ def tan(x):
     try:
         val_new = np.tan(x.val)
         N = x.N
-        var_new = x.var
         if N == 1:
             der_new = np.array([1 / (np.cos(x.val)) ** 2])  # TODO: where is x.der?
         else:
@@ -764,10 +746,9 @@ def tan(x):
             val_new = np.tan(x)
             # If x is a constant, the derivative of x is 0.
             der_new = np.zeros(1)
-            var_new = 'const'
         else:
             raise AttributeError('Type error!')
-    return AutoDiff(val_new, der_new, N, var_new)
+    return AutoDiff(val_new, der_new, N)
 
 
 def arcsin_k_order(gx, k):
@@ -783,15 +764,12 @@ def arcsin_k_order(gx, k):
 def arcsin(x):
     # (arcsin(x))' = 1/sqrt(1-(x)^2) * x'
     """Returns the value and derivative of an arcsine operation: arcsin(x)
-
     INPUTS
     =======
     x: an AutoDiff object or a scalar, required, the input variable
-
     RETURNS
     ========
     an AD object containing the value and derivative of the expression
-
     EXAMPLES
     =========
     >>> arcsin(0.0)
@@ -807,7 +785,6 @@ def arcsin(x):
     try:
         val_new = np.arcsin(x.val)
         N = x.N
-        var_new = x.var
         if N == 1:
             der_new = np.array(1 / np.sqrt(1 - x.val ** 2) * x.der)
         else:
@@ -820,10 +797,9 @@ def arcsin(x):
             val_new = np.arcsin(x)
             # If x is a constant, the derivative of x is 0.
             der_new = np.zeros(1)
-            var_new = 'const'
         else:
             raise AttributeError('Type error!')
-    return AutoDiff(val_new, der_new, N, var_new)
+    return AutoDiff(val_new, der_new, N)
 
 
 #### arccos is not correct for the 1th der when k>1
@@ -840,15 +816,12 @@ def arccos_k_order(gx, k):
 def arccos(x):
     # (arccos(x))' = - 1/sqrt(1-(x)^2) * x'
     """Returns the value and derivative of an arccosine operation: arccos(x)
-
     INPUTS
     =======
     x: an AutoDiff object or a scalar, required, the input variable
-
     RETURNS
     ========
     an AD object containing the value and derivative of the expression
-
     EXAMPLES
     =========
     >>> arccos(0.0)
@@ -862,9 +835,8 @@ def arccos(x):
         if x.val < -1 or x.val > 1:
             raise ValueError('Error: Independent variable must be in [-1,1]!')
     try:
-        val_new = np.arcsin(x.val)
+        val_new = np.arccos(x.val)
         N = x.N
-        var_new = x.var
         if N == 1:
             der_new = np.array(-1 / np.sqrt(1 - x.val ** 2) * x.der)
         else:
@@ -877,10 +849,9 @@ def arccos(x):
             val_new = np.arccos(x)
             # If x is a constant, the derivative of x is 0.
             der_new = np.zeros(1)
-            var_new = 'const'
         else:
             raise AttributeError('Type error!')
-    return AutoDiff(val_new, der_new, N, var_new)
+    return AutoDiff(val_new, der_new, N)
 
 
 def arctan_k_order(gx, k):
@@ -896,15 +867,12 @@ def arctan_k_order(gx, k):
 def arctan(x):
     # (arctan(x))' = 1/(1+(x)**2) * x'
     """Returns the value and derivative of an arctangent operation: arctan(x)
-
     INPUTS
     =======
     x: an AutoDiff object or a scalar, required, the input variable
-
     RETURNS
     ========
     an AD object containing the value and derivative of the expression
-
     EXAMPLES
     =========
     >>> arctan(0.0)
@@ -917,7 +885,6 @@ def arctan(x):
     try:
         val_new = np.arctan(x.val)
         N = x.N
-        var_new = x.var
         if N == 1:
             der_new = np.array(1 / (1 + x.val ** 2) * x.der)
         else:
@@ -928,10 +895,9 @@ def arctan(x):
             val_new = np.arctan(x)
             # If x is a constant, the derivative of x is 0.
             der_new = np.zeros(1)
-            var_new = 'const'
         else:
             raise AttributeError('Type error!')
-    return AutoDiff(val_new, der_new, N, var_new)
+    return AutoDiff(val_new, der_new, N)
 
 
 def sinh_k_order(gx, k):
@@ -943,15 +909,12 @@ def sinh_k_order(gx, k):
 def sinh(x):
     # (sinh(x))' = cosh(x) * x'
     """Returns the value and derivative of a hyperbolic sine operation: sinh(x)
-
     INPUTS
     =======
     x: an AutoDiff object or a scalar, required, the input variable
-
     RETURNS
     ========
     an AD object containing the value and derivative of the expression
-
     EXAMPLES
     =========
     >>> sinh(0.0)
@@ -964,7 +927,6 @@ def sinh(x):
     try:
         val_new = np.sinh(x.val)
         N = x.N
-        var_new = x.var
         if N == 1:
             der_new = np.array(np.cosh(x.val) * x.der)
         else:
@@ -975,10 +937,9 @@ def sinh(x):
             val_new = np.sinh(x)
             # If x is a constant, the derivative of x is 0.
             der_new = np.zeros(1)
-            var_new = 'const'
         else:
             raise AttributeError('Type error!')
-    return AutoDiff(val_new, der_new, N, var_new)
+    return AutoDiff(val_new, der_new, N)
 
 
 def cosh_k_order(gx, k):
@@ -991,15 +952,12 @@ def cosh_k_order(gx, k):
 def cosh(x):
     # (cosh(x))' = sinh(x) * x'
     """Returns the value and derivative of a hyperbolic cosine operation: cosh(x)
-
     INPUTS
     =======
     x: an AutoDiff object or a scalar, required, the input variable
-
     RETURNS
     ========
     an AD object containing the value and derivative of the expression
-
     EXAMPLES
     =========
     >>> cosh(0.0)
@@ -1012,7 +970,6 @@ def cosh(x):
     try:
         val_new = np.cosh(x.val)
         N = x.N
-        var_new = x.var
         if N == 1:
             der_new = np.array(np.sinh(x.val) * x.der)
         else:
@@ -1023,25 +980,21 @@ def cosh(x):
             val_new = np.cosh(x)
             # If x is a constant, the derivative of x is 0.
             der_new = np.zeros(1)
-            var_new = 'const'
         else:
             raise AttributeError('Type error!')
-    return AutoDiff(val_new, der_new, N, var_new)
+    return AutoDiff(val_new, der_new, N)
 
 
 def tanh(x):
     # (tanh(x))' = (1 - tanh(x)**2) * x'
     """Returns the value and derivative of a hyperbolic tangent operation: tanh(x)
     tanh(x)=(e^(2x)-1)/(e^(2x)+1), i.e. f(g(h(x))) with f(x)=(x-1)/(x+1) and g(x)=e^(2x)
-
     INPUTS
     =======
     x: an AutoDiff object or a scalar, required, the input variable
-
     RETURNS
     ========
     an AD object containing the value and derivative of the expression
-
     EXAMPLES
     =========
     >>> tanh(0.0)
@@ -1053,7 +1006,6 @@ def tanh(x):
     try:
         val_new = np.tanh(x.val)
         N = x.N
-        var_new = x.var
         if N == 1:
             der_new = np.array([(1 - np.tanh(x.val) ** 2) * x.der])
         else:
@@ -1066,7 +1018,6 @@ def tanh(x):
             val_new = np.tanh(x)
             # If x is a constant, the derivative of x is 0.
             der_new = np.zeros(1)
-            var_new = 'const'
         else:
             raise AttributeError('Type error!')
-    return AutoDiff(val_new, der_new, N, var_new)
+    return AutoDiff(val_new, der_new, N)
