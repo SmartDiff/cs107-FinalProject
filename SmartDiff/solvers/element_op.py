@@ -149,7 +149,8 @@ class AutoDiff():
             N_new = self.N  # The larger order of the two components
             if self.N == other.N:
                 if N_new == 1:
-                    der_new = val_new * (other.val * self.der / self.val + other.der / np.log(self.val))
+                    der_new = val_new * (other.val * self.der / self.val + other.der * np.log(self.val))
+
                 else:
                     # fx^gx = e^(gx * ln(fx))
                     pw = ln(self) * other
@@ -170,8 +171,10 @@ class AutoDiff():
         return AutoDiff(val_new, der_new, N_new)
 
     def __rpow__(self, other):
-        # other is constant: c^fx
-        pw = self.val * np.log(other)
+        # other is constant: c^fx = e^(fx * ln(c))
+        # print("power base = ", other)
+        # print("self.val = ", self.val)
+        pw = self * np.log(other)
         return exp(pw)
 
     # unary operations
@@ -370,26 +373,17 @@ def power(x, n):
     return AutoDiff(val_new, der_new, N)
 
 
-def log_k_order(gx, n, k):
-    if k == 1:
-        return 1/(gx * np.log(n))
-    if k != 1:
-        return power_k_order(gx, -1, k-1)/(np.log(n))
-
-def log(x, n):
+def log(x, a):
     # (log_n(x))' = 1/(x * log_e(n) * x')
     # we should also check the value >0 for log calculation
     """Returns the value and derivative of a logarithm operation: log_n(x)
-
     INPUTS
     =======
     x: an AutoDiff object or a scalar, required, the input variable
-    n: float or int, required, the base
-
+    a: float or int, required, the base
     RETURNS
     ========
     an AD object containing the value and derivative of the expression
-
     EXAMPLES
     =========
     >>> log(np.e, np.e)
@@ -397,29 +391,73 @@ def log(x, n):
     >>> log(AD(np.e**2, 2.0), np.e)
     AD(2.0, 0.06766764161830635)
     """
+    # equivalent to log_gx(fx) = ln(fx) / ln(gx)
     if isinstance(x, AutoDiff):
         if x.val <= 0:
             raise ValueError('Error: Independent variable must be positive!')
-    N = 1
-    dk_f = lambda gx, k: log_k_order(gx, n, k)  # nth order derivative for log(x, n)
     try:
-        val_new = np.log(x.val) / np.log(n)
-        N = x.N
-        if N == 1:
-            der_new = 1 / (x.val * np.log(n) * x.der)
-        else:
-            # N > 1
-            der_new = get_n_der_vecs(dk_f, x, N)
+        return ln(x) / ln(a)
+        # val_new = np.log(x.val) / np.log(n)
+        # der_new = 1 / (x.val * np.log(n) * x.der)  # BUG: x.der should be outside???
     except AttributeError:
         if isinstance(x, float) or isinstance(x, int):
             if x <= 0:
                 raise ValueError('Error: Independent variable must be positive!')
-            val_new = np.log(x) / np.log(n)
-            # If x is a constant, the derivative of x is 0.
-            der_new = np.zeros(1)
+            return inv(ln(a)) * np.log(x)  # in case a is an AD object
         else:
             raise AttributeError('Type error!')
-    return AutoDiff(val_new, der_new, N)
+
+# def log_k_order(gx, n, k):
+#     if k == 1:
+#         return 1/(gx * np.log(n))
+#     if k != 1:
+#         return power_k_order(gx, -1, k-1)/(np.log(n))
+#
+# def log(x, n):
+#     # (log_n(x))' = 1/(x * log_e(n) * x')
+#     # we should also check the value >0 for log calculation
+#     """Returns the value and derivative of a logarithm operation: log_n(x)
+#
+#     INPUTS
+#     =======
+#     x: an AutoDiff object or a scalar, required, the input variable
+#     n: float or int, required, the base
+#
+#     RETURNS
+#     ========
+#     an AD object containing the value and derivative of the expression
+#
+#     EXAMPLES
+#     =========
+#     >>> log(np.e, np.e)
+#     AD(1.0, 0)
+#     >>> log(AD(np.e**2, 2.0), np.e)
+#     AD(2.0, 0.06766764161830635)
+#     """
+#     if isinstance(x, AutoDiff):
+#         if x.val <= 0:
+#             raise ValueError('Error: Independent variable must be positive!')
+#     N = 1
+#     dk_f = lambda gx, k: log_k_order(gx, n, k)  # nth order derivative for log(x, n)
+#     try:
+#         val_new = np.log(x.val) / np.log(n)
+#         N = x.N
+#         if N == 1:
+#             der_new = 1 / (x.val * np.log(n) * x.der)
+#         else:
+#             # N > 1
+#             der_new = get_n_der_vecs(dk_f, x, N)
+#     except AttributeError:
+#         if isinstance(x, float) or isinstance(x, int):
+#             if x <= 0:
+#                 raise ValueError('Error: Independent variable must be positive!')
+#             val_new = np.log(x) / np.log(n)
+#             # If x is a constant, the derivative of x is 0.
+#             der_new = np.zeros(1)
+#         else:
+#             raise AttributeError('Type error!')
+#     return AutoDiff(val_new, der_new, N)
+
 
 def ln(x):
     # (log_n(x))' = 1/(x * log_e(n) * x')

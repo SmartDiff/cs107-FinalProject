@@ -32,7 +32,7 @@ class TestElemOp:
 
       x = 8
       f = el.log(x,2)
-      assert (f.val,f.der) == (3, 0)
+      assert (np.round(f.val, 6), f.der) == (3, 0)
 
       x = 9.0
       f = el.log(x,3)
@@ -306,10 +306,10 @@ class TestElemOp:
     def test_mul(self):
       x = AD(4)
       f = el.log(x,2) * 3**x
-      #assert (np.round(f.val), f.der) == (162, 81/(4*np.log(2)) + 162*np.log(3))
+      assert (np.round(f.val, 6), np.round(f.der[-1], 6)) == (162, np.round(81/(4*np.log(2)) + 162*np.log(3), 6))
 
       f = 3**x * el.log(x,2)  
-      #assert (np.round(f.val),f.der) == (162, 81/(4*np.log(2)) + 162*np.log(3))
+      assert (np.round(f.val, 6), np.round(f.der[-1], 6)) == (162, np.round(81/(4*np.log(2)) + 162*np.log(3), 6))
 
       with pytest.raises(AttributeError):
           f = x * "5"
@@ -317,7 +317,7 @@ class TestElemOp:
     def test_truediv(self):
       x = AD(4)
       f = el.log(x,2) / 3**x
-      #assert (np.round(f.val, 6), f.der) == (np.round(2/81, 6), (81/(4*np.log(2)) - 162*np.log(3))/3**8)
+      assert (np.round(f.val, 6), np.round(f.der[-1],6)) == (np.round(2/81, 6), np.round((81/(4*np.log(2)) - 162*np.log(3))/3**8, 6))
 
       f = el.sin(x) / 4
       assert (f.val,f.der) == ((np.sin(4))/4, (np.cos(4))/4)
@@ -329,15 +329,32 @@ class TestElemOp:
         f = el.cos(x) / 0
 
       f = 3**x / el.log(x,2)  
-      #assert (np.round(f.val, 6),f.der) == (np.round(81/2, 6), (162*np.log(3) - 81/(4*np.log(2)))/(np.log(4)/np.log(2))**2)
+      assert (np.round(f.val, 6), np.round(f.der, 6)) == (np.round(81/2, 6),
+                                                          np.round((162*np.log(3) - 81/(4*np.log(2)))/(np.log(4)/np.log(2))**2, 6))
 
       with pytest.raises(AttributeError):
         f = el.cos(x) / "el.sin(0)"
 
     def test_pow(self):
       x = AD(2)
-      f = (el.power(x,2))**x
-      #assert (f.val,f.der) == (16, 16*np.log(4) + 32)
+      f = x**4
+      assert (f.val, f.der[-1]) == (16, 32)
+
+      x = AD(2)
+      f = 3**x
+      assert (np.round(f.val, 8), np.round(f.der[-1], 6)) == (9, np.round(9*np.log(3), 6))
+
+      x = AD(2)
+      f = el.power(x, 2)
+      assert (f.val, f.der) == (4, 4)
+
+      x = AD(2)
+      f = x**x
+      assert (f.val, f.der[-1]) == (4, 4 * np.log(2) + 4)
+
+      x = AD(2)
+      f = (el.power(x, 2))**x
+      assert (f.val,f.der) == (16, 16*np.log(4) + 32)
 
       f = (el.power(x,2))**3
       assert (f.val,f.der) == (64, 192)
@@ -346,10 +363,10 @@ class TestElemOp:
         f = (el.power(x,2))**"3"
 
       f = (2**x)**x
-      #assert (f.val,f.der) == (16, 16*np.log(16))
+      assert (f.val,f.der) == (16, 16*np.log(16))
 
       f = x**(2**x)
-      #assert (f.val,f.der) == (16, 32 + 64*(np.log(2)**2))
+      assert (f.val,f.der) == (16, 32 + 64*(np.log(2)**2))
 
     def test_pos(self):
       x = AD(100)
@@ -357,4 +374,3 @@ class TestElemOp:
 
       f = el.log(x,10) + x 
       assert (f.val,f.der) == (102, 1/(100*np.log(10))+1)
-
