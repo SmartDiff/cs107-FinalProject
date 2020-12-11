@@ -81,7 +81,7 @@
     <string/>
    </property>
   </widget>
-  <widget class="QTextEdit" name="ValInput">
+  <widget class="QTextEdit" name="FuncVal">
    <property name="geometry">
     <rect>
      <x>50</x>
@@ -91,7 +91,7 @@
     </rect>
    </property>
   </widget>
-  <widget class="QTextEdit" name="FuncInput">
+  <widget class="QTextEdit" name="DerVal">
    <property name="geometry">
     <rect>
      <x>280</x>
