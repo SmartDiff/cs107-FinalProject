@@ -384,7 +384,7 @@ def log(x, n):
     INPUTS
     =======
     x: an AutoDiff object or a scalar, required, the input variable
-    a: float or int, required, the base
+    n: float or int, required, the base
 
     RETURNS
     ========
@@ -397,6 +397,9 @@ def log(x, n):
     >>> log(AD(np.e**2, 2.0), np.e)
     AD(2.0, 0.06766764161830635)
     """
+    if isinstance(x, AutoDiff):
+        if x.val <= 0:
+            raise ValueError('Error: Independent variable must be positive!')
     N = 1
     dk_f = lambda gx, k: log_k_order(gx, n, k)  # nth order derivative for log(x, n)
     try:
@@ -409,14 +412,14 @@ def log(x, n):
             der_new = get_n_der_vecs(dk_f, x, N)
     except AttributeError:
         if isinstance(x, float) or isinstance(x, int):
+            if x <= 0:
+                raise ValueError('Error: Independent variable must be positive!')
             val_new = np.log(x) / np.log(n)
             # If x is a constant, the derivative of x is 0.
             der_new = np.zeros(1)
         else:
             raise AttributeError('Type error!')
     return AutoDiff(val_new, der_new, N)
-
-
 
 def ln(x):
     # (log_n(x))' = 1/(x * log_e(n) * x')
@@ -585,6 +588,9 @@ def sqrt(x):
     >>> sqrt(AD(1.0, 2.0))
     AD(1.0, 1.0)
     """
+    if isinstance(x, AutoDiff):
+        if x.val < 0:
+            raise ValueError('Error: Independent variable must be nonnegative!')
     N = 1
     dk_f = lambda gx, k: power_k_order(gx, 1/2, k)  # nth order derivative for sqrt(x)
     try:
@@ -598,6 +604,8 @@ def sqrt(x):
             der_new = get_n_der_vecs(dk_f, x, N)
     except AttributeError:
         if isinstance(x, float) or isinstance(x, int):
+            if x < 0:
+                raise ValueError('Error: Independent variable must be nonnegative!')
             val_new = np.sqrt(x)
             # If x is a constant, the derivative of x is 0.
             der_new = np.zeros(1)
@@ -825,7 +833,7 @@ def arccos(x):
         if x.val < -1 or x.val > 1:
             raise ValueError('Error: Independent variable must be in [-1,1]!')
     try:
-        val_new = np.arcsin(x.val)
+        val_new = np.arccos(x.val)
         N = x.N
         if N == 1:
             der_new = np.array(-1 / np.sqrt(1 - x.val ** 2) * x.der)
