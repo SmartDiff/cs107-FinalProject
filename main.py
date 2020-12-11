@@ -4,6 +4,7 @@ import numpy as np
 import math
 from SmartDiff.preprocess.pyexpr_formatter import PyExpression_Formatter
 from SmartDiff.solvers.element_op import *
+from SmartDiff.solvers.element_op import AutoDiff as AD
 
 # global Ui_MainWindow, Ui_SecondDiag
 Ui_MainWindow, QtBaseClass = uic.loadUiType('SmartDiff/GUI/step1.ui')  # .ui drawn in Qt Designer
