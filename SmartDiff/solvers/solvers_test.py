@@ -50,6 +50,15 @@ class TestElemOp:
         x = "s"
         f = el.log(x,3)
 
+      with pytest.raises(ValueError):
+        x = -3
+        f = el.log(x,3)
+
+    def test_ln(self):
+      x = AD(-10)
+      with pytest.raises(ValueError):
+        f = el.ln(x)
+
     def test_exp(self):
       f = el.exp(1)
       assert (f.val,f.der) == (np.exp(1), 0)
@@ -67,6 +76,40 @@ class TestElemOp:
         x = "hello"
         f = el.exp(x)
 
+    def test_expn(self):
+      x = AD(2)
+      f = el.expn(x, 25)
+      assert (f.val, f.der) == (625, 625*np.log(25))
+
+      x = 2
+      f = el.expn(x, 25)
+      assert (f.val, f.der) == (625, 0)
+
+      with pytest.raises(AttributeError):
+        f = el.expn('25', 0)
+
+      with pytest.raises(ValueError):
+        f = el.expn(x, -10)
+
+    def test_inv(self):
+      x = 10 
+      assert el.inv(x) == 0.1
+
+      y = -1/30 
+      assert el.inv(y) == -30
+
+      with pytest.raises(ZeroDivisionError):
+        x = 0
+        f = el.inv(x)
+
+      x = AD(8)
+      f = el.inv(x)
+      assert (f.val, f.der) == (1/8, -1/64)
+
+      x = 92
+      f = el.inv(x)
+      assert (f.val, f.der) == (1/92, 0)
+      
     def test_sqrt(self):
       x = AD(4)
       f = el.sqrt(x)
@@ -405,25 +448,25 @@ class TestElemOp:
       y = 100
       z = AD(100)
 
-      assert (x.val < z.val) == (x.val.__lt__(z.val))
-      assert (x.val < y) == (x.val.__lt__(y))
+      assert (x.val < z.val) == x.val.__lt__(z.val)
+      assert (x.val < y) == x.val.__lt__(y)
 
-      assert (x.val <= z.val) == (x.val.__le__(z.val))
-      assert (x.val <= y) == (x.val.__le__(y))
-      assert (x.val <= n) == (x.val.__le__(n))
+      assert (x.val <= z.val) == x.val.__le__(z.val)
+      assert (x.val <= y) == x.val.__le__(y)
+      assert (x.val <= n) == x.val.__le__(n)
 
-      assert (z.val > x.val) == (z.val.__gt__(x.val))
-      assert (z.val > n) == (z.val.__gt__(n))
+      assert (z.val > x.val) == z.val.__gt__(x.val)
+      assert (z.val > n) == z.val.__gt__(n)
       
-      assert (z.val >= x.val) == (z.val.__ge__(x.val))
-      assert (z.val >= n) == (z.val.__ge__(n))
-      assert (z.val >= y) == (z.val.__ge__(y))
+      assert (z.val >= x.val) == z.val.__ge__(x.val)
+      assert (z.val >= n) == z.val.__ge__(n)
+      assert (z.val >= y) == z.val.__ge__(y)
 
-      assert (y == z.val) == (y.__eq__(z.val))
-      assert (z.val == y) == (z.val.__eq__(y))
+      assert (y == z.val) == y.__eq__(z.val)
+      assert (z.val == y) == z.val.__eq__(y)
 
-      assert (y != x.val) == (y.__ne__(x.val))
-      assert (x.val != y) == (x.val.__ne__(y))
+      assert (y != x.val) == y.__ne__(x.val)
+      assert (x.val != y) == x.val.__ne__(y)
 
       assert ("val = 20; der = [1.]") == x.__str__()
       
