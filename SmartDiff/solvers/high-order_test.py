@@ -138,6 +138,20 @@ class TestElemOpNOrder:
     f = el.cosh(x)
     assert (f.val, f.der[-1]) == (np.cosh(10), np.sinh(10))
 
+  def test_tanh(self):
+    # N > 1
+    x = AD(0.5, N=2)
+    f = el.tanh(x)
+    assert (f.val, np.round(f.der[-1], 6)) == (np.tanh(0.5), -0.726862)
+
+    x = AD(0.5, N=3)
+    f = el.tanh(x)
+    assert (f.val, np.round(f.der[-1], 6)) == (np.tanh(0.5), -0.565209)
+
+    x = AD(0, N=3)
+    f = el.tanh(x)
+    assert (f.val, f.der[-1]) == (np.tanh(0), -2)
+
   def test_exp(self):
     # N = 1
     f = el.exp(1)
