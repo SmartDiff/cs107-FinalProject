@@ -400,12 +400,32 @@ class TestElemOp:
       assert (f.val,f.der) == (102, 1/(100*np.log(10))+1)
 
     def test_compare(self):
+      n = 20
       x = AD(20)
       y = 100
       z = AD(100)
 
-      assert (x.val < y) == (x.val < z.val)
-      assert y == z.val
+      assert (x.val < z.val) == (x.val.__lt__(z.val))
+      assert (x.val < y) == (x.val.__lt__(y))
+
+      assert (x.val <= z.val) == (x.val.__le__(z.val))
+      assert (x.val <= y) == (x.val.__le__(y))
+      assert (x.val <= n) == (x.val.__le__(n))
+
+      assert (z.val > x.val) == (z.val.__gt__(x.val))
+      assert (z.val > n) == (z.val.__gt__(n))
+      
+      assert (z.val >= x.val) == (z.val.__ge__(x.val))
+      assert (z.val >= n) == (z.val.__ge__(n))
+      assert (z.val >= y) == (z.val.__ge__(y))
+
+      assert (y == z.val) == (y.__eq__(z.val))
+      assert (z.val == y) == (z.val.__eq__(y))
+
+      assert (y != x.val) == (y.__ne__(x.val))
+      assert (x.val != y) == (x.val.__ne__(y))
+
+      assert ("val = 20; der = [1.]") == x.__str__()
       
 
       
