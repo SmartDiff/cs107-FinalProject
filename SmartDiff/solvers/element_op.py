@@ -1,4 +1,3 @@
-
 import numpy as np
 from sympy import bell, binomial, symbols
 from math import factorial
@@ -189,7 +188,6 @@ class AutoDiff():
     def __lt__(self, other):
         """
         less than comparison operator
-
         Returns
         -------
         """
@@ -204,10 +202,8 @@ class AutoDiff():
         Parameters
         ----------
         other
-
         Returns
         -------
-
         """
         try:
             return self.val > other.val
@@ -220,7 +216,6 @@ class AutoDiff():
         less than or equal to comparison operator
         Returns
         -------
-
         """
         try:
             return self.val <= other.val
@@ -232,7 +227,6 @@ class AutoDiff():
         greater than or equal to comparison operator
         Returns
         -------
-
         """
         try:
             return self.val >= other.val
@@ -245,10 +239,8 @@ class AutoDiff():
         Parameters
         ----------
         other
-
         Returns
         -------
-
         """
         try:
             return self.val == other.val
@@ -261,7 +253,6 @@ class AutoDiff():
         not equal to comparison operator
         Returns
         -------
-
         """
         try:
             return not self.val == other.val
@@ -279,11 +270,9 @@ def get_n_der_vecs(dk_f, gx, N):
     """
     This function applies Faa di Bruno's formula to compute the derivatives of order from 1 to N
     given the calling elementary operator has dk_f as its kth order derivative function.
-
     :param dk_f(val, k): A lambda function of the kth order derivative of f at the point val
     :param gx: Potentially an AutoDiff object
     :param N: highest derivative order of gx
-
     :return: a list of high-order derivatives up until gx.N
     """
     # Create symbols and symbol-value mapping for eval() in the loop
@@ -333,16 +322,13 @@ def power_k_order(gx, n, k):
 def power(x, n):
     # ((x)^n)' = n * (x)^{n-1} * x'
     """Returns the value and derivative of a power operation: x^n
-
     INPUTS
     =======
     x: an AutoDiff object or a scalar, required, the input variable
     n: float or int, required, the base
-
     RETURNS
     ========
     an AD object containing the value and derivative of the expression
-
     EXAMPLES
     =========
     >>> power(1.0, 2.0)
@@ -500,16 +486,13 @@ def ln(x):
 def expn(x,n):
     #  (n^{x})' = n^{x} * ln(n) * x'
     """Returns the value and derivative of a exponential operation: n^x
-
         INPUTS
         =======
         x: an AutoDiff object or a scalar, required, the input variable
         n: float or int, required, the base
-
         RETURNS
         ========
         an AD object containing the value and derivative of the expression
-
         EXAMPLES
         =========
         >>> exp(1.0, np.e)
@@ -543,15 +526,12 @@ def expn(x,n):
 def exp(x):
     # (e^{x})' = e^{x} * x'
     """Returns the value and derivative of a exponential operation: e^x
-
     INPUTS
     =======
     x: an AutoDiff object or a scalar, required, the input variable
-
     RETURNS
     ========
     an AD object containing the value and derivative of the expression
-
     EXAMPLES
     =========
     >>> exp(1.0)
@@ -610,15 +590,12 @@ def sqrt(x):
     # (sqrt(x))' = ((x)^{1/2})' = 1/2 * (x)^{-1/2} * x'
     # we should also check the value is >0 for sqrt calculation
     """Returns the value and derivative of a square root operation: x^{1/2}
-
     INPUTS
     =======
     x: an AutoDiff object or a scalar, required, the input variable
-
     RETURNS
     ========
     an AD object containing the value and derivative of the expression
-
     EXAMPLES
     =========
     >>> sqrt(1.0)
@@ -655,15 +632,12 @@ def sqrt(x):
 def sin(x):
     # (sin(x))' = cos(x) * x'
     """Returns the value and derivative of a sine operation: sin(x)
-
     INPUTS
     =======
     x: an AutoDiff object or a scalar, required, the input variable
-
     RETURNS
     ========
     an AD object containing the value and derivative of the expression
-
     EXAMPLES
     =========
     >>> sin(0.0)
@@ -695,15 +669,12 @@ def sin(x):
 def cos(x):
     # (cos(x))' = - sin(x) * x'
     """Returns the value and derivative of a cosine operation: cos(x)
-
     INPUTS
     =======
     x: an AutoDiff object or a scalar, required, the input variable
-
     RETURNS
     ========
     an AD object containing the value and derivative of the expression
-
     EXAMPLES
     =========
     >>> cos(0.0)
@@ -745,15 +716,12 @@ def tan_k_order(gx, k):
 def tan(x):
     # (tan(x))' = 1/cos(x)^2 * x'
     """Returns the value and derivative of a tangent operation: tan(x)
-
     INPUTS
     =======
     x: an AutoDiff object or a scalar, required, the input variable
-
     RETURNS
     ========
     an AD object containing the value and derivative of the expression
-
     EXAMPLES
     =========
     >>> tan(0.0)
@@ -794,15 +762,12 @@ def arcsin_k_order(gx, k):
 def arcsin(x):
     # (arcsin(x))' = 1/sqrt(1-(x)^2) * x'
     """Returns the value and derivative of an arcsine operation: arcsin(x)
-
     INPUTS
     =======
     x: an AutoDiff object or a scalar, required, the input variable
-
     RETURNS
     ========
     an AD object containing the value and derivative of the expression
-
     EXAMPLES
     =========
     >>> arcsin(0.0)
@@ -849,15 +814,12 @@ def arccos_k_order(gx, k):
 def arccos(x):
     # (arccos(x))' = - 1/sqrt(1-(x)^2) * x'
     """Returns the value and derivative of an arccosine operation: arccos(x)
-
     INPUTS
     =======
     x: an AutoDiff object or a scalar, required, the input variable
-
     RETURNS
     ========
     an AD object containing the value and derivative of the expression
-
     EXAMPLES
     =========
     >>> arccos(0.0)
@@ -903,15 +865,12 @@ def arctan_k_order(gx, k):
 def arctan(x):
     # (arctan(x))' = 1/(1+(x)**2) * x'
     """Returns the value and derivative of an arctangent operation: arctan(x)
-
     INPUTS
     =======
     x: an AutoDiff object or a scalar, required, the input variable
-
     RETURNS
     ========
     an AD object containing the value and derivative of the expression
-
     EXAMPLES
     =========
     >>> arctan(0.0)
@@ -948,15 +907,12 @@ def sinh_k_order(gx, k):
 def sinh(x):
     # (sinh(x))' = cosh(x) * x'
     """Returns the value and derivative of a hyperbolic sine operation: sinh(x)
-
     INPUTS
     =======
     x: an AutoDiff object or a scalar, required, the input variable
-
     RETURNS
     ========
     an AD object containing the value and derivative of the expression
-
     EXAMPLES
     =========
     >>> sinh(0.0)
@@ -994,15 +950,12 @@ def cosh_k_order(gx, k):
 def cosh(x):
     # (cosh(x))' = sinh(x) * x'
     """Returns the value and derivative of a hyperbolic cosine operation: cosh(x)
-
     INPUTS
     =======
     x: an AutoDiff object or a scalar, required, the input variable
-
     RETURNS
     ========
     an AD object containing the value and derivative of the expression
-
     EXAMPLES
     =========
     >>> cosh(0.0)
@@ -1034,15 +987,12 @@ def tanh(x):
     # (tanh(x))' = (1 - tanh(x)**2) * x'
     """Returns the value and derivative of a hyperbolic tangent operation: tanh(x)
     tanh(x)=(e^(2x)-1)/(e^(2x)+1), i.e. f(g(h(x))) with f(x)=(x-1)/(x+1) and g(x)=e^(2x)
-
     INPUTS
     =======
     x: an AutoDiff object or a scalar, required, the input variable
-
     RETURNS
     ========
     an AD object containing the value and derivative of the expression
-
     EXAMPLES
     =========
     >>> tanh(0.0)
