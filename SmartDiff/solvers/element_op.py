@@ -150,7 +150,6 @@ class AutoDiff():
             if self.N == other.N:
                 if N_new == 1:
                     der_new = val_new * (other.val * self.der / self.val + other.der * np.log(self.val))
-
                 else:
                     # fx^gx = e^(gx * ln(fx))
                     pw = ln(self) * other

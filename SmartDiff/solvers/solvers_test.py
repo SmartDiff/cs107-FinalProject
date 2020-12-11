@@ -274,6 +274,16 @@ class TestElemOp:
       with pytest.raises(AttributeError):
         f = el.power(x,2) + "5"
 
+      f = el.power(x,2) 
+      g = 5
+      h = f + g
+      assert (h.val, h.der) == (30,10)
+      
+      f = 5
+      g = el.power(x,2) 
+      h = f + g
+      assert (h.val, h.der) == (30,10)
+
     def test_sub(self):
       x = AD(5)
       f = el.power(x,2) + -5*x
@@ -335,6 +345,13 @@ class TestElemOp:
       with pytest.raises(AttributeError):
         f = el.cos(x) / "el.sin(0)"
 
+      x = AD(0)
+      f = el.sin(x) / el.cos(x)
+      assert (f.val,f.der) == (0, 1)
+
+      with pytest.raises(ZeroDivisionError):
+        f = el.cos(x) / el.sin(x)
+
     def test_pow(self):
       x = AD(2)
       f = x**4
@@ -368,9 +385,27 @@ class TestElemOp:
       f = x**(2**x)
       assert (f.val,f.der) == (16, 32 + 64*(np.log(2)**2))
 
+      x = AD(0)
+      f = el.sin(x)
+      g = x 
+
+      with pytest.raises(ValueError):
+        h = f**g
+
     def test_pos(self):
       x = AD(100)
       assert (x.val,x.der) == (100, 1)
 
       f = el.log(x,10) + x 
       assert (f.val,f.der) == (102, 1/(100*np.log(10))+1)
+
+    def test_compare(self):
+      x = AD(20)
+      y = 100
+      z = AD(100)
+
+      assert (x.val < y) == (x.val < z.val)
+      assert y == z.val
+      
+
+      
