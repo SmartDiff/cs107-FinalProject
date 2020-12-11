@@ -1,9 +1,10 @@
 import sys
 from PyQt5 import QtGui, QtCore, QtWidgets, uic
-import numpy as np
 import math
+from sympy import symbols
 from SmartDiff.preprocess.pyexpr_formatter import PyExpression_Formatter
 from SmartDiff.solvers.element_op import *
+# from SmartDiff.multivariate import *
 
 # global Ui_MainWindow, Ui_SecondDiag
 Ui_MainWindow, QtBaseClass = uic.loadUiType('SmartDiff/GUI/step1.ui')  # .ui drawn in Qt Designer
@@ -21,20 +22,66 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
         self.FuncDim = 1  # default
         self.InputDim = 1  # default
+
+        self.order = self.setupOrder()
         self.val = np.zeros(1)
         self.func = None
 
         # once OK button is pressed, go to step 2 and 3 and 4
         self.OKButton.clicked.connect(self.onClickOK)
 
+    def setupOrder(self):
+        '''
+        :param: None
+        :return:
+        int, user input: the order of derivative to calculate
+        '''
+        # Need to make the dialog window larger to show the title
+        order, okPressed = QtWidgets.QInputDialog.getInt(self, "Step 0: Input the order of derivative", "N = ",
+                                                         value=1, min=1)
+        if okPressed:
+            return order
 
     def SetDimInput(self):
         '''
+        Set up the function and input dimensions
         :return:
         user input of function dimension and input dimension
         '''
         self.FuncDim = int(self.FuncDimBox.currentText())
         self.InputDim = int(self.InputDimBox.currentText())
+
+    def DisplayOrderWarning(self):
+        '''
+        Display warnings if the order is too high
+        Reset the self.FuncDim and self.InputDim based on self.order
+        :return:
+        None
+        '''
+        warning_msg = ""
+        if self.order > 10:
+            self.FuncDim = 1
+            self.InputDim = 1
+            warning_msg += "Warning: the order of derivative is high, so the computation may take a long time. "
+            if self.FuncDim > 1:
+                self.FuncDim = 1
+                warning_msg += "Reset function dimension to 1. "
+            if self.InputDim > 1:
+                self.InputDim = 1
+                warning_msg += "Reset input dimension to 1. "
+        elif self.order > 2:
+            if self.FuncDim > 1:
+                self.FuncDim = 1
+                warning_msg += "Warning: Reset function dimension to 1. "
+            if self.InputDim > 1:
+                self.InputDim = 1
+                warning_msg += "Warning: Reset input dimension to 1. "
+        elif self.order == 2:
+            if self.FuncDim > 1:
+                self.FuncDim = 1
+                warning_msg += "Warning: Reset function dimension to 1. Hessian is not supported for vector-valued " \
+                               "functions."
+        self.ErrMsg.setText(warning_msg)
 
     def PointEval(self):
         '''
@@ -42,15 +89,15 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         :return:
         np array of the user input (size = self.InputDim from step 1)
         '''
-        if self.InputDim == 1:
-            num = self._PointEval("x1")
-            return np.array([num])
-        elif self.InputDim > 1:
-            raise NotImplementedError
+        xs = symbols('x(1:%d)' % (self.InputDim+1))
+        x_list = []
+        for i, x in enumerate(xs):
+            x_list.append(self._PointEval(str(x)))
+        return x_list
 
     def _PointEval(self, string):
         '''
-        :param string: x, y, z to put in the QInputDialog box title
+        :param string: x1, x2, x3, ... to put in the QInputDialog box title
         :return:
         double, user input, default 0, min -100, max 100, up to 4 decimals
         '''
@@ -66,14 +113,15 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         :return:
         a list of user input function (each element is a component of the function)
         '''
-
-        if self.InputDim == 1:
-            func = self._FuncEval("f1")
-            return list([func])
+        fs = symbols('f(1:%d)' % (self.InputDim+1))
+        f_list = []
+        for i, f in enumerate(fs):
+            f_list.append(self._PointEval(str(f)))
+        return f_list
 
     def _FuncEval(self, string):
         '''
-        :param string: x, y, z to put in the QInputDialog box title
+        :param string: f1, f2, f3,... to put in the QInputDialog box title
         :return:
         str, user input
         '''
@@ -88,10 +136,10 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         Trigger step 2: User puts in values of the variables to evaluate
         Trigger step 3: User puts in the function to evaluate and differentiate (working on this now)
         Trigger step 4: User confirms the input is correct and chooses whether to show the function value
-        :return:
-        None
+        :return: None
         '''
         self.SetDimInput()
+        self.DisplayOrderWarning()
         # step 2
         self.val = self.PointEval()
         # step 3
@@ -126,24 +174,38 @@ class FourthDiag(QtWidgets.QDialog, Ui_FourthDiag):
     def SetupValFunc(self):
         '''
         Display the function expressions, variable value input based on user input
-        :return:
+        :return: None
         '''
-        xVal_list = [self.xVal_1, self.xVal_2, self.xVal_3]
-        FuncInput_list = [self.FuncInput_1, self.FuncInput_2, self.FuncInput_3]
-
-        for xval in xVal_list:
-            xval.setText("N/A")
-            xval.setEnabled(False)
-            xval.setStyleSheet("background: white; color: black")
-        for func in FuncInput_list:
-            func.setText("N/A")
-            func.setEnabled(False)
-            func.setStyleSheet("background: white; color: black")
-        if self.InputDim == 1 and self.FuncDim == 1:
-            self.xVal_1.setText(str(self.val[0]))
-            self.FuncInput_1.setText(self.func[0])
-        else:
-            raise NotImplementedError
+        # xVal_list = [self.xVal_1, self.xVal_2, self.xVal_3]
+        # FuncInput_list = [self.FuncInput_1, self.FuncInput_2, self.FuncInput_3]
+        #
+        # for xval in xVal_list:
+        #     xval.setText("N/A")
+        #     xval.setEnabled(False)
+        #     xval.setStyleSheet("background: white; color: black")
+        # for func in FuncInput_list:
+        #     func.setText("N/A")
+        #     func.setEnabled(False)
+        #     func.setStyleSheet("background: white; color: black")
+        # if self.InputDim == 1 and self.FuncDim == 1:
+        #     self.xVal_1.setText(str(self.val[0]))
+        #     self.FuncInput_1.setText(self.func[0])
+        # else:
+        #     raise NotImplementedError
+        xs = symbols('x(1:%d)' % (self.InputDim + 1))
+        fs = symbols('f(1:%d)' % (self.FuncDim + 1))
+        var_msg = ""
+        func_msg = ""
+        for i, x in enumerate(self.val):
+            var_msg += f"{str(xs[i])}={self.val[i]}\n"
+        for i, f in enumerate(self.func):
+            func_msg += f"{str(fs[i])}={self.func[i]}\n"
+        self.ValInput.setText(var_msg)
+        self.ValInput.setEnabled(False)
+        self.ValInput.setStypeSheet("background: white; color: black")
+        self.FuncInput.setText(func_msg)
+        self.FuncInput.setEnabled(False)
+        self.FuncInput.setStypeSheet("background: white; color: black")
 
     def setDisVal(self):
         '''
@@ -165,6 +227,7 @@ class FourthDiag(QtWidgets.QDialog, Ui_FourthDiag):
         dlg5 = FifthDiag(self.InputDim, self.FuncDim, val, der, msg, self.DisVal)
         dlg5.exec_()
 
+    ### NEED TO UPDATE
     def compValDer(self):
         '''
         Format the user input in step 2 and 3 into strings and call AD modules in solvers
@@ -174,31 +237,32 @@ class FourthDiag(QtWidgets.QDialog, Ui_FourthDiag):
         err_msg = ""
         # instantiate a formatter object
         formatter = PyExpression_Formatter()
-        var_map = {"x1": AD(self.val[0]), "x": AD(self.val[0]),
-                   "x_1": AD(self.val[0])}  # the last two consider user input error
+        xs = symbols('x(1:%d)' % (self.InputDim+1))
+        var_map = {str(xs[i]): self.val[i] for i in range(self.InputDim)}
         func_map = {"pi": math.pi, "e": math.e, "power": power, "log": log, "exp": exp, "sqrt": sqrt, "sin": sin,
                     "cos": cos, "tan": tan, "arcsin": arcsin, "arccos": arccos, "arctan": arctan, "sinh": sinh,
                     "cosh": cosh, "tanh": tanh}
         var_map.update(func_map)
         # Get user input and check if it's valid
-        is_valid = formatter.is_valid_input(self.func[0])
-        if is_valid == 0:
-            try:
-                AD_out = eval(self.func[0], var_map)
-                val = AD_out.val
-                der = AD_out.der
-                return np.array([val]), np.array([der]), err_msg  # need to change for higher dim
-            except ValueError as e:
-                return np.zeros(1), np.zeros(1), str(e)+" "
-            except AttributeError as e:
-                return np.zeros(1), np.zeros(1), str(e)+" "
-            except ZeroDivisionError as e:
-                return np.zeros(1), np.zeros(1), str(e)+" "
-        else:
-            if is_valid == 1:
-                return np.zeros(1), np.zeros(1), "Input function has unmatched parenthesis!"
+        for i, f in enumerate(self.func):
+            is_valid = formatter.is_valid_input(f)
+            if is_valid == 0:
+                try:
+                    AD_out = eval(f, var_map)
+                    val = AD_out.val
+                    der = AD_out.der
+                    return np.array([val]), np.array([der]), err_msg  # need to change for higher dim
+                except ValueError as e:
+                    return np.zeros(1), np.zeros(1), str(e)+" "
+                except AttributeError as e:
+                    return np.zeros(1), np.zeros(1), str(e)+" "
+                except ZeroDivisionError as e:
+                    return np.zeros(1), np.zeros(1), str(e)+" "
             else:
-                return np.zeros(1), np.zeros(1), "Input function contains invalid character!"
+                if is_valid == 1:
+                    return np.zeros(1), np.zeros(1), "Input function has unmatched parenthesis!"
+                else:
+                    return np.zeros(1), np.zeros(1), "Input function contains invalid character!"
 
 
 class FifthDiag(QtWidgets.QDialog, Ui_FifthDiag):
@@ -221,6 +285,7 @@ class FifthDiag(QtWidgets.QDialog, Ui_FifthDiag):
         # stop the program when user clicks quit
         self.quitButton.clicked.connect(self.onClickQuit)
 
+    ### NEED TO CHANGE
     def ResultDisplay(self):
         '''
         Display the results of the SmartDiff, based on user input
@@ -299,7 +364,6 @@ class FifthDiag(QtWidgets.QDialog, Ui_FifthDiag):
 
 
 if __name__ == "__main__":
-    # is there a way to make the .ui loaded not global but accessible in classes?
     app = QtWidgets.QApplication(sys.argv)
     window = MainWindow()
     window.show()
