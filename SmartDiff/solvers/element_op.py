@@ -1071,7 +1071,7 @@ def tanh(x):
     return AutoDiff(val_new, der_new, N)
 
 
-def logistic(x,x0=1, L=1, k=1):
+def logistic(x,x0=0, L=1, k=1):
     """Return the value and derivative of a logistic operation L/(1+e^-k(x-x0)}).
     INPUTS
     =======
