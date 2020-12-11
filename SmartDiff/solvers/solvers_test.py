@@ -50,8 +50,8 @@ class TestElemOp:
         x = "s"
         f = el.log(x,3)
 
+      x = -3
       with pytest.raises(ValueError):
-        x = -3
         f = el.log(x,3)
 
     def test_ln(self):
@@ -448,19 +448,19 @@ class TestElemOp:
       y = 100
       z = AD(100)
 
-      assert (x.val < z.val) == x.val.__lt__(z.val)
+      assert (n < z.val) == n.__lt__(z.val)
       assert (x.val < y) == x.val.__lt__(y)
 
-      assert (x.val <= z.val) == x.val.__le__(z.val)
+      assert (n <= z.val) == n.__le__(z.val)
       assert (x.val <= y) == x.val.__le__(y)
-      assert (x.val <= n) == x.val.__le__(n)
+      assert (y <= z.val) == y.__le__(z.val)
 
-      assert (z.val > x.val) == z.val.__gt__(x.val)
+      assert (y > x.val) == y.__gt__(x.val)
       assert (z.val > n) == z.val.__gt__(n)
       
-      assert (z.val >= x.val) == z.val.__ge__(x.val)
+      assert (y >= x.val) == y.__ge__(x.val)
       assert (z.val >= n) == z.val.__ge__(n)
-      assert (z.val >= y) == z.val.__ge__(y)
+      assert (n >= y) == n.__ge__(y)
 
       assert (y == z.val) == y.__eq__(z.val)
       assert (z.val == y) == z.val.__eq__(y)
