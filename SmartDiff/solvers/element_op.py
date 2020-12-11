@@ -333,7 +333,7 @@ def power(x, n):
     =========
     >>> power(1.0, 2.0)
     AD(1.0, 0)
-    >>> power(AD(1.0, 2.0), 2.0)
+    >>> power(AutoDiff(1.0, 2.0), 2.0)
     AD(1.0, 4.0)
     """
     N = 1
@@ -857,7 +857,7 @@ def arctan_k_order(gx, k):
         return 1 / (1 + gx ** 2)
     else:
         x = AutoDiff(gx, N = k-1)
-        f = 1 + power(x,2)
+        f = 1 + power(x, 2)
         dk_f2 = lambda gx2, k2: power_k_order(gx2, -1.0, k2)
         der_new = get_n_der_vecs(dk_f2, f, k-1)
         return np.float(der_new[k-2])
@@ -1014,6 +1014,41 @@ def tanh(x):
     except AttributeError:
         if isinstance(x, float) or isinstance(x, int):
             val_new = np.tanh(x)
+            # If x is a constant, the derivative of x is 0.
+            der_new = np.zeros(1)
+        else:
+            raise AttributeError('Type error!')
+    return AutoDiff(val_new, der_new, N)
+
+
+def logistic(x, x0=0, L=1, k=1):
+    """Return the value and derivative of a logistic operation L/(1+e^-k(x-x0)}).
+    INPUTS
+    =======
+    x: AutoDiff.variable object or a number.
+    x0: float or int, the x value of the sigmoid's midpoint
+    L: float or int, curve's maximum value.
+    k: float or int, logistic growth rate.
+    RETURNS
+    ========
+    an AD object containing the value and derivative of the expression
+    """
+    N = 1
+    try:
+        val_new = L / (1 + np.exp(-k * (x.val - x0)))
+        der_val = k*(np.exp(-k * (x.val - x0)))
+        N = x.N
+        if N == 1:
+            #der_new = np.array([val_new * (1-val_new) * x.der])
+            der_new = np.array([val_new * (val_new/L) * der_val * x.der])
+        else:
+            # N > 1
+            f = lambda x: L * 1/(1+x)
+            g = lambda x: exp(-k*(x-x0))
+            der_new = f(g(x)).der
+    except AttributeError:
+        if isinstance(x, float) or isinstance(x, int):
+            val_new = L / ( 1 + np.exp(-k * (x-x0)))
             # If x is a constant, the derivative of x is 0.
             der_new = np.zeros(1)
         else:

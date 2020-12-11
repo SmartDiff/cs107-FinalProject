@@ -44,13 +44,19 @@ def get_hessian(func_str, all_vals, eval_func_map=FUNC_MAP):
         var_map = {"x%d" % i: val for i, val in enumerate(all_vals)}
         var_map.update(MATH_FUNC_MAP)
         f = sympify(func_str)
-        vs = f.free_symbols
-        hess = hessian(f, list(ordered(vs)))
+        vs = list(ordered(f.free_symbols))
+        hess = hessian(f, vs)
         print(hess)
+
+        H2 = np.zeros((D, D))
+
         for i in range(D):
             for j in range(D):
                 didj_func = hess[i*D+j]
-                H[i][j] = eval(str(didj_func), var_map)
+                print(str(didj_func.evalf()))
+                H[i][j] = eval(str(didj_func.evalf()), var_map)
+
+        print("using sp.evalf: ", H2)
     return H
 
 
@@ -104,48 +110,50 @@ def jacob_hessian(func, vals, N=1):
 
 
 if __name__ == "__main__":
-    print("\nTest Hessian (single variable):")
-    func = "x0 + 3"
-    vals = [5]
-    Hmat = get_hessian(func_str=func, all_vals=vals)
-    print("Hessian 1:", Hmat, "; Expected = [[0]]")
+    # print("\nTest Hessian (single variable):")
+    # func = "x0 + 3"
+    # vals = [5]
+    # Hmat = get_hessian(func_str=func, all_vals=vals)
+    # print("Hessian 1:", Hmat, "; Expected = [[0]]")
+    #
+    # func = "x0**2"
+    # vals = [5]
+    # Hmat = get_hessian(func_str=func, all_vals=vals)
+    # print("Hessian 2:", Hmat, "; Expected = [[2]]")
+    #
+    # func = "x0**3 + log(4, 2)"
+    # vals = [5]
+    # Hmat = get_hessian(func_str=func, all_vals=vals)
+    # print("Hessian 3:", Hmat, "; Expected = [30]]")
+    #
+    #
+    # print("\n\nTest Hessian (multivariate):")
+    # func = "x0 + x1"
+    # vals = [3, 5]
+    # Hmat = get_hessian(func_str=func, all_vals=vals)
+    # print("Hessian 1:", Hmat)
+    # print("Expected = [[0, 0], [0, 0]]\n")
+    #
+    # func = "x0 * x1"
+    # vals = [3, 5]
+    # Hmat = get_hessian(func_str=func, all_vals=vals)
+    # print("Hessian 2:", Hmat)
+    # print("Expected = [[0, 1], [1, 0]]\n")
+    #
+    # func = "x0 * x1**3"
+    # vals = [3, 5]
+    # Hmat = get_hessian(func_str=func, all_vals=vals)
+    # print("Hessian 3:", Hmat)
+    # print("Expected = [[0, 75], [75, 90]]\n")
 
-    func = "x0**2"
-    vals = [5]
-    Hmat = get_hessian(func_str=func, all_vals=vals)
-    print("Hessian 2:", Hmat, "; Expected = [[2]]")
 
-    func = "x0**3 + log(4, 2)"
-    vals = [5]
-    Hmat = get_hessian(func_str=func, all_vals=vals)
-    print("Hessian 3:", Hmat, "; Expected = [30]]")
-
-
-    print("\n\nTest Hessian (multivariate):")
-    func = "x0 + x1"
-    vals = [3, 5]
-    Hmat = get_hessian(func_str=func, all_vals=vals)
-    print("Hessian 1:", Hmat)
-    print("Expected = [[0, 0], [0, 0]]\n")
-
-    func = "x0 * x1"
-    vals = [3, 5]
-    Hmat = get_hessian(func_str=func, all_vals=vals)
-    print("Hessian 2:", Hmat)
-    print("Expected = [[0, 1], [1, 0]]\n")
-
-    func = "x0 * x1**3"
-    vals = [3, 5]
-    Hmat = get_hessian(func_str=func, all_vals=vals)
-    print("Hessian 3:", Hmat)
-    print("Expected = [[0, 75], [75, 90]]\n")
-
-    func = "x0 * x1**x0 * x1"
+    # TODO: Issues when function has: power, arcsin, arccos, arctan
+    func = "x0 * arctan(x1) * e"
     vals = [3, 5]
     Hmat = get_hessian(func_str=func, all_vals=vals)
     print("Hessian 4:", Hmat)
     print("Expected = [[0, 375], [375, 900]]\n")
-    
+
     #print("Expected = " + str([[0, np.log(5)+1],[np.log(5)+1, 3/5]]) + "\n")
 
 
