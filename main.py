@@ -82,6 +82,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                 warning_msg += "Warning: Reset function dimension to 1. Hessian is not supported for vector-valued " \
                                "functions."
         self.ErrMsg.setText(warning_msg)
+        self.ErrMsg.setWordWrap(True)
 
     def PointEval(self):
         '''
@@ -113,10 +114,10 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         :return:
         a list of user input function (each element is a component of the function)
         '''
-        fs = symbols('f(1:%d)' % (self.InputDim+1))
+        fs = symbols('f(1:%d)' % (self.FuncDim+1))
         f_list = []
         for i, f in enumerate(fs):
-            f_list.append(self._PointEval(str(f)))
+            f_list.append(self._FuncEval(str(f)))
         return f_list
 
     def _FuncEval(self, string):
@@ -176,22 +177,6 @@ class FourthDiag(QtWidgets.QDialog, Ui_FourthDiag):
         Display the function expressions, variable value input based on user input
         :return: None
         '''
-        # xVal_list = [self.xVal_1, self.xVal_2, self.xVal_3]
-        # FuncInput_list = [self.FuncInput_1, self.FuncInput_2, self.FuncInput_3]
-        #
-        # for xval in xVal_list:
-        #     xval.setText("N/A")
-        #     xval.setEnabled(False)
-        #     xval.setStyleSheet("background: white; color: black")
-        # for func in FuncInput_list:
-        #     func.setText("N/A")
-        #     func.setEnabled(False)
-        #     func.setStyleSheet("background: white; color: black")
-        # if self.InputDim == 1 and self.FuncDim == 1:
-        #     self.xVal_1.setText(str(self.val[0]))
-        #     self.FuncInput_1.setText(self.func[0])
-        # else:
-        #     raise NotImplementedError
         xs = symbols('x(1:%d)' % (self.InputDim + 1))
         fs = symbols('f(1:%d)' % (self.FuncDim + 1))
         var_msg = ""
@@ -200,12 +185,14 @@ class FourthDiag(QtWidgets.QDialog, Ui_FourthDiag):
             var_msg += f"{str(xs[i])}={self.val[i]}\n"
         for i, f in enumerate(self.func):
             func_msg += f"{str(fs[i])}={self.func[i]}\n"
-        self.ValInput.setText(var_msg)
-        self.ValInput.setEnabled(False)
-        self.ValInput.setStypeSheet("background: white; color: black")
-        self.FuncInput.setText(func_msg)
-        self.FuncInput.setEnabled(False)
-        self.FuncInput.setStypeSheet("background: white; color: black")
+        self.ValInput.setPlainText(var_msg)
+        # self.ValInput.setlineWrap(True)
+        self.ValInput.setReadOnly(True)
+        self.ValInput.setStyleSheet("background: white; color: black")
+        self.FuncInput.setPlainText(func_msg)
+        # self.FuncInput.setWordWrap(True)
+        self.FuncInput.setReadOnly(True)
+        self.FuncInput.setStyleSheet("background: white; color: black")
 
     def setDisVal(self):
         '''
@@ -239,6 +226,11 @@ class FourthDiag(QtWidgets.QDialog, Ui_FourthDiag):
         formatter = PyExpression_Formatter()
         xs = symbols('x(1:%d)' % (self.InputDim+1))
         var_map = {str(xs[i]): self.val[i] for i in range(self.InputDim)}
+        var_map.update({"x": self.val[0]})
+        if self.InputDim == 2:
+            var_map.update({"y": self.val[1]})
+        if self.InputDim == 3:
+            var_map.update({"y": self.val[1], "z": self.val[2]})
         func_map = {"pi": math.pi, "e": math.e, "power": power, "log": log, "exp": exp, "sqrt": sqrt, "sin": sin,
                     "cos": cos, "tan": tan, "arcsin": arcsin, "arccos": arccos, "arctan": arctan, "sinh": sinh,
                     "cosh": cosh, "tanh": tanh}

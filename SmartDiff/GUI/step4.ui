@@ -29,22 +29,6 @@
     <enum>Qt::RichText</enum>
    </property>
   </widget>
-  <widget class="QLineEdit" name="FuncInput">
-   <property name="geometry">
-    <rect>
-     <x>240</x>
-     <y>180</y>
-     <width>411</width>
-     <height>371</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string extracomment="default is 0"/>
-   </property>
-   <property name="placeholderText">
-    <string extracomment="Default is 0"/>
-   </property>
-  </widget>
   <widget class="QPushButton" name="OKButton">
    <property name="geometry">
     <rect>
@@ -84,16 +68,6 @@
     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;Variable input:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="ValInput">
-   <property name="geometry">
-    <rect>
-     <x>40</x>
-     <y>180</y>
-     <width>161</width>
-     <height>371</height>
-    </rect>
-   </property>
-  </widget>
   <widget class="QCheckBox" name="checkBox">
    <property name="geometry">
     <rect>
@@ -105,6 +79,26 @@
    </property>
    <property name="text">
     <string>Show function value</string>
+   </property>
+  </widget>
+  <widget class="QTextEdit" name="ValInput">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>180</y>
+     <width>181</width>
+     <height>371</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QTextEdit" name="FuncInput">
+   <property name="geometry">
+    <rect>
+     <x>240</x>
+     <y>180</y>
+     <width>421</width>
+     <height>371</height>
+    </rect>
    </property>
   </widget>
  </widget>
