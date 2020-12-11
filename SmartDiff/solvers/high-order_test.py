@@ -257,6 +257,30 @@ class TestElemOpNOrder:
       x = AD(-3)
       n = 1/2
       f = el.power_k_order(x, n, 3)
+
+  def test_logistic(self):
+    x = AD(100)
+    f = el.logistic(x,x0=0, L=1, k=1)
+    assert (f.val, np.round(f.der[-1], 10)) == (1/(1+np.exp(-100)), 
+                                                np.round(np.exp(100)/(1 + np.exp(100))**2, 6))
+    #assert (f.val, f.der[-1]) == (1/(1+np.exp(-100)), np.exp(100)/(1 + np.exp(100))**2)
+
+    f = el.logistic(x,x0=10, L=2, k=3) 
+    assert (f.val, f.der[-1]) == (2*np.exp(270)/(1+np.exp(270)), (6*np.exp(270))/(1 + np.exp(270))**2)  
+
+    x = AD(100, N=2)
+    f = el.logistic(x,x0=0, L=1, k=1) 
+    assert (f.val, np.round(f.der[-1], 6)) == (1/(1+np.exp(-100)), np.round((np.exp(100)-np.exp(200))/(1 + np.exp(100))**3, 6))
+
+    x = 100 
+    f = el.logistic(x,x0=0, L=1, k=1) 
+    assert (f.val, f.der) == (1/(1+np.exp(-100)), 0)
+
+    with pytest.raises(AttributeError):
+      x = "AD(-3)"
+      f = el.logistic(x,x0=0, L=1, k=1) 
+
+                                      
   
 #if __name__ == "__main__":
   # test = NOrderTestElemOp()
