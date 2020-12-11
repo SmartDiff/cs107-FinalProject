@@ -186,11 +186,9 @@ class FourthDiag(QtWidgets.QDialog, Ui_FourthDiag):
         for i, f in enumerate(self.func):
             func_msg += f"{str(fs[i])}={self.func[i]}\n"
         self.ValInput.setPlainText(var_msg)
-        # self.ValInput.setlineWrap(True)
         self.ValInput.setReadOnly(True)
         self.ValInput.setStyleSheet("background: white; color: black")
         self.FuncInput.setPlainText(func_msg)
-        # self.FuncInput.setWordWrap(True)
         self.FuncInput.setReadOnly(True)
         self.FuncInput.setStyleSheet("background: white; color: black")
 
