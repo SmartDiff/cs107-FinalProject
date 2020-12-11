@@ -20,12 +20,13 @@ from SmartDiff.solvers.element_op import *
 #     jaco = AD_func.der
 #     return values, jaco
 
+
 def jacob_hessian(func, vals, N=1):
     '''
-    :param func: m function, n variable
+    :param func: a list of m functions, n variable
     :param vals: list of scalar, len = n
     :param N: specify order of derivatives, default 1, max 2
-    :return:
+    :return: value, Jacobian, and Hessian
     '''
     n = len(vals)
     m = len(func(*vals))
@@ -36,23 +37,47 @@ def jacob_hessian(func, vals, N=1):
     elif N > 2:
         raise ValueError("Only support 1st and 2nd order derivatives for multivariable cases")
     xs = symbols('x:%d' % n)
-    print(xs)
-    AD_val = [AD(vals[i], N=N, var=str(xs[i])) for i in range(n)]
-    AD_func = func(*AD_val)
-    values = np.array([AD_func[i].val for i in range(m)])
-    jacobian = np.array([AD_func[i].der[0] for i in range(m)])
-    hessian = np.array([AD_func[i].der[1] for i in range(m)]) if N == 2 else np.empty((n, n))
+    AD_vars = [AD(vals[i], N=N, var=xs[i]) for i in range(n)]
+    # AD_const = [AD(vals[i], N=1, var='const') for i in range(n)]
+    AD_func_list = []
+    for i in range(n):
+        AD_v = vals.copy()
+        AD_v[i] = AD_vars[i]
+        AD_func_list.append(func(*AD_v))
+
+    # fill in value
+    values = np.zeros(m)
+    for j in range(m):
+        try:
+            values[j] = AD_func_list[0][j].val
+        except AttributeError:
+            values[j] = AD_func_list[0][j]
+    # values = np.array([AD_func_list[0][j].val for j in range(m)])
+    for i in range(m):
+        for j in range(n):
+            print(AD_func_list[j][i])
+    # fill in Jacobian
+    jacobian = np.zeros((m, n))
+    for i in range(m):
+        for j in range(n):
+            try:
+                jacobian[i, j] = AD_func_list[j][i].der[0]
+            except AttributeError:
+                pass
+
+    # hessian = np.array([AD_func[i].der[1] for i in range(m)]) if N == 2 else np.empty((n, n))
+    hessian = np.zeros((n, n))
     return values, jacobian, hessian
 
 
-# output_value1, jacobian1 = jacob_hessian(func = (lambda x,y,z : [x*z+y,y*z+x]), vals = [2,3,4])
+# output_value1, jacobian1, hess1 = jacob_hessian(lambda x,y,z : [x*z+y, y*z+x, z, z+2], [2,3,4])
 # print('value1', output_value1)
 # print('jacobian1',jacobian1)
-output_value1, jacobian1, hess1 = jacob_hessian(lambda x,y : [x**2*exp(x)+y, y], [2,3], 2)
+output_value1, jacobian1, hess1 = jacob_hessian(lambda x,y : [x**2*exp(x)+y, y], [2,3], 1)
 print('value1', output_value1)
 print('jacobian1',jacobian1)
 print('hessian1',hess1)
-
+#
 # output_value1, jacobian1, hess1 = jacob_hessian(lambda x,y : [x**2*exp(x),x*y], [2,3], 2)
 # print('value2', output_value1)
 # print('jacobian2',jacobian1)
