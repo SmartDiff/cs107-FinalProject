@@ -1091,7 +1091,7 @@ def logistic(x,x0=1, L=1, k=1):
             der_new = np.array([val_new * (1-val_new) * x.der])
         else:
             # N > 1
-            f = lambda x: L * 1/(1+y)
+            f = lambda x: L * 1/(1+x)
             g = lambda x: exp(-k*(x-x0))
             der_new = f(g(x)).der
     except AttributeError:
