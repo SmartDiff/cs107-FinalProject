@@ -23,12 +23,13 @@ def get_ord2_der(func_str, all_vals, dvar_idx, func_map):
     return AD_out.der[-1]
 
 
-def get_hessian(func_str, all_vals, eval_func_map=FUNC_MAP):
+def get_hessian(func_str, all_vals, eval_func_map=FUNC_MAP, math_func_map=MATH_FUNC_MAP):
     """
     Returns the hessian matrix of the input function over the input variables
     :param func_str: A string of input math function
     :param all_vals: A list of real scalar values
     :param eval_func_map: A mapping of math expression to python's math function
+    :param math_func_map: A mapping of math expression to python's math function
     :return:
     """
     # Assume func is a valid expression
@@ -40,7 +41,7 @@ def get_hessian(func_str, all_vals, eval_func_map=FUNC_MAP):
         H[0][0] = get_ord2_der(func_str, all_vals, 0, eval_func_map)
     else:
         var_map = {"x%d" % i: val for i, val in enumerate(all_vals)}
-        var_map.update(MATH_FUNC_MAP)
+        var_map.update(math_func_map)
         f = sympify(func_str)
         vs = f.free_symbols
         hess = hessian(f, list(ordered(vs)))
@@ -52,53 +53,39 @@ def get_hessian(func_str, all_vals, eval_func_map=FUNC_MAP):
     return H
 
 
-def jacob_hessian(func, vals, N=1):
+def get_val_jacobian(func_list, vals, eval_func_map=FUNC_MAP):
     '''
-    :param func: a list of m functions, n variable
+    Calulates the function values and Jacobian for multivariate input
+    :param func_list: a list of m function strs
     :param vals: list of scalar, len = n
-    :param N: specify order of derivatives, default 1, max 2
-    :return: value, Jacobian, and Hessian
+    :param eval_func_map: A mapping of math expression to python's math function
+    :return: value, Jacobian
     '''
     n = len(vals)
-    m = len(func(*vals))
-    if N == 2:
-        if m > 1:
-            print("Warning: Only scalar valued function is supported for Hessian. Only calculating Jacobian now")
-            N = 1
-    elif N > 2:
-        raise ValueError("Only support 1st and 2nd order derivatives for multivariable cases")
-    xs = symbols('x:%d' % n)
-    AD_vars = [AD(vals[i], N=N) for i in range(n)]
-    # AD_const = [AD(vals[i], N=1, var='const') for i in range(n)]
-    AD_func_list = []
-    for i in range(n):
-        AD_v = vals.copy()
-        AD_v[i] = AD_vars[i]
-        AD_func_list.append(func(*AD_v))
-
-    # fill in value
-    values = np.zeros(m)
-    for j in range(m):
-        try:
-            values[j] = AD_func_list[0][j].val
-        except AttributeError:
-            values[j] = AD_func_list[0][j]
-    # values = np.array([AD_func_list[0][j].val for j in range(m)])
-    for i in range(m):
-        for j in range(n):
-            print(AD_func_list[j][i])
-    # fill in Jacobian
+    m = len(func_list)
     jacobian = np.zeros((m, n))
-    for i in range(m):
-        for j in range(n):
+    values = np.zeros(m)
+    xs = symbols('x:%d' % n)
+    for i, f in enumerate(func_list):
+        var_map = {str(xs[i]): val for i, val in enumerate(vals)}
+        var_map.update(eval_func_map)
+        get_val = False
+        for j, x in enumerate(vals):
+            AD_map = var_map.copy()
+            AD_map.update({str(xs[j]): AutoDiff(value=vals[j])})
+            AD_out = eval(f, AD_map)
+            if not get_val:
+                try:
+                    values[i] = AD_out.val
+                    get_val = True
+                except AttributeError:
+                    pass
             try:
-                jacobian[i, j] = AD_func_list[j][i].der[0]
+                jacobian[i, j] = AD_out.der[0]
             except AttributeError:
                 pass
 
-    # hessian = np.array([AD_func[i].der[1] for i in range(m)]) if N == 2 else np.empty((n, n))
-    hessian = np.zeros((n, n))
-    return values, jacobian, hessian
+    return values, jacobian
 
 
 if __name__ == "__main__":
@@ -143,8 +130,24 @@ if __name__ == "__main__":
     print("Hessian 4:", Hmat)
     print("Expected = [[0, 375], [375, 900]]\n")
 
-    # print("Expected = " + str([[0, np.log(5)+1],[np.log(5)+1, 3/5]]) + "\n")
+    print("Expected = " + str([[0, np.log(5)+1],[np.log(5)+1, 3/5]]) + "\n")
 
+    func_list = ['x0*x2+x1', 'x1']
+    val_list = [2,3,4]
+
+    values, jacobian = get_val_jacobian(func_list, val_list)
+    print("values:")
+    print(values)
+    print("Jacobian:")
+    print(jacobian)
+
+    func_list = ["x0*exp(x0+9)"]
+    val_list = [2]
+    values, jacobian = get_val_jacobian(func_list, val_list)
+    print("values:")
+    print(values)
+    print("Jacobian:")
+    print(jacobian)
     # output_value1, jacobian1, hess1 = jacob_hessian(lambda x,y,z : [x*z+y, y*z+x, z, z+2], [2,3,4])
     # print('value1', output_value1)
     # print('jacobian1',jacobian1)
