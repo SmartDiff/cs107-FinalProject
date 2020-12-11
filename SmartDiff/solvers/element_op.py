@@ -12,7 +12,7 @@ from math import factorial
 
 
 class AutoDiff():
-    def __init__(self, value, der=None, N=1):
+    def __init__(self, value, der=None, N=1, signatures=None, ):
         self.val = value
         self.N = N
         if der is None:
@@ -171,8 +171,6 @@ class AutoDiff():
 
     def __rpow__(self, other):
         # other is constant: c^fx = e^(fx * ln(c))
-        # print("power base = ", other)
-        # print("self.val = ", self.val)
         pw = self * np.log(other)
         return exp(pw)
 
@@ -581,7 +579,6 @@ def exp(x):
     return AutoDiff(val_new, der_new, N)
 
 
-# YW copied from Xincheng's code on github
 def inv(x):
     """
     Inverse of a term (x cannot be 0)
