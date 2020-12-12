@@ -36,7 +36,6 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         :return:
         int, user input: the order of derivative to calculate
         '''
-        # Need to make the dialog window larger to show the title
         order, okPressed = QtWidgets.QInputDialog.getInt(self, "Step 0: Input the order of derivative", "N = ",
                                                          value=1, min=1)
         if okPressed:
@@ -145,7 +144,6 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.val = self.PointEval()
         # step 3
         self.func = self.FuncEval()
-        # print(f"Evaluating {self.func} at {self.val}")  # for testing only, to be commented out in the future
         # step 4
         dlg4 = FourthDiag(self.InputDim, self.FuncDim, self.val, self.func, self.order)
         dlg4.exec_()
@@ -208,6 +206,7 @@ class FourthDiag(QtWidgets.QDialog, Ui_FourthDiag):
         The function value and derivative at the specific point from user input
         '''
         # compute function value and derivative and get error messsage
+
         val, der, msg = self.compValDer()
         # step 5
         dlg5 = FifthDiag(val, der, msg, self.order, self.DisVal)
@@ -221,17 +220,17 @@ class FourthDiag(QtWidgets.QDialog, Ui_FourthDiag):
         '''
         # instantiate a formatter object
         formatter = PyExpression_Formatter()
-        xs = symbols('x:%d' % self.InputDim)
-        var_map = {str(xs[i]): self.val[i] for i in range(self.InputDim)}
-        var_map.update({"x": self.val[0]})
-        if self.InputDim == 2:
-            var_map.update({"y": self.val[1]})
-        if self.InputDim == 3:
-            var_map.update({"y": self.val[1], "z": self.val[2]})
+        # xs = symbols('x:%d' % self.InputDim)
+        # var_map = {str(xs[i]): self.val[i] for i in range(self.InputDim)}
+        # var_map.update({"x": self.val[0]})
+        # if self.InputDim == 2:
+        #     var_map.update({"y": self.val[1]})
+        # if self.InputDim == 3:
+        #     var_map.update({"y": self.val[1], "z": self.val[2]})
         func_map = {"pi": math.pi, "e": math.e, "power": power, "log": log, "exp": exp, "sqrt": sqrt, "sin": sin,
                     "cos": cos, "tan": tan, "arcsin": arcsin, "arccos": arccos, "arctan": arctan, "sinh": sinh,
                     "cosh": cosh, "tanh": tanh}
-        var_map.update(func_map)
+        # var_map.update(func_map)
 
         err_msg = ""
         # Get user input and check if it's valid
@@ -245,23 +244,26 @@ class FourthDiag(QtWidgets.QDialog, Ui_FourthDiag):
         # proceed if all the functions pass user input checking
         try:
             if self.FuncDim == 1:
-                if self.InputDim == 1 and self.order == 1:
-                    AD_out = eval(self.func[0], var_map)
-                    try:
-                        val = AD_out.val
-                        der = AD_out.der
-                    except AttributeError:
-                        val = AD_out
-                        der = 1
+                if self.order == 1:
+                    val, der = get_val_jacobian(self.func, self.val, eval_func_map=func_map)
                     return val, der, err_msg
                 elif self.order == 2:
                     val, _ = get_val_jacobian(self.func, self.val, eval_func_map=func_map)
                     der = get_hessian(self.func[0], self.val, eval_func_map=func_map)
                     return val, der, err_msg
+                else:  # self.order > 2 and self.FuncDim == 1 and self.InputDim == 1
+                    var_map = {'x': AutoDiff(self.val[0], N=self.order), 'x1': AutoDiff(self.val[0], N=self.order), 'x0': AutoDiff(self.val[0], N=self.order)}
+                    var_map.update(func_map)
+                    AD_out = eval(self.func[0], var_map)
+                    try:
+                        val = AD_out.val
+                        der = AD_out.der[-1]
+                    except AttributeError:
+                        val = AD_out
+                        der = 1
+                    return val, der, err_msg
             else:
-                # by GUI setting:
-                # self.order == 1 and self.FuncDim > 1 or self.InputDim > 1
-                # or self.order > 2 and self.FuncDim == 1 and self.InputDim == 1
+                # self.FuncDim > 1 and self.order == 1
                 val, der = get_val_jacobian(self.func, self.val, eval_func_map=func_map)
                 return val, der, err_msg
         except ValueError as e:
@@ -306,82 +308,24 @@ class FifthDiag(QtWidgets.QDialog, Ui_FifthDiag):
         if self.msg == "":
             self.ErrMsg.setText("Success! See results below")
             if self.DisVal:
-                self.FuncVal.setPlainText(self.val)
+                self.FuncVal.setPlainText(str(self.val))
             else:
                 self.FuncVal.setPlainText("N/A")
             der_msg = f"{self.order}-order derivative:\n"
-            self.DerVal.setPlainText(der_msg + self.der)
+            self.DerVal.setPlainText(der_msg + str(self.der))
         else:
             self.FuncVal.setPlainText("N/A")
             self.DerVal.setPlainText("N/A")
             self.ErrMsg.setText("Failure: " + self.msg +
                                 "Close windows of step 4 and 5 and start again from step 1.")
 
-
-
-
-
-        # self.fval.setStyleSheet("background: white; color: black")
-        # for der in der_list:
-        #     der.setText("N/A")
-        #     der.setEnabled(False)
-        #     der.setStyleSheet("background: white; color: black")
-
-        # if self.InputDim == 1 and self.FuncDim == 1:
-        #     # display error message, if any
-        #     if self.msg == "":
-        #         self.ErrMsg.setText("Success! See results below")
-        #         if self.DisVal:
-        #             self.f1Val.setText(str(np.round(self.val[0], 2)))
-        #             self.f11Der.setText(str(np.round(self.der[0], 2)))
-        #         else:
-        #             self.f11Der.setText(str(np.round(self.der[0], 2)))
-        #     else:
-        #         self.ErrMsg.setText("Failure: " + self.msg +
-        #                             "Close windows of step 4 and 5 and start again from step 1.")
-        # else:
-        #     raise NotImplementedError
-
     def onClickQuit(self):
         '''
-        stop the program when user clicks quit
+        Stop the program when user clicks quit
         :return:
         None
         '''
         sys.exit()
-
-
-#     def PointEval1(self, var):
-#         '''
-#         User input the number to evaluate
-#         Note: Use the input validation function to only allow float
-#         :return:
-#         None
-#         '''
-#         # try:
-#         #     self.val_vec = np.array([float(self.xVal.text())])
-#         # except ValueError:
-#         #     ty = type(self.xVal.text())
-#         #     self.WarnLabel.setText(f"Warning: You entered {ty}. Please enter a float")
-#         reg_ex = QtCore.QRegExp("[-+]?[0-9]*\.?[0-9]+")  # regex for float
-#         input_validator = QtGui.QRegExpValidator(reg_ex)
-#         var.setValidator(input_validator)
-#         var.setMaxLength(6)
-#         var.setAlignment(QtCore.Qt.AlignRight)
-#         text, okPressed = QtWidgets.QInputDialog.getText(self, "Get text", "Your name:", var, "")
-#         if okPressed and text != '':
-#             print(text)
-#             return text
-#         # def enterPress():
-#         #     return txt_input[-1]
-#         # def textchanged(text):
-#         #     print("content of the txt box: " + text)
-#         #     txt_input.append(text)
-#         # var.textChanged.connect(textchanged)
-#         # return ent.clicked.connect(enterPress())
-#         # if var.text() == "":
-#         #     return 0
-#         # return var.text()
 
 
 if __name__ == "__main__":
