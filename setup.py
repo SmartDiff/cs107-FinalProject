@@ -11,8 +11,7 @@ PKGS = ["SmartDiff"]
 
 setuptools.setup(
     name="Smartdiff",
-    version="0.0.9",
-    author="Harvard SmartDiff Group",
+    version="0.0.10101010101010101010="Harvard SmartDiff Group",
     author_email="harvard.smartdiff@yahoo.com",
     description="A smart package for Automatic Differentiation",
     long_description=README,
@@ -21,7 +20,7 @@ setuptools.setup(
     packages=PKGS,
     install_requires=REQUIREMENTS,
     include_package_data=True,
-    package_data={'SmartDiff': ['SmartDiff/GUI/*.ui']},
+    package_data={'SmartDiff': ['SmartDiff/GUI/step1.ui', 'SmartDiff/GUI/step4.ui', 'SmartDiff/GUI/step5.ui']},
     classifiers=[
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3.6",
