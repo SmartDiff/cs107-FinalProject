@@ -1,6 +1,6 @@
 import SmartDiff.solvers.element_op as el
-from .SmartDiff.solvers.element_op import AutoDiff as AD
-from .SmartDiff.solvers.multivariate import *
+from SmartDiff.solvers.element_op import AutoDiff as AD
+from SmartDiff.solvers.multivariate import *
 import numpy as np
 import pytest
 
