@@ -45,7 +45,7 @@ def get_hessian(func_str, all_vals, eval_func_map=FUNC_MAP, math_func_map=MATH_F
         f = sympify(func_str)
         vs = f.free_symbols
         hess = hessian(f, list(ordered(vs)))
-        print(hess)
+        # print(hess)
         for i in range(D):
             for j in range(D):
                 didj_func = hess[i * D + j]
