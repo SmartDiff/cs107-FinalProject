@@ -1,6 +1,6 @@
 # usage: pytest -q solvers_test.py
 import sys, os
-sys.path.append(os.path.abspath(os.path.join('..', 'SmartDiff')))
+sys.path.append(os.path.abspath(os.path.join('../', 'SmartDiff')))
 import SmartDiff.solvers.element_op as el
 from SmartDiff.solvers.element_op import AutoDiff as AD
 import numpy as np
