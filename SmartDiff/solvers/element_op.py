@@ -1060,7 +1060,7 @@ def tan(x):
         val_new = np.tan(x.val)
         N = x.N
         if N == 1:
-            der_new = np.array([1 / (np.cos(x.val)) ** 2])  # TODO: where is x.der?
+            der_new = np.array([1 / (np.cos(x.val)) ** 2 * x.der])
         else:
             # N > 1
             der_new = get_n_der_vecs(dk_f, x, N)
