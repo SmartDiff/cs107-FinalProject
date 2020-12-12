@@ -1,5 +1,3 @@
 PyQt5==5.15.1
 numpy>=1.9.3
 sympy>=1.7
-doctest
-pytest
