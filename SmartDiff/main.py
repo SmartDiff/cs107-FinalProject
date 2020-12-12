@@ -7,9 +7,9 @@ from SmartDiff.solvers.element_op import *
 from SmartDiff.solvers.multivariate import *
 
 # global Ui_MainWindow, Ui_SecondDiag
-Ui_MainWindow, QtBaseClass = uic.loadUiType('SmartDiff/GUI/step1.ui')  # .ui drawn in Qt Designer
-Ui_FourthDiag, QtBaseClass4 = uic.loadUiType('SmartDiff/GUI/step4.ui')  # .ui drawn in Qt Designer
-Ui_FifthDiag, QtBaseClass5 = uic.loadUiType('SmartDiff/GUI/step5.ui')  # .ui drawn in Qt Designer
+Ui_MainWindow, QtBaseClass = uic.loadUiType('GUI/step1.ui')  # .ui drawn in Qt Designer
+Ui_FourthDiag, QtBaseClass4 = uic.loadUiType('GUI/step4.ui')  # .ui drawn in Qt Designer
+Ui_FifthDiag, QtBaseClass5 = uic.loadUiType('GUI/step5.ui')  # .ui drawn in Qt Designer
 
 class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
@@ -161,7 +161,7 @@ class FourthDiag(QtWidgets.QDialog, Ui_FourthDiag):
         self.order = order
 
         self.setupUi(self)
-        Ui_FourthDiag, QtBaseClass4 = uic.loadUiType('SmartDiff/GUI/step4.ui')
+        Ui_FourthDiag, QtBaseClass4 = uic.loadUiType('GUI/step4.ui')
         Ui_FourthDiag.__init__(self)
         self.DisVal = False
         # populate the boxes based on user input in step 2 and 3
@@ -284,7 +284,7 @@ class FifthDiag(QtWidgets.QDialog, Ui_FifthDiag):
         self.msg = Msg
         self.order = Order
         self.DisVal = DisVal
-        Ui_FifthDiag, QtBaseClass5 = uic.loadUiType('SmartDiff/GUI/step5.ui')
+        Ui_FifthDiag, QtBaseClass5 = uic.loadUiType('GUI/step5.ui')
         Ui_FifthDiag.__init__(self)
         self.setupUi(self)
 
