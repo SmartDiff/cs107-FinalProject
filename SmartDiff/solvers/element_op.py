@@ -17,7 +17,7 @@ class AutoDiff():
     User can give a variable and order of the derivative they want to differentiate in this class.
     """
 
-    def __init__(self, value, der=None, N=1, signatures=None, ):
+    def __init__(self, value, der=None, N=1):
         """
         Initiate the variable dual object with given value, derivative, order of derivative
         INPUTS
@@ -561,6 +561,39 @@ class AutoDiff():
 
 
 def get_n_der_vecs(dk_f, gx, N):
+    """
+    This function applies Faa di Bruno's formula to compute the derivatives of order from 1 to N
+    given the calling elementary operator has dk_f as its kth order derivative function.
+    INPUTS
+    =======
+    dk_f(val, k): A lambda function of the kth order derivative of f at the point val
+    gx: Potentially an AutoDiff object
+    N: highest derivative order of gx
+    RETURNS
+    =======
+    a list of high-order derivatives up until gx.N
+    """
+    # Create symbols and symbol-value mapping for eval() in the loop
+    dxs = symbols('q:%d' % N)
+    dx_mapping = {str(dxs[i]): gx.der[i] for i in range(N)}
+    # Use Faa di Bruno's formula
+    der_new = []
+    for n in range(1, N + 1):
+        nth_der = 0
+        for k in range(1, n + 1):
+            # The first n-k+1 derivatives
+            t = n - k + 1
+            vars = dxs[:t]
+            # bell polynomial as python function str
+            bell_nk_str = str(bell(n, k, vars))
+            # evaluate the bell polynomial using the symbol-value mapping
+            val_bell_nk = eval(bell_nk_str, dx_mapping)
+            nth_der += dk_f(gx.val, k) * val_bell_nk
+        der_new.append(nth_der)
+    return der_new
+
+
+def get_nth_der_vecs(dk_f, gx, N):
     """
     This function applies Faa di Bruno's formula to compute the derivatives of order from 1 to N
     given the calling elementary operator has dk_f as its kth order derivative function.
