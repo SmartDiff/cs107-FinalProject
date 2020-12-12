@@ -11,7 +11,8 @@ PKGS = ["SmartDiff"]
 
 setuptools.setup(
     name="Smartdiff",
-    version="0.0.10101010101010101010="Harvard SmartDiff Group",
+    version="0.0.10",
+    author="Harvard SmartDiff Group",
     author_email="harvard.smartdiff@yahoo.com",
     description="A smart package for Automatic Differentiation",
     long_description=README,
