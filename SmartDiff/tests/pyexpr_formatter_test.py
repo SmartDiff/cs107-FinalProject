@@ -1,5 +1,5 @@
 import sys, os
-sys.path.append(os.path.abspath(os.path.join('../', 'SmartDiff')))
+sys.path.append('../')
 from SmartDiff.preprocess.pyexpr_formatter import PyExpression_Formatter
 
 class TestPyExpFormatter:

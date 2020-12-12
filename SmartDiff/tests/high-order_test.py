@@ -1,5 +1,6 @@
 import sys, os
-sys.path.append(os.path.abspath(os.path.join('../', 'SmartDiff')))
+#sys.path.append(os.path.abspath(os.path.join('../', 'SmartDiff')))
+sys.path.append('../')
 import SmartDiff.solvers.element_op as el
 from SmartDiff.solvers.element_op import AutoDiff as AD
 from SmartDiff.solvers.multivariate import *
