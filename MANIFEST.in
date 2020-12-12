@@ -1,1 +1,3 @@
-include SmartDiff/GUI/*.ui
+include SmartDiff/GUI/*
+include SmartDiff/preprocess/*.py
+include SmartDiff/solvers/*.py
