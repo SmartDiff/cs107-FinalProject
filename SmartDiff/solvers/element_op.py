@@ -829,9 +829,21 @@ def exp(x):
 
 def inv(x):
     """
-    Inverse of a term (x cannot be 0)
-    :param x:
-    :return:
+    Returns the value and derivative of a inverse operation: 1/x
+    INPUTS
+    =======
+    x: an AutoDiff object or a scalar, required, the input variable
+    RETURNS
+    ========
+    an AutoDiff object containing the value and derivative of the expression
+    EXAMPLES
+    =========
+    >>> f = inv(1.0)
+    >>> print(f.val, f.der)
+    1.0 [0.]
+    >>> f = inv(AutoDiff(1.0, N = 3))
+    >>> print(f.val, f.der)
+    1.0 [-1.  2. -6.]
     """
     N = 1
     dk_f = lambda gx, k: ((-1.0) ** k * factorial(k)) / (gx ** (k+1)) # YW
