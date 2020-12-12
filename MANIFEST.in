@@ -1,3 +1,4 @@
 include SmartDiff/GUI/*
 include SmartDiff/preprocess/*.py
 include SmartDiff/solvers/*.py
+include SmartDiff/tests/*.py
