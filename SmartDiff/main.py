@@ -272,6 +272,8 @@ class FourthDiag(QtWidgets.QDialog, Ui_FourthDiag):
             return np.zeros(1), np.zeros(1), str(e)+" "
         except ZeroDivisionError as e:
             return np.zeros(1), np.zeros(1), str(e)+" "
+        except TypeError as e:
+            return np.zeros(1), np.zeros(1), str(e)+" "
 
 
 class FifthDiag(QtWidgets.QDialog, Ui_FifthDiag):
