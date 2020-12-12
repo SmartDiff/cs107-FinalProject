@@ -323,35 +323,26 @@ class TestElemOpNOrder:
         func = "x0 + x1"
         vals = [3, 5]
         Hmat = get_hessian(func_str=func, all_vals=vals)
-        Hmat 
-        #assert Hmat == [[0, 0], [0, 0]]
-        #print("Hessian 1:", Hmat)
-        #print("Expected = [[0, 0], [0, 0]]\n")
+        assert (Hmat[0] == [0, 0]).all()
+        assert (Hmat[1] == [0, 0]).all()
 
         func = "x0 * x1"
         vals = [3, 5]
         Hmat = get_hessian(func_str=func, all_vals=vals)
-        Hmat 
-        #assert Hmat == [[0, 1], [1, 0]]
-        #print("Hessian 2:", Hmat)
-        #print("Expected = [[0, 1], [1, 0]]\n")
+        assert (Hmat[0] == [0, 1]).all()
+        assert (Hmat[1] == [1, 0]).all()
 
         func = "x0 * x1**3"
         vals = [3, 5]
         Hmat = get_hessian(func_str=func, all_vals=vals)
-        Hmat
-        #assert Hmat == [[0, 75], [75, 90]]
-        #print("Hessian 3:", Hmat)
-        #print("Expected = [[0, 75], [75, 90]]\n")
+        assert (Hmat[0] == [0, 75]).all()
+        assert (Hmat[1] == [75, 90]).all()
 
         func = "x0 * x1**x0 * x1"
         vals = [3, 5]
         Hmat = get_hessian(func_str=func, all_vals=vals)
-        Hmat 
-        #assert Hmat == [[0, 375], [375, 900]]
-        #print("Hessian 4:", Hmat)
-        #print("Expected = [[0, 375], [375, 900]]\n")
-
+        #assert (Hmat[0] == [0, 375]).all()
+        #assert (Hmat[1] == [375, 900]).all() 
         #print("Expected = " + str([[0, np.log(5)+1],[np.log(5)+1, 3/5]]) + "\n")
 
     def test_jacobian(self):
@@ -359,35 +350,30 @@ class TestElemOpNOrder:
         func_list = ['x0*x2+x1', 'x1']
         val_list = [2,3,4]
         values, jacobian = get_val_jacobian(func_list, val_list)
-        print("values:")
-        print(values)
-        print("Jacobian:")
-        print(jacobian)
+        assert (values == [11, 3]).all()
+        assert (jacobian[0] == [4, 1, 2]).all()
+        assert (jacobian[1] == [0, 1, 0]).all()
 
         func_list = ["x0*exp(x0+9)"]
         val_list = [2]
         values, jacobian = get_val_jacobian(func_list, val_list)
-        print("values:")
-        print(values)
-        print("Jacobian:")
-        print(jacobian)
-        # output_value1, jacobian1, hess1 = jacob_hessian(lambda x,y,z : [x*z+y, y*z+x, z, z+2], [2,3,4])
-        # print('value1', output_value1)
-        # print('jacobian1',jacobian1)
-        # output_value1, jacobian1, hess1 = jacob_hessian(lambda x,y : [x**2*exp(x)+y, y], [2,3], 1)
-        # print('value1', output_value1)
-        # print('jacobian1',jacobian1)
-        # print('hessian1',hess1)
-        #
-        # output_value1, jacobian1, hess1 = jacob_hessian(lambda x,y : [x**2*exp(x),x*y], [2,3], 2)
-        # print('value2', output_value1)
-        # print('jacobian2',jacobian1)
-        # print('hessian2',hess1)
+        assert (values == [2*np.exp(11)]).all()
+        assert (jacobian[0] == [np.exp(11) + 2*np.exp(11)]).all()
 
-        # print('----------')
-        # output_value2, jacobian2 = get_jaco(func = (lambda x,y,z : [el.cos(el.exp(x))*z+y*z]), vals = [1,2,3])
-        # print('value2',output_value2)
-        # print('jacobian2',jacobian2)
+        func_list = ["x1*exp(x0+9)", "x1*sin(x0)"]
+        val_list = [2,5]
+        values, jacobian = get_val_jacobian(func_list, val_list)
+        assert (values == [5*np.exp(11), 5*np.sin(2)]).all()
+        assert (jacobian[0] == [5*np.exp(11), np.exp(11)]).all()
+        assert (jacobian[1] == [5*np.cos(2), np.sin(2)]).all()
+
+        func_list = ["cos(exp(x0))*x2+x1*x2"]
+        val_list = [1,2,3]
+        values, jacobian = get_val_jacobian(func_list, val_list)
+        assert (values == [6+3*np.cos(np.exp(1))]).all()
+        assert (np.round(jacobian[0],6) == np.round([-3*np.sin(np.exp(1))*np.exp(1), 3, np.cos(np.exp(1))+2],6)).all()
+
+        #---------- Old code? -----------#
 
         # print('----------')
         # output_value3, jacobian3 = get_jaco(func = (lambda x: [x**4+10]), vals = [2], ders = [[2]])
@@ -403,4 +389,19 @@ class TestElemOpNOrder:
         # output_value5, jacobian5 = get_jaco(func = (lambda x: np.array([x**4+10, x**6])), vals = 2)
         # print('value5',output_value5)
         # print('jacobian5',jacobian5)
+
+        # output_value1, jacobian1, hess1 = jacob_hessian(lambda x,y,z : [x*z+y, y*z+x, z, z+2], [2,3,4])
+        # print('value1', output_value1)
+        # print('jacobian1',jacobian1)
+        # output_value1, jacobian1, hess1 = jacob_hessian(lambda x,y : [x**2*exp(x)+y, y], [2,3], 1)
+        # print('value1', output_value1)
+        # print('jacobian1',jacobian1)
+        # print('hessian1',hess1)
+        #
+        # output_value1, jacobian1, hess1 = jacob_hessian(lambda x,y : [x**2*exp(x),x*y], [2,3], 2)
+        # print('value2', output_value1)
+        # print('jacobian2',jacobian1)
+        # print('hessian2',hess1)
+
+        
 
